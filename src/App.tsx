@@ -7,6 +7,11 @@ import Index from "./pages/Index";
 import ProjectTorku from "./pages/ProjectTorku";
 import ProjectTampere from "./pages/ProjectTampere";
 import ProjectKuusamo from "./pages/ProjectKuusamo";
+import ProjectOulu from "./pages/ProjectOulu";
+import ProjectLevi from "./pages/ProjectLevi";
+import ProjectHelsinki from "./pages/ProjectHelsinki";
+import ProjectTunturi from "./pages/ProjectTunturi";
+import ProjectSodankyla from "./pages/ProjectSodankyla";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +27,11 @@ const App = () => (
           <Route path="/project/torku" element={<ProjectTorku />} />
           <Route path="/project/tampere" element={<ProjectTampere />} />
           <Route path="/project/kuusamo" element={<ProjectKuusamo />} />
+          <Route path="/project/oulu" element={<ProjectOulu />} />
+          <Route path="/project/levi" element={<ProjectLevi />} />
+          <Route path="/project/helsinki" element={<ProjectHelsinki />} />
+          <Route path="/project/tunturi" element={<ProjectTunturi />} />
+          <Route path="/project/sodankyla" element={<ProjectSodankyla />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
