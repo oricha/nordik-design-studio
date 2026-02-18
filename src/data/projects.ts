@@ -15,12 +15,13 @@ export type Project = {
   price: number;
   image: string;
   badge?: "New" | "Popular";
+  slug?: string;
 };
 
 export const projects: Project[] = [
   { id: 1, name: "Tunturi", category: "houses", area: 145, bedrooms: 4, bathrooms: 2, price: 185000, image: project1, badge: "Popular" },
   { id: 2, name: "Sodankylä", category: "houses", area: 180, bedrooms: 5, bathrooms: 3, price: 245000, image: project2, badge: "New" },
-  { id: 3, name: "Koli", category: "cabins", area: 65, bedrooms: 2, bathrooms: 1, price: 89000, image: project3 },
+  { id: 3, name: "Torku", category: "cabins", area: 48, bedrooms: 2, bathrooms: 1, price: 32400, image: project3, badge: "Popular", slug: "torku" },
   { id: 4, name: "Inari", category: "houses", area: 220, bedrooms: 5, bathrooms: 3, price: 320000, image: project4, badge: "Popular" },
   { id: 5, name: "Levi", category: "houses", area: 110, bedrooms: 3, bathrooms: 2, price: 145000, image: project5 },
   { id: 6, name: "Saariselkä", category: "cabins", area: 45, bedrooms: 1, bathrooms: 1, price: 62000, image: project6, badge: "New" },
