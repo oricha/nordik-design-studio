@@ -2,8 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Maximize2, BedDouble, Bath, Plus, Check, ChevronDown, Home, Wrench, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 import torkuHero from "@/assets/torku-hero.jpg";
 import torkuInterior from "@/assets/torku-interior.jpg";
@@ -61,8 +59,7 @@ const ProjectTorku = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      <main className="pt-16">
+            <main className="pt-16">
         {/* Hero */}
         <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
           <img
@@ -349,8 +346,7 @@ const ProjectTorku = () => {
           </div>
         </section>
       </main>
-      <Footer />
-    </div>
+          </div>
   );
 };
 

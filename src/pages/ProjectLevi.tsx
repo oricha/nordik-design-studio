@@ -2,8 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Maximize2, BedDouble, Bath, Plus, Check, ChevronDown, Home, Wrench, Layers } from "lucide-react";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 import project3 from "@/assets/project-3.jpg";
 import project5 from "@/assets/project-5.jpg";
@@ -61,8 +59,7 @@ const ProjectLevi = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      <main className="pt-16">
+            <main className="pt-16">
         <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
           <img src={images[activeImage]} alt="Levi house" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/60 to-transparent" />
@@ -215,8 +212,7 @@ const ProjectLevi = () => {
           </div>
         </section>
       </main>
-      <Footer />
-    </div>
+          </div>
   );
 };
 

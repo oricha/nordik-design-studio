@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "Our Projects", href: "#projects" },
-  { label: "Construction Options", href: "#services" },
-  { label: "Services", href: "#why" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contacts", href: "#contact" },
+  { label: "Our Projects", href: "/#projects" },
+  { label: "Construction Options", href: "/#services" },
+  { label: "Services", href: "/#why" },
+  { label: "Gallery", href: "/#gallery" },
+  { label: "Contacts", href: "/#contact" },
 ];
 
 const Header = () => {
@@ -16,9 +17,9 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold tracking-tight text-foreground">
+        <Link to="/" className="text-2xl font-bold tracking-tight text-foreground">
           Nordi<span className="text-accent">K</span>
-        </a>
+        </Link>
 
         <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
@@ -38,7 +39,7 @@ const Header = () => {
             EN / €
           </button>
           <a
-            href="#contact"
+            href="/#contact"
             className="bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
           >
             GET A PRICE
@@ -73,7 +74,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setMobileOpen(false)}
                 className="bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold text-center mt-2"
               >
