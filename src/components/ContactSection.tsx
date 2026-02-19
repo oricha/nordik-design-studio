@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import contactImage from "@/assets/contact-house.jpg";
 
-const projectTypes = ["Turnkey House", "Cabin", "SIP Panels", "Renovation", "Other"];
+const projectTypes = ["Casa Llave en Mano", "Cabaña", "Paneles SIP", "Renovación", "Otro"];
 
 const ContactSection = () => {
   const [form, setForm] = useState({
@@ -26,7 +26,7 @@ const ContactSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // placeholder
-    alert("Thank you! Your request has been submitted.");
+    alert("¡Gracias! Su solicitud ha sido enviada.");
   };
 
   return (
@@ -38,8 +38,8 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
-          <p className="text-muted-foreground">Tell us about your project and we'll get back to you within 24 hours.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Contáctanos</h2>
+          <p className="text-muted-foreground">Cuéntanos sobre tu proyecto y te responderemos en 24 horas.</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
@@ -64,7 +64,7 @@ const ContactSection = () => {
             className="bg-background rounded-2xl p-8 flex flex-col gap-5"
           >
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">Name</label>
+              <label className="block text-sm font-medium text-foreground mb-1.5">Nombre</label>
               <input
                 type="text"
                 required
@@ -72,13 +72,13 @@ const ContactSection = () => {
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none"
-                placeholder="Your full name"
+                placeholder="Tu nombre completo"
               />
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
+                <label className="block text-sm font-medium text-foreground mb-1.5">Correo electrónico</label>
                 <input
                   type="email"
                   required
@@ -86,35 +86,34 @@ const ContactSection = () => {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none"
-                  placeholder="email@example.com"
+                  placeholder="correo@ejemplo.com"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5">Phone</label>
+                <label className="block text-sm font-medium text-foreground mb-1.5">Teléfono</label>
                 <input
                   type="tel"
                   maxLength={20}
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none"
-                  placeholder="+358 40 123 4567"
+                  placeholder="+34 600 123 456"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Project Type</label>
+              <label className="block text-sm font-medium text-foreground mb-2">Tipo de Proyecto</label>
               <div className="flex flex-wrap gap-2">
                 {projectTypes.map((type) => (
                   <button
                     key={type}
                     type="button"
                     onClick={() => toggleType(type)}
-                    className={`px-3 py-1.5 rounded-full text-sm transition-all ${
-                      form.types.includes(type)
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-secondary text-muted-foreground hover:bg-border"
-                    }`}
+                    className={`px-3 py-1.5 rounded-full text-sm transition-all ${form.types.includes(type)
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-secondary text-muted-foreground hover:bg-border"
+                      }`}
                   >
                     {type}
                   </button>
@@ -123,7 +122,7 @@ const ContactSection = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">Message</label>
+              <label className="block text-sm font-medium text-foreground mb-1.5">Mensaje</label>
               <textarea
                 required
                 maxLength={1000}
@@ -131,7 +130,7 @@ const ContactSection = () => {
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none resize-none"
-                placeholder="Tell us about your project..."
+                placeholder="Háblanos sobre tu proyecto..."
               />
             </div>
 
@@ -140,7 +139,7 @@ const ContactSection = () => {
               className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 mt-auto"
             >
               <Send className="w-4 h-4" />
-              Send Request
+              Enviar Solicitud
             </button>
           </motion.form>
         </div>

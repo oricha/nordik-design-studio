@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 import { projects, type Project } from "@/data/projects";
 
 const categories = [
-  { key: "all", label: "All" },
-  { key: "houses", label: "Houses" },
-  { key: "cabins", label: "Cabins" },
-  { key: "materials", label: "Materials" },
-  { key: "reforms", label: "Reforms" },
+  { key: "all", label: "Todos" },
+  { key: "houses", label: "Casas" },
+  { key: "cabins", label: "Cabañas" },
+  { key: "materials", label: "Materiales" },
+  { key: "reforms", label: "Reformas" },
 ] as const;
 
 const sortOptions = [
-  { value: "price-asc", label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
-  { value: "area-desc", label: "Largest First" },
-  { value: "name-asc", label: "Name: A-Z" },
+  { value: "price-asc", label: "Precio: Menor a Mayor" },
+  { value: "price-desc", label: "Precio: Mayor a Menor" },
+  { value: "area-desc", label: "Más grande primero" },
+  { value: "name-asc", label: "Nombre: A-Z" },
 ];
 
 const ProjectCatalog = () => {
@@ -54,9 +54,9 @@ const ProjectCatalog = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Projects</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Proyectos</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Explore our collection of Scandinavian-designed homes, cabins, and construction solutions.
+            Explore nuestra colección de casas de diseño escandinavo, cabañas y soluciones de construcción.
           </p>
         </motion.div>
 
@@ -66,11 +66,10 @@ const ProjectCatalog = () => {
             <button
               key={cat.key}
               onClick={() => setActiveCategory(cat.key)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                activeCategory === cat.key
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-background text-muted-foreground hover:bg-border"
-              }`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeCategory === cat.key
+                ? "bg-primary text-primary-foreground"
+                : "bg-background text-muted-foreground hover:bg-border"
+                }`}
             >
               {cat.label}
             </button>
@@ -123,7 +122,7 @@ const ProjectCatalog = () => {
 
         {filtered.length === 0 && (
           <p className="text-center text-muted-foreground py-12">
-            No projects match your criteria. Try adjusting the filters.
+            No hay proyectos que coincidan con sus criterios. Intente ajustar los filtros.
           </p>
         )}
       </div>
@@ -150,11 +149,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
         />
         {project.badge && (
           <span
-            className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${
-              project.badge === "New"
-                ? "bg-accent text-accent-foreground"
-                : "bg-primary text-primary-foreground"
-            }`}
+            className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${project.badge === "New"
+              ? "bg-accent text-accent-foreground"
+              : "bg-primary text-primary-foreground"
+              }`}
           >
             {project.badge}
           </span>

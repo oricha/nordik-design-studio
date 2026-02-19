@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "Our Projects", href: "/#projects" },
-  { label: "Construction Options", href: "/#services" },
-  { label: "Services", href: "/#why" },
-  { label: "Gallery", href: "/#gallery" },
-  { label: "Contacts", href: "/#contact" },
+  { label: "Nuestros Proyectos", href: "/#projects" },
+  { label: "Opciones de Construcción", href: "/#services" },
+  { label: "Servicios", href: "/#why" },
+  { label: "Galería", href: "/#gallery" },
+  { label: "Contactos", href: "/#contact" },
 ];
 
 const Header = () => {
@@ -36,13 +36,13 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-4">
           <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <Globe className="w-4 h-4" />
-            EN / €
+            ES / €
           </button>
           <a
             href="/#contact"
             className="bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
           >
-            GET A PRICE
+            OBTENER PRESUPUESTO
           </a>
         </div>
 
@@ -78,7 +78,7 @@ const Header = () => {
                 onClick={() => setMobileOpen(false)}
                 className="bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold text-center mt-2"
               >
-                GET A PRICE
+                OBTENER PRESUPUESTO
               </a>
             </nav>
           </motion.div>

@@ -3,12 +3,12 @@ import { TreePine, Coins, Zap, Clock, Award, Shield, Play } from "lucide-react";
 import videoThumb from "@/assets/video-thumbnail.jpg";
 
 const values = [
-  { icon: TreePine, title: "Natural Wood", desc: "Sustainably sourced Scandinavian timber" },
-  { icon: Coins, title: "Affordable Price", desc: "Competitive pricing without compromise" },
-  { icon: Zap, title: "Energy Efficiency", desc: "A-rated thermal performance" },
-  { icon: Clock, title: "Fast Construction", desc: "Assembled in weeks, not months" },
-  { icon: Award, title: "Professional Experience", desc: "Expert craftsmanship guaranteed" },
-  { icon: Shield, title: "Guarantee", desc: "10-year structural warranty" },
+  { icon: TreePine, title: "Madera Natural", desc: "Madera escandinava de origen sostenible" },
+  { icon: Coins, title: "Precio Asequible", desc: "Precios competitivos sin compromisos" },
+  { icon: Zap, title: "Eficiencia Energética", desc: "Rendimiento térmico con calificación A" },
+  { icon: Clock, title: "Construcción Rápida", desc: "Ensamblado en semanas, no en meses" },
+  { icon: Award, title: "Experiencia Profesional", desc: "Artesanía experta garantizada" },
+  { icon: Shield, title: "Garantía", desc: "10 años de garantía estructural" },
 ];
 
 const WhySection = () => {
@@ -21,7 +21,7 @@ const WhySection = () => {
           viewport={{ once: true }}
           className="text-3xl md:text-4xl font-bold text-foreground mb-12 max-w-lg"
         >
-          Why are Scandinavian countries switching to this housing format?
+          ¿Por qué los países escandinavos están cambiando a este formato de vivienda?
         </motion.h2>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">

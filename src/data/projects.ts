@@ -30,5 +30,4 @@ export const projects: Project[] = [
   { id: 9, name: "Kuusamo", category: "cabins", area: 80, bedrooms: 2, bathrooms: 1, price: 95000, image: project3, slug: "kuusamo" },
   { id: 10, name: "Tampere", category: "materials", area: 0, bedrooms: 0, bathrooms: 0, price: 35000, image: project4, slug: "tampere" },
   { id: 11, name: "Helsinki", category: "reforms", area: 120, bedrooms: 3, bathrooms: 2, price: 175000, image: project5, slug: "helsinki" },
-  { id: 12, name: "Turku", category: "materials", area: 0, bedrooms: 0, bathrooms: 0, price: 28000, image: project6 },
 ];

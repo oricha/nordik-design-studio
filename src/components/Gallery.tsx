@@ -21,8 +21,8 @@ const Gallery = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Project Photos</h2>
-          <p className="text-muted-foreground">A glimpse into our craftsmanship and attention to detail.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Fotos del Proyecto</h2>
+          <p className="text-muted-foreground">Un vistazo a nuestra artesanía y atención al detalle.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

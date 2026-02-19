@@ -10,23 +10,23 @@ const Footer = () => {
               Nordi<span className="text-accent">K</span>
             </h3>
             <p className="text-primary-foreground/70 text-sm leading-relaxed max-w-sm">
-              Premium Scandinavian wood-frame houses engineered for sustainability, comfort, and modern living. Building the future with nature.
+              Casas nórdicas prémium con estructura de madera, diseñadas para la sostenibilidad, el confort y la vida moderna. Construyendo el futuro con la naturaleza.
             </p>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
             <nav className="flex flex-col gap-2 text-sm text-primary-foreground/70">
-              <a href="#projects" className="hover:text-primary-foreground transition-colors">Our Projects</a>
-              <a href="#services" className="hover:text-primary-foreground transition-colors">Construction Options</a>
-              <a href="#why" className="hover:text-primary-foreground transition-colors">Why NordiK</a>
-              <a href="#gallery" className="hover:text-primary-foreground transition-colors">Gallery</a>
-              <a href="#contact" className="hover:text-primary-foreground transition-colors">Contact</a>
+              <a href="#projects" className="hover:text-primary-foreground transition-colors">Nuestros Proyectos</a>
+              <a href="#services" className="hover:text-primary-foreground transition-colors">Opciones de Construcción</a>
+              <a href="#why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
+              <a href="#gallery" className="hover:text-primary-foreground transition-colors">Galería</a>
+              <a href="#contact" className="hover:text-primary-foreground transition-colors">Contacto</a>
             </nav>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
+            <h4 className="font-semibold mb-4">Contacto</h4>
             <div className="flex flex-col gap-3 text-sm text-primary-foreground/70">
               <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> Helsinki, Finland</span>
               <span className="flex items-center gap-2"><Phone className="w-4 h-4" /> +358 40 123 4567</span>
@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-foreground/10 mt-12 pt-6 text-center text-sm text-primary-foreground/50">
-          © 2026 NordiK. All rights reserved.
+          © 2026 NordiK. Todos los derechos reservados.
         </div>
       </div>
     </footer>
