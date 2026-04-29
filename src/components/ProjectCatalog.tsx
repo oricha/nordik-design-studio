@@ -1,6 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, BedDouble, Bath, ArrowUpDown, Search, X } from "lucide-react";
+import { Maximize2, BedDouble, Bath, ArrowUpDown, Search, X, Grid2X2, List } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects, type Project } from "@/data/projects";
 
@@ -40,6 +40,19 @@ const ProjectCatalog = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState("price-asc");
   const [searchQuery, setSearchQuery] = useState("");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem("projectViewMode") as "grid" | "list" | null;
+    if (saved) {
+      setViewMode(saved);
+    }
+  }, []);
+
+  const handleViewModeChange = (mode: "grid" | "list") => {
+    setViewMode(mode);
+    sessionStorage.setItem("projectViewMode", mode);
+  };
 
   const availableRange = useMemo(
     () => calculateAvailableRange(activeCategory, searchQuery),
@@ -121,6 +134,30 @@ const ProjectCatalog = () => {
               <X className="w-4 h-4 text-muted-foreground" />
             </button>
           )}
+        </div>
+
+        {/* View Mode Toggle */}
+        <div className="mb-6 flex items-center gap-2">
+          <button
+            onClick={() => handleViewModeChange("grid")}
+            className={`p-2 rounded-lg transition-all ${viewMode === "grid"
+              ? "bg-primary text-primary-foreground"
+              : "bg-background text-muted-foreground hover:bg-border"
+              }`}
+            title="Vista Grid"
+          >
+            <Grid2X2 className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => handleViewModeChange("list")}
+            className={`p-2 rounded-lg transition-all ${viewMode === "list"
+              ? "bg-primary text-primary-foreground"
+              : "bg-background text-muted-foreground hover:bg-border"
+              }`}
+            title="Vista Lista"
+          >
+            <List className="w-5 h-5" />
+          </button>
         </div>
 
         {/* Filters */}
@@ -215,10 +252,16 @@ const ProjectCatalog = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div
+          className={
+            viewMode === "grid"
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              : "flex flex-col gap-4"
+          }
+        >
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard key={project.id} project={project} listView={viewMode === "list"} />
             ))}
           </AnimatePresence>
         </div>
@@ -233,8 +276,57 @@ const ProjectCatalog = () => {
   );
 };
 
-const ProjectCard = ({ project }: { project: Project }) => {
-  const content = (
+const ProjectCard = ({ project, listView }: { project: Project; listView?: boolean }) => {
+  const content = listView ? (
+    <motion.div
+      layout
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.3 }}
+      className="bg-background rounded-lg overflow-hidden hover-lift group cursor-pointer flex gap-4 p-4 border border-border"
+    >
+      <div className="relative w-40 h-40 flex-shrink-0 overflow-hidden rounded-lg">
+        <img
+          src={project.image}
+          alt={project.name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+        {project.badge && (
+          <span
+            className={`absolute top-2 left-2 px-2 py-1 rounded text-xs font-semibold ${project.badge === "New"
+              ? "bg-accent text-accent-foreground"
+              : "bg-primary text-primary-foreground"
+              }`}
+          >
+            {project.badge}
+          </span>
+        )}
+      </div>
+      <div className="flex-1 flex flex-col justify-between">
+        <div>
+          <h3 className="font-semibold text-foreground text-lg mb-2">{project.name}</h3>
+          {project.area > 0 && (
+            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3 flex-wrap">
+              <span className="flex items-center gap-1">
+                <Maximize2 className="w-3.5 h-3.5" /> {project.area} m²
+              </span>
+              <span className="flex items-center gap-1">
+                <BedDouble className="w-3.5 h-3.5" /> {project.bedrooms}
+              </span>
+              <span className="flex items-center gap-1">
+                <Bath className="w-3.5 h-3.5" /> {project.bathrooms}
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="text-xl font-bold text-accent">
+          €{project.price.toLocaleString()}
+        </div>
+      </div>
+    </motion.div>
+  ) : (
     <motion.div
       layout
       initial={{ opacity: 0, scale: 0.95 }}
