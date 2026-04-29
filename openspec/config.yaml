@@ -1,0 +1,27 @@
+schema: spec-driven
+
+context: |
+  Project: NordiK - Portal B2B/B2C de Casas Prefabricadas Nórdicas
+  Tech stack: TypeScript, React, Node.js, Next.js
+  Conventions: Feature-based approach, spec-driven development
+  Domain: Sustainable construction, modular housing, SIP panels
+
+  Key goals:
+  - Improve user experience and conversion funnel
+  - Complete broken functionality (filters, links, forms)
+  - Add social proof and credibility indicators
+  - Implement advanced features (3D, ecommerce, CRM)
+
+  Current state:
+  - 32 features enumerated across 4 priorities
+  - P1 (Critical): 32 features, 2-3 weeks
+  - P2 (High): 23 features, 3-4 weeks
+  - P3 (Medium): 19 features, 2 weeks
+  - P4 (Low): 18 features, 4+ weeks
+
+rules:
+  features:
+    - Each feature must have clear acceptance criteria (5+ checkboxes)
+    - Effort estimates: small (1-3h), medium (4-8h), large (9h+)
+    - Status: proposed, in-progress, completed
+    - Include metrics for success

@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, BedDouble, Bath, ArrowUpDown } from "lucide-react";
+import { Maximize2, BedDouble, Bath, ArrowUpDown, Search, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects, type Project } from "@/data/projects";
 
@@ -23,13 +23,17 @@ const ProjectCatalog = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState("price-asc");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 400000]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = useMemo(() => {
+    const searchLower = searchQuery.toLowerCase();
+
     let result = projects.filter(
       (p) =>
         (activeCategory === "all" || p.category === activeCategory) &&
         p.price >= priceRange[0] &&
-        p.price <= priceRange[1]
+        p.price <= priceRange[1] &&
+        (searchQuery === "" || p.name.toLowerCase().includes(searchLower))
     );
 
     const [field, dir] = sortBy.split("-");
@@ -43,7 +47,7 @@ const ProjectCatalog = () => {
     });
 
     return result;
-  }, [activeCategory, sortBy, priceRange]);
+  }, [activeCategory, sortBy, priceRange, searchQuery]);
 
   return (
     <section id="projects" className="section-padding bg-warm-gray">
@@ -54,11 +58,31 @@ const ProjectCatalog = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Proyectos</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Nuestros Proyectos</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Explore nuestra colección de casas de diseño escandinavo, cabañas y soluciones de construcción.
           </p>
         </motion.div>
+
+        {/* Search Input */}
+        <div className="mb-6 flex items-center gap-2 bg-background border border-border rounded-lg px-3 py-2 w-full max-w-sm">
+          <Search className="w-4 h-4 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Buscar proyectos..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="flex-1 bg-transparent text-foreground outline-none text-sm"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="p-1 hover:bg-border rounded transition-colors"
+            >
+              <X className="w-4 h-4 text-muted-foreground" />
+            </button>
+          )}
+        </div>
 
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-3 mb-6">

@@ -1,0 +1,234 @@
+name: "P4 - Funcionalidades Avanzadas (4+ semanas)"
+description: "Prioridad 4: Configurador 3D, ecommerce, blog, carrito avanzado"
+priority: low
+effort: large
+status: proposed
+
+epics:
+  - id: "4.1"
+    name: "Configurador 3D/Visualizador"
+    description: "4 features para visualización interactiva de proyectos"
+    features:
+      - id: "F4.1.1"
+        name: "Visualizador 3D Interactivo"
+        description: "Permitir rotar, zoomear casa en 3D"
+        effort: large
+        status: proposed
+        acceptance:
+          - "Modelo 3D de proyecto"
+          - "Rotación con mouse/touch"
+          - "Zoom in/out"
+          - "Vistas predefinidas (frente, lateral, aéreo)"
+
+      - id: "F4.1.2"
+        name: "Cambio de Acabados en Tiempo Real"
+        description: "Selector de colores/materiales que actualiza visualización 3D"
+        effort: large
+        status: proposed
+        acceptance:
+          - "Selector: color de fachada (3-4 opciones)"
+          - "Selector: color de techo (3-4 opciones)"
+          - "Selector: tipo de ventanas (2-3 opciones)"
+          - "Actualización instant del modelo 3D"
+
+      - id: "F4.1.3"
+        name: "Planos Interactivos"
+        description: "Mostrar planta baja, alta, sección con dimensiones"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Tabs: Planta Baja | Planta Alta | Sección"
+          - "Dimensiones visibles (m²)"
+          - "Zoom en planos"
+          - "Descargable como PDF"
+
+      - id: "F4.1.4"
+        name: "Cálculo de Precio Dinámico"
+        description: "Precio se actualiza según personalizaciones"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Precio base visible"
+          - "Upcharges por cada opción de personalización"
+          - "Total actualiza en tiempo real"
+          - "Breakdown de costos"
+
+  - id: "4.2"
+    name: "Sistema de Carrito y Cotización"
+    description: "5 features para gestión de pedidos y leads"
+    features:
+      - id: "F4.2.1"
+        name: "Carrito de Proyectos/Materiales"
+        description: "Agregar múltiples proyectos al carrito"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Icono carrito en header"
+          - "Botón 'Agregar al Carrito' en detalle"
+          - "Modal carrito con items, cantidades, totales"
+          - "Editar cantidades o remover items"
+
+      - id: "F4.2.2"
+        name: "Generación Automática de PDF de Cotización"
+        description: "Descargar PDF con detalle de carrito"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Botón 'Descargar Presupuesto PDF'"
+          - "PDF incluye: Proyectos, cantidades, precios, subtotal"
+          - "Logo y branding de NordiK"
+          - "Fecha y número de cotización único"
+
+      - id: "F4.2.3"
+        name: "Guardar Proyectos Favoritos"
+        description: "Funcionalidad de wishlist (requiere login)"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Icono corazón en tarjetas"
+          - "Click guarda a lista de favoritos"
+          - "Página /favoritos con todos guardados"
+          - "Comparación entre favoritos"
+          - "Email notification si favorito baja de precio"
+
+      - id: "F4.2.4"
+        name: "Sistema de Cuentas de Usuario"
+        description: "Registro/login para historial y preferencias"
+        effort: large
+        status: proposed
+        acceptance:
+          - "Sign up: email, password, nombre"
+          - "Login: email + password + OAuth (Google, LinkedIn)"
+          - "Perfil: nombre, teléfono, ubicación, preferencias"
+          - "Email verificación requerida"
+
+      - id: "F4.2.5"
+        name: "Historial de Cotizaciones"
+        description: "Usuario ve todas sus cotizaciones pasadas"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Página /historial accesible desde perfil"
+          - "Tabla: fecha, proyectos, total, estado"
+          - "Botones: Ver detalle, Re-solicitar, Compartir"
+          - "Filtros: fecha, estado, total"
+
+  - id: "4.3"
+    name: "Blog y Recursos SEO"
+    description: "5 features para educación de clientes y posicionamiento"
+    features:
+      - id: "F4.3.1"
+        name: "Crear Sección Blog"
+        description: "Blog con artículos de educación"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Página /blog con lista de artículos"
+          - "Búsqueda y filtros por categoría"
+          - "Paginación o 'Cargar más'"
+
+      - id: "F4.3.2"
+        name: "Artículos Temáticos"
+        description: "Mínimo 8-10 artículos sobre SIP, sostenibilidad, diseño"
+        effort: large
+        status: proposed
+        acceptance:
+          - "Artículo 1: 'Guía Completa a Paneles SIP' (2000+ palabras)"
+          - "Artículo 2: 'Construcción Sostenible' (1500+ palabras)"
+          - "Artículo 3: 'Diseño Escandinavo Moderno' (1200+ palabras)"
+          - "5+ case studies en formato artículo"
+
+      - id: "F4.3.3"
+        name: "Optimización SEO de Artículos"
+        description: "Keywords, meta descriptions, internal linking"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Keyword research para cada artículo"
+          - "Meta description (150 caracteres)"
+          - "Headers H2/H3 con keywords"
+          - "3-5 links internos por artículo"
+          - "Imágenes con alt text"
+
+      - id: "F4.3.4"
+        name: "Autor y Fecha Visible"
+        description: "Mostrar autor, fecha publicación, actualización"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Autor del artículo (foto + bio)"
+          - "Fecha publicación: formato legible"
+          - "Actualización: 'Última actualización: Abril 2026'"
+          - "Tiempo de lectura estimado"
+
+      - id: "F4.3.5"
+        name: "Newsletter Signup en Blog"
+        description: "Formulario para subscribirse a newsletter"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Popup o form en sidebar"
+          - "'Recibe artículos sobre [tema]'"
+          - "Email obligatorio"
+          - "Confirmación doble-opt-in"
+
+  - id: "4.4"
+    name: "Integración de Ecommerce"
+    description: "4 features para pagos, CRM e integración comercial"
+    features:
+      - id: "F4.4.1"
+        name: "Integración Pasarela de Pago"
+        description: "Integrar Stripe, Redsys o similar"
+        effort: large
+        status: proposed
+        acceptance:
+          - "Pasarela integrada en checkout"
+          - "Métodos: tarjeta crédito, transferencia, PayPal"
+          - "Manejo seguro de PCI compliance"
+          - "Confirmación post-pago"
+
+      - id: "F4.4.2"
+        name: "Integración CRM para Leads"
+        description: "Conectar formularios a CRM (HubSpot, Pipedrive, Salesforce)"
+        effort: large
+        status: proposed
+        acceptance:
+          - "Lead data sync automático"
+          - "Campos mapeados: nombre, email, teléfono, proyecto, presupuesto"
+          - "Dupliplicación detection"
+          - "Log de actividades: formulario, cotización, llamada"
+
+      - id: "F4.4.3"
+        name: "Seguimiento de Cotizaciones"
+        description: "Dashboard para vendedores: estado de cotizaciones"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Dashboard admin: pendientes, aceptadas, cerradas"
+          - "Filtros: vendedor, fecha, monto, estado"
+          - "Notificaciones: cotización nueva, vencimiento próximo"
+          - "Historial de comunicaciones por cotización"
+
+      - id: "F4.4.4"
+        name: "Portal de Cliente Post-Venta"
+        description: "Acceso a documentos, tracking, soporte"
+        effort: large
+        status: proposed
+        acceptance:
+          - "Login de cliente"
+          - "Descarga: contrato, planos, especificaciones"
+          - "Tracking: estado de fabricación y entrega"
+          - "Ticket de soporte integrado"
+          - "Documentos técnicos y garantía"
+
+metrics:
+  - "Blog: 5000+ sesiones/mes en 3 meses"
+  - "Newsletter: 500+ suscriptores en 2 meses"
+  - "Carrito: 15%+ de usuarios lo usan"
+  - "Tasa de conversión con pasarela: 2-3%"
+  - "Satisfacción post-venta (NPS): 50+"
+
+timeline:
+  start: "2026-07-03"
+  end: "2026-07-31"
+  duration_weeks: 4

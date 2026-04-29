@@ -1,0 +1,276 @@
+name: "P2 - Funcionalidades Importantes (3-4 semanas)"
+description: "Prioridad 2: Social proof, contenido mejorado, comparador y sobre nosotros"
+priority: high
+effort: large
+status: proposed
+
+epics:
+  - id: "2.1"
+    name: "Sección 'Sobre Nosotros'"
+    description: "6 features para crear página de credibilidad y confianza"
+    features:
+      - id: "F2.1.1"
+        name: "Historia de la Empresa"
+        description: "Página /sobre-nosotros con historia, fundación, misión"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Timeline: fundación → hitos principales → presente"
+          - "300-500 palabras de storytelling"
+          - "Foto del founder/equipo fundador"
+
+      - id: "F2.1.2"
+        name: "Equipo y Expertos"
+        description: "Cards de miembros clave con roles y experiencia"
+        effort: small
+        status: proposed
+        acceptance:
+          - "5-8 miembros del equipo"
+          - "Foto profesional + nombre + rol + bio corta"
+          - "Link a LinkedIn (opcional)"
+
+      - id: "F2.1.3"
+        name: "Certificaciones y Estándares"
+        description: "Mostrar ISO, estándares energéticos, acreditaciones"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Logos de certificaciones"
+          - "Año de obtención"
+          - "Link a certificado (PDF)"
+
+      - id: "F2.1.4"
+        name: "Proceso Constructivo Detallado"
+        description: "Explicar paso a paso cómo se construye"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "6-8 pasos con imágenes"
+          - "Duración estimada por fase"
+          - "QA checkpoints detallados"
+
+      - id: "F2.1.5"
+        name: "Visión y Valores"
+        description: "Declaración de visión y 3-4 valores core"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Sección con visión (2-3 párrafos)"
+          - "4 valores con descripción de cada uno"
+          - "Iconografía coherente"
+
+      - id: "F2.1.6"
+        name: "Referencias de Clientes Destacados"
+        description: "Logo/nombre de clientes notables (con permiso)"
+        effort: small
+        status: proposed
+        acceptance:
+          - "6-10 logos de clientes"
+          - "Nombre y descripción corta si permitido"
+          - "Link opcional a proyecto específico"
+
+  - id: "2.2"
+    name: "Social Proof y Testimonios"
+    description: "6 features para agregar credibilidad mediante reviews y casos de éxito"
+    features:
+      - id: "F2.2.1"
+        name: "Página de Testimonios"
+        description: "Página /testimonios con mínimo 5-6 testimonios reales"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "5-6 testimonios: nombre, foto, rol, texto (100-150 palabras)"
+          - "Video testimonios (si disponible)"
+          - "Proyecto/ubicación del cliente"
+          - "Ratings 4.5-5 stars"
+
+      - id: "F2.2.2"
+        name: "Ratings y Reviews"
+        description: "Integrar sistema de ratings (Google Reviews, Trustpilot, custom)"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Widget mostrando rating promedio (4.5+)"
+          - "Desglose: 5★, 4★, 3★, etc."
+          - "Link a página completa de reviews"
+          - "Última actualización visible"
+
+      - id: "F2.2.3"
+        name: "Sistema de Reseñas Verificadas"
+        description: "Mostrar reviews solo de clientes verificados"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Badge 'Cliente Verificado' en cada review"
+          - "Mostrar proyecto o tipo de compra"
+          - "Email ofuscado (usuario@***)"
+
+      - id: "F2.2.4"
+        name: "Estadísticas Actualizadas"
+        description: "Números: clientes totales, proyectos completados, % satisfacción"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Actualizado cada trimestre"
+          - "Desglose: clientes, proyectos, años operando"
+          - "Comparativa año vs. año si es relevante"
+
+      - id: "F2.2.5"
+        name: "Estudios de Caso (Case Studies)"
+        description: "2-3 proyectos showcased con antes/después, métricas"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "3 case studies: introducción, contexto, solución, resultados"
+          - "Fotos antes/después"
+          - "Números: tamaño proyecto, duración, budget, ROI cliente"
+          - "Link a detalle o descargar PDF"
+
+      - id: "F2.2.6"
+        name: "Testimonios en 'Por Qué NordiK'"
+        description: "Cada razón incluye micro-testimonios de clientes"
+        effort: small
+        status: proposed
+        acceptance:
+          - "6 razones de valor"
+          - "Cada una con quote corto de cliente"
+          - "Foto pequeña del cliente"
+
+  - id: "2.3"
+    name: "Galería Mejorada"
+    description: "5 features para mejorar visualización de proyectos"
+    features:
+      - id: "F2.3.1"
+        name: "Fotos Reales de Proyectos Entregados"
+        description: "Reemplazar imágenes genéricas con fotos reales"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Mínimo 3 fotos reales por proyecto"
+          - "Categorización: exterior, interior, detalles"
+          - "Atribución/permiso del propietario"
+
+      - id: "F2.3.2"
+        name: "Galería Categorizada por Fase"
+        description: "Organizar fotos: proceso, interiores, detalles, acabados"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Tabs: Exterior | Interiores | Detalles | Acabados"
+          - "Min 3 fotos por categoría"
+          - "Transiciones smooth entre tabs"
+
+      - id: "F2.3.3"
+        name: "Antes/Después en Reformas"
+        description: "Para proyectos de reforma, mostrar estado inicial vs. final"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Slider antes/después (antes a la izquierda)"
+          - "Múltiples puntos antes/después por reforma"
+          - "Duración de reforma visible"
+
+      - id: "F2.3.4"
+        name: "Videos de Construcción o Tours 3D"
+        description: "Agregar video timelapse o tour virtual"
+        effort: large
+        status: proposed
+        acceptance:
+          - "1-2 videos de timelapse (30-90 segundos)"
+          - "Tours 360 (si presupuesto permite)"
+          - "Embed YouTube o video propio"
+
+      - id: "F2.3.5"
+        name: "Lightbox/Zoom Mejorado"
+        description: "Funcionalidad: zoom, fullscreen, navegación con teclado"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Doble click para zoom"
+          - "Fullscreen mode"
+          - "Teclado: ← → para navegar, ESC para cerrar"
+          - "Contador: '3 de 24 fotos'"
+
+  - id: "2.4"
+    name: "Comparador de Productos"
+    description: "3 features para comparación entre proyectos"
+    features:
+      - id: "F2.4.1"
+        name: "Selector de Proyectos para Comparar"
+        description: "Permitir seleccionar 2-3 proyectos"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Checkboxes en tarjetas de catálogo"
+          - "Botón flotante: 'Comparar (2 seleccionados)'"
+          - "Máximo 3 proyectos simultáneamente"
+
+      - id: "F2.4.2"
+        name: "Tabla de Comparación"
+        description: "Side-by-side table con especificaciones"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "Columnas: Proyecto 1 | Proyecto 2 | Proyecto 3"
+          - "Filas: Área m², Habitaciones, Baños, Precio, R-value, Tiempo entrega"
+          - "Diferencias destacadas (green/red si aplica)"
+          - "Exportar a PDF"
+
+      - id: "F2.4.3"
+        name: "CTA: Solicitar Cotización Comparativa"
+        description: "Botón para solicitar presupuesto con 3 proyectos seleccionados"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Botón prominente al final de tabla"
+          - "Formulario pre-filled con 3 proyectos"
+          - "Campo extra: '¿Cuál te interesa más?'"
+
+  - id: "2.5"
+    name: "Expandir Sección 'Por Qué NordiK'"
+    description: "3 features para mejorar diferenciadores clave"
+    features:
+      - id: "F2.5.1"
+        name: "Detalles de Garantía Completa"
+        description: "Especificar estructura, materiales, técnica, servicio post-venta"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Sección 'Nuestra Garantía' con breakdown:"
+          - "  - Estructura: 10 años"
+          - "  - Materiales: 5 años"
+          - "  - Técnica: 2 años"
+          - "PDF descargable: términos completos"
+          - "Proceso de reclamación explicado"
+
+      - id: "F2.5.2"
+        name: "Certificaciones Ambientales"
+        description: "Mostrar PEFC, FSC, O sellos de eficiencia energética"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Logos de certificaciones con descripciones"
+          - "Impacto ambiental: CO2 reducido vs. construcción tradicional"
+          - "Links a certificados verificables"
+
+      - id: "F2.5.3"
+        name: "Comparativa vs. Construcción Tradicional"
+        description: "Tabla mostrando ventajas competitivas"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Tabla 2 columnas: SIP Panels | Construcción Tradicional"
+          - "Filas: Tiempo, Costo, Eficiencia, Desperdicio, Garantía"
+          - "Números reales/estimados claramente marcados"
+
+metrics:
+  - "Rating de plataforma: 4.5+ stars"
+  - "Número de testimonios: 5-6 mínimo"
+  - "Engagement con galería mejorada: +40% vs. baseline"
+  - "Comparador: 10%+ de usuarios lo usan"
+  - "Tiempo en página 'Sobre Nosotros': 2+ minutos"
+
+timeline:
+  start: "2026-05-22"
+  end: "2026-06-18"
+  duration_weeks: 4

@@ -17,7 +17,7 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
             <nav className="flex flex-col gap-2 text-sm text-primary-foreground/70">
-              <a href="#projects" className="hover:text-primary-foreground transition-colors">Nuestros Proyectos</a>
+              <a href="#projects" className="hover:text-primary-foreground transition-colors">Proyectos</a>
               <a href="#services" className="hover:text-primary-foreground transition-colors">Opciones de Construcción</a>
               <a href="#why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
               <a href="#gallery" className="hover:text-primary-foreground transition-colors">Galería</a>

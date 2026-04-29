@@ -1,0 +1,236 @@
+name: "P3 - Mejoras UX (2 semanas)"
+description: "Prioridad 3: Optimizaciones visuales, FAQ, mejora de CTAs"
+priority: medium
+effort: medium
+status: proposed
+
+epics:
+  - id: "3.1"
+    name: "Optimizaciones Visuales"
+    description: "6 features para mejorar diseño y presentación"
+    features:
+      - id: "F3.1.1"
+        name: "Jerarquía Visual Mejorada en Headers"
+        description: "Aumentar tamaño de H1/H2, peso de fuente, contraste"
+        effort: small
+        status: proposed
+        acceptance:
+          - "H1: 48-56px"
+          - "H2: 32-40px"
+          - "Peso: 600-700 para headings"
+          - "Line height: 1.2-1.3"
+
+      - id: "F3.1.2"
+        name: "Iconografía Coherente para Servicios"
+        description: "Asignar iconos únicos a cada servicio"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Set de 6-8 iconos consistentes"
+          - "Usados en sección de servicios"
+          - "Usados en tarjetas de producto"
+
+      - id: "F3.1.3"
+        name: "Espaciado Mejorado (Padding/Margin)"
+        description: "Aumentar gaps entre secciones principales"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Margin entre secciones: 60-80px"
+          - "Padding dentro tarjetas: 24-32px"
+          - "Consistencia en todos los breakpoints"
+
+      - id: "F3.1.4"
+        name: "Breadcrumbs en Páginas de Detalle"
+        description: "Agregar navegación migajas: Home > Proyectos > [Nombre]"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Breadcrumbs en header de /proyecto/{slug}"
+          - "Links funcionales a secciones padre"
+          - "Último item no clickeable"
+
+      - id: "F3.1.5"
+        name: "Hover Effects en Tarjetas"
+        description: "Agregar zoom sutil (1.02x), shadow deepened"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Tarjetas: transform: scale(1.02) on hover"
+          - "Shadow aumenta 4px on hover"
+          - "Transition: 200-300ms ease"
+          - "Cursor: pointer en clickeable"
+
+      - id: "F3.1.6"
+        name: "Tipografía: Body Text Legible"
+        description: "Aumentar tamaño body (14px → 16px), mejorar contraste"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Body text: 16px mínimo"
+          - "Line height: 1.6-1.8"
+          - "Contraste: WCAG AA mínimo (4.5:1)"
+
+  - id: "3.2"
+    name: "Mejoras en Filtros UX"
+    description: "4 features para mejorar experiencia de filtros"
+    features:
+      - id: "F3.2.1"
+        name: "Indicador Visual de Filtros Activos"
+        description: "Badge sobre icono de filtro mostrando cantidad"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Badge rojo con número sobre icono de filtro"
+          - "Desaparece si no hay filtros"
+          - "Anima al aplicar/remover filtro"
+
+      - id: "F3.2.2"
+        name: "Cambio de Filtro = Scroll al Top"
+        description: "Al aplicar filtro, page scrollea a top"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Smooth scroll al cambiar filtro"
+          - "Opcional: deshabilitar si desplazamiento > 500px"
+          - "Animation: 300-500ms"
+
+      - id: "F3.2.3"
+        name: "Estado de URL: Filtros en Query Params"
+        description: "URL refleja estado actual de filtros"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "?type=casas,cabanas (múltiple)"
+          - "?price=50-200"
+          - "?bedrooms=3"
+          - "Back button restaura estado"
+
+      - id: "F3.2.4"
+        name: "Mobile: Filtros en Modal/Drawer"
+        description: "En mobile, filtros en drawer deslizable"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Botón 'Filtros' en header mobile"
+          - "Drawer/modal con todos los filtros"
+          - "Botón 'Aplicar Filtros' al final"
+          - "Botón 'Limpiar' visible"
+
+  - id: "3.3"
+    name: "Página FAQ"
+    description: "3 features para crear sección de preguntas frecuentes"
+    features:
+      - id: "F3.3.1"
+        name: "Crear Página /FAQ"
+        description: "Página con 12-15 preguntas frecuentes"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Accordion: pregunta expandible"
+          - "Búsqueda dentro de FAQ"
+          - "Categorías: Proceso, Garantía, Financiamiento, Técnica"
+
+      - id: "F3.3.2"
+        name: "Responder Preguntas Clave"
+        description: "Cubrir: proceso, entrega, garantía, personalización, etc."
+        effort: medium
+        status: proposed
+        acceptance:
+          - "12-15 preguntas con respuestas completas"
+          - "¿Cómo funciona el proceso de compra?"
+          - "¿Cuál es el tiempo de entrega?"
+          - "¿Ofrece servicios de instalación?"
+          - "¿Qué incluye la garantía?"
+          - "¿Se puede personalizar?"
+          - "¿Cuáles son los costos adicionales?"
+          - "¿Financiamiento disponible?"
+          - "¿Dónde entregan?"
+          - "¿Cómo es el aislamiento SIP?"
+
+      - id: "F3.3.3"
+        name: "Link a FAQ desde Formulario"
+        description: "Link 'Ver FAQ primero' antes de envío"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Link visible en formulario"
+          - "Abre FAQ en tab/modal"
+          - "No impide envío si user decide continuar"
+
+  - id: "3.4"
+    name: "Mejorar Call-to-Actions"
+    description: "6 features para optimizar conversión a través de CTAs"
+    features:
+      - id: "F3.4.1"
+        name: "Botón CTA Flotante en Scroll"
+        description: "Botón flotante bottom-right: 'Obtener Presupuesto'"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Aparece después de scroll > 1000px"
+          - "Posición: bottom-right con padding 24px"
+          - "Color: highlight color (madera/castaño)"
+          - "Click: abre formulario o link a /contacto"
+          - "Cierre: X button o click fuera"
+
+      - id: "F3.4.2"
+        name: "CTA Contextual en Hero"
+        description: "2 botones claros: 'Ver Proyectos' y 'Cotizar Ahora'"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Botón primario: 'Explorar Proyectos' → /catalogo"
+          - "Botón secundario: 'Solicitar Presupuesto' → /contacto"
+          - "Tamaños grandes, contraste alto"
+
+      - id: "F3.4.3"
+        name: "CTA en Tarjetas de Producto"
+        description: "Agregar botón 'Solicitar Cotización' en cada tarjeta"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Botón secundario en esquina tarjeta o hover"
+          - "Abre modal con formulario pre-filled"
+
+      - id: "F3.4.4"
+        name: "CTA al Final de Secciones"
+        description: "Al fin de cada sección grande, CTA relevante"
+        effort: medium
+        status: proposed
+        acceptance:
+          - "'Por Qué': 'Conoce más' → /sobre-nosotros"
+          - "'Servicios': 'Ver proyectos' → /catalogo?type=casas"
+          - "'Testimonios': 'Solicita presupuesto' → /contacto"
+
+      - id: "F3.4.5"
+        name: "Micro-copy Persuasivo en CTAs"
+        description: "Textos en botones más persuasivos"
+        effort: small
+        status: proposed
+        acceptance:
+          - "En lugar de 'Enviar': 'Solicitar Presupuesto Gratis'"
+          - "En lugar de 'Contacto': 'Agendar Consulta'"
+          - "En lugar de 'Más': 'Ver Todos los Proyectos'"
+
+      - id: "F3.4.6"
+        name: "Botón WhatsApp Flotante"
+        description: "Icono de WhatsApp flotante bottom-left"
+        effort: small
+        status: proposed
+        acceptance:
+          - "Icono flotante WhatsApp"
+          - "Click abre: https://wa.me/34XXXXX"
+          - "Números por país/región"
+          - "Mensaje pre-filled: 'Hola, quiero info sobre...'"
+
+metrics:
+  - "CTR de botones flotantes: 2-3%"
+  - "FAQ: 20%+ de visitantes la usan"
+  - "Bounce rate en mobile: <60%"
+  - "Tiempo promedio en sitio: +30% vs. baseline"
+
+timeline:
+  start: "2026-06-19"
+  end: "2026-07-02"
+  duration_weeks: 2
