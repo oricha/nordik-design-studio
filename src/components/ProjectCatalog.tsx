@@ -19,11 +19,50 @@ const sortOptions = [
   { value: "name-asc", label: "Nombre: A-Z" },
 ];
 
+const calculateAvailableRange = (category: string, search: string): [number, number] => {
+  const searchLower = search.toLowerCase();
+  let filtered = projects.filter(
+    (p) =>
+      (category === "all" || p.category === category) &&
+      (search === "" || p.name.toLowerCase().includes(searchLower))
+  );
+
+  if (filtered.length === 0) return [0, 400000];
+
+  const prices = filtered.map((p) => p.price);
+  const minPrice = Math.floor(Math.min(...prices) / 1000) * 1000;
+  const maxPrice = Math.ceil(Math.max(...prices) / 1000) * 1000;
+
+  return [minPrice, maxPrice];
+};
+
 const ProjectCatalog = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState("price-asc");
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 400000]);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const availableRange = useMemo(
+    () => calculateAvailableRange(activeCategory, searchQuery),
+    [activeCategory, searchQuery]
+  );
+
+  const [priceRange, setPriceRange] = useState<[number, number]>(availableRange);
+
+  // Update priceRange when availableRange changes
+  useMemo(() => {
+    setPriceRange((prev) => {
+      const [minAvail, maxAvail] = availableRange;
+      const [minCurrent, maxCurrent] = prev;
+
+      const newMin = Math.max(minCurrent, minAvail);
+      const newMax = Math.min(maxCurrent, maxAvail);
+
+      if (newMin <= newMax) {
+        return [newMin, newMax];
+      }
+      return [minAvail, maxAvail];
+    });
+  }, [availableRange]);
 
   const filtered = useMemo(() => {
     const searchLower = searchQuery.toLowerCase();
@@ -116,22 +155,62 @@ const ProjectCatalog = () => {
             </select>
           </div>
 
-          <div className="flex items-center gap-3 flex-1 min-w-[200px] max-w-sm">
-            <span className="text-sm text-muted-foreground whitespace-nowrap">
-              €{priceRange[0].toLocaleString()}
-            </span>
-            <input
-              type="range"
-              min={0}
-              max={400000}
-              step={5000}
-              value={priceRange[1]}
-              onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-              className="flex-1 accent-accent"
-            />
-            <span className="text-sm text-muted-foreground whitespace-nowrap">
-              €{priceRange[1].toLocaleString()}
-            </span>
+          <div className="flex flex-col gap-3 flex-1 min-w-[250px]">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-foreground whitespace-nowrap">Precio:</span>
+              <div className="flex items-center gap-2 flex-1">
+                <input
+                  type="number"
+                  min={availableRange[0]}
+                  max={availableRange[1]}
+                  value={priceRange[0]}
+                  onChange={(e) => {
+                    const newMin = Number(e.target.value);
+                    if (newMin <= priceRange[1]) {
+                      setPriceRange([newMin, priceRange[1]]);
+                    }
+                  }}
+                  className="w-24 bg-background border border-border rounded px-2 py-1 text-sm text-foreground"
+                />
+                <span className="text-sm text-muted-foreground">-</span>
+                <input
+                  type="number"
+                  min={availableRange[0]}
+                  max={availableRange[1]}
+                  value={priceRange[1]}
+                  onChange={(e) => {
+                    const newMax = Number(e.target.value);
+                    if (newMax >= priceRange[0]) {
+                      setPriceRange([priceRange[0], newMax]);
+                    }
+                  }}
+                  className="w-24 bg-background border border-border rounded px-2 py-1 text-sm text-foreground"
+                />
+              </div>
+              <span className="text-sm text-muted-foreground whitespace-nowrap">
+                (€{availableRange[0].toLocaleString()} - €{availableRange[1].toLocaleString()})
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="range"
+                min={availableRange[0]}
+                max={availableRange[1]}
+                step={5000}
+                value={priceRange[0]}
+                onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
+                className="flex-1 accent-accent"
+              />
+              <input
+                type="range"
+                min={availableRange[0]}
+                max={availableRange[1]}
+                step={5000}
+                value={priceRange[1]}
+                onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+                className="flex-1 accent-accent"
+              />
+            </div>
           </div>
         </div>
 
