@@ -5,13 +5,13 @@ Plan de implementación de 32 features organizadas en 4 prioridades y 18 épicas
 ## 📋 Resumen por Prioridad
 
 ### 🔴 P1 - Funcionalidades Críticas (2-3 semanas)
-**32 features en 5 épicas**
+**30 features en 5 épicas**
 
 Enfoque: Reparar funcionalidad quebrada, crear páginas de detalle, mejorar contacto.
 
 | Épica | Features | Duración |
 |-------|----------|----------|
-| [1.1 Filtros y Búsqueda](p1-criticas.yaml#epics) | 8 | 1-2 sem |
+| [1.1 Filtros y Búsqueda](p1-criticas.yaml#epics) | 6 | 1-2 sem |
 | [1.2 Detalle de Producto](p1-criticas.yaml#epics) | 8 | 2-3 sem |
 | [1.3 Enlaces Rotos](p1-criticas.yaml#epics) | 2 | 3-5 días |
 | [1.4 Formulario](p1-criticas.yaml#epics) | 9 | 1-2 sem |
@@ -153,18 +153,18 @@ opsx:report --priority p1 --status in-progress
 
 ## 📊 Estado Actual
 
-- **Total Features:** 92 (32 + 23 + 19 + 18)
+- **Total Features:** 90 (30 + 23 + 19 + 18)
 - **Total Épicas:** 18
 - **Duración Estimada:** 12-16 semanas
 - **Status Global:** Proposed (pendiente iniciar)
 
 | Prioridad | Features | Status | Duración |
 |-----------|----------|--------|----------|
-| P1 | 32 | Proposed | 2-3 sem |
+| P1 | 30 | Proposed | 2-3 sem |
 | P2 | 23 | Proposed | 3-4 sem |
 | P3 | 19 | Proposed | 2 sem |
 | P4 | 18 | Proposed | 4+ sem |
-| **Total** | **92** | **Proposed** | **12-16 sem** |
+| **Total** | **90** | **Proposed** | **12-16 sem** |
 
 ---
 

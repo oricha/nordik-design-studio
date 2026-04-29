@@ -7,7 +7,7 @@ status: proposed
 epics:
   - id: "1.1"
     name: "Funcionalidad de Filtros y Búsqueda"
-    description: "8 features para búsqueda avanzada y filtros dinámicos"
+    description: "6 features para búsqueda avanzada y filtros dinámicos"
     features:
       - id: "F1.1.1"
         name: "Búsqueda por Texto de Proyecto"
@@ -41,26 +41,6 @@ epics:
           - "Actualiza resultados en tiempo real"
 
       - id: "F1.1.4"
-        name: "Filtro por Eficiencia Energética"
-        description: "Filtro por categoría energética (A, B, C, D, etc.)"
-        effort: medium
-        status: proposed
-        acceptance:
-          - "Mostrar etiqueta energética (A-F) en tarjetas"
-          - "Filtro por categoría seleccionada"
-          - "Ordenable: mejor a peor eficiencia"
-
-      - id: "F1.1.5"
-        name: "Filtro por Tiempo de Entrega"
-        description: "Filtrar por velocidad de entrega (0-3 meses, 3-6 meses, 6+ meses)"
-        effort: small
-        status: proposed
-        acceptance:
-          - "3 rangos de tiempo seleccionables"
-          - "Valor de entregas mostrado en tarjetas"
-          - "Actualiza resultados dinámicamente"
-
-      - id: "F1.1.6"
         name: "Vista Grid vs. Lista"
         description: "Alternar entre visualización en grid (3 cols) o lista (1 fila)"
         effort: small
@@ -70,7 +50,7 @@ epics:
           - "Estado persiste en sesión"
           - "Responsive en ambas vistas"
 
-      - id: "F1.1.7"
+      - id: "F1.1.5"
         name: "Sidebar Persistente de Filtros"
         description: "Panel lateral con todos los filtros activos visibles, opción 'Limpiar todo'"
         effort: medium
@@ -81,7 +61,7 @@ epics:
           - "Botón 'Limpiar Filtros' resetea todo"
           - "Resultado contador: 'Mostrando 12 de 240'"
 
-      - id: "F1.1.8"
+      - id: "F1.1.6"
         name: "Ordenamiento Extendido"
         description: "Agregar opciones: precio (menor/mayor), tamaño, eficiencia, tiempo entrega"
         effort: small
@@ -364,7 +344,7 @@ metrics:
   - "0 enlaces rotos en catálogo"
   - "Todos los proyectos tienen página de detalle funcional"
   - "Filtros dinámicos ajustan rango de precios en tiempo real"
-  - "Formulario tiene validación visible"
+  - "6 features completadas en épica 1.1"
   - "Tasa de conversión de contacto: 1-2%"
 
 timeline:
