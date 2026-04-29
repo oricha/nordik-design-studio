@@ -12,6 +12,7 @@ import ProjectLevi from "./pages/ProjectLevi";
 import ProjectHelsinki from "./pages/ProjectHelsinki";
 import ProjectTunturi from "./pages/ProjectTunturi";
 import ProjectSodankyla from "./pages/ProjectSodankyla";
+import ProjectDetail from "./components/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -27,6 +28,7 @@ const App = () => (
         <Header />
         <Routes>
           <Route path="/" element={<Index />} />
+          {/* Legacy routes - kept for backward compatibility */}
           <Route path="/project/torku" element={<ProjectTorku />} />
           <Route path="/project/tampere" element={<ProjectTampere />} />
           <Route path="/project/kuusamo" element={<ProjectKuusamo />} />
@@ -35,6 +37,10 @@ const App = () => (
           <Route path="/project/helsinki" element={<ProjectHelsinki />} />
           <Route path="/project/tunturi" element={<ProjectTunturi />} />
           <Route path="/project/sodankyla" element={<ProjectSodankyla />} />
+
+          {/* Dynamic project route (Spanish) */}
+          <Route path="/proyecto/:slug" element={<ProjectDetail />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -376,7 +376,7 @@ const ProjectCard = ({ project, listView }: { project: Project; listView?: boole
   );
 
   if (project.slug) {
-    return <Link to={`/project/${project.slug}`}>{content}</Link>;
+    return <Link to={`/proyecto/${project.slug}`}>{content}</Link>;
   }
 
   return content;
