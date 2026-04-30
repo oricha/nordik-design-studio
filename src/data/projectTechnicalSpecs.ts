@@ -249,6 +249,94 @@ const projectTechnicalSpecs: ProjectTechnicalSpecsMap = {
       "Diseño Accesible Certificado",
     ],
   },
+  inari: {
+    sipPanel: {
+      thickness: 22,
+      rValue: 5.8,
+    },
+    quantity: {
+      bedrooms: 5,
+      bathrooms: 3,
+      area: 220,
+    },
+    finishes: {
+      roof: "Cubiertas de pizarra con estructura de acero galvanizado",
+      floor: "Tarima de roble nórdico con acabado satinado",
+      paint: "Pintura ecológica transpirable premium",
+      doors: "Puertas de entrada de alerce macizo con triple acristalamiento",
+    },
+    customization: [
+      "Sistema de calefacción geotérmica completo",
+      "Integración de paneles solares fotovoltaicos",
+      "Ampliación de terrazas cubiertas",
+      "Sistema de almacenamiento inteligente",
+    ],
+    certifications: [
+      "ISO 9001:2015",
+      "ISO 14001:2015",
+      "PEFC Certificado",
+      "Energieeffizienz Clase A+",
+      "Declaración Ambiental de Producto (EPD)",
+    ],
+  },
+  rovaniemi: {
+    sipPanel: {
+      thickness: 20,
+      rValue: 5.2,
+    },
+    quantity: {
+      bedrooms: 4,
+      bathrooms: 2,
+      area: 160,
+    },
+    finishes: {
+      roof: "Cubiertas de metal con aislamiento reflectivo",
+      floor: "Parquet de abeto escandinavo tratado",
+      paint: "Pintura nórdica resistente a clima extremo",
+      doors: "Puertas de fresno con cerraduras inteligentes",
+    },
+    customization: [
+      "Sistema de ventilación mecánica controlada",
+      "Integración de sauna finlandés",
+      "Ampliación modular de espacios",
+      "Sistema de captura y reutilización de agua",
+    ],
+    certifications: [
+      "ISO 9001:2015",
+      "PEFC Certificado",
+      "Energieeffizienz Clase A",
+      "Pasaporte de Construcción Sostenible",
+    ],
+  },
+  saariselka: {
+    sipPanel: {
+      thickness: 18,
+      rValue: 4.6,
+    },
+    quantity: {
+      bedrooms: 1,
+      bathrooms: 1,
+      area: 45,
+    },
+    finishes: {
+      roof: "Tejas cerámicas antideslizantes",
+      floor: "Suelo de hormigón pulido con calefacción radiante",
+      paint: "Pintura exterior resistente UV y nieve",
+      doors: "Puerta de entrada de aluminio anodizado con triple acristalamiento",
+    },
+    customization: [
+      "Terraza cubierta con protección viento",
+      "Sistema de ventilación natural optimizado",
+      "Integración de equipamiento camping",
+      "Aislamiento acústico mejorado",
+    ],
+    certifications: [
+      "ISO 9001:2015",
+      "PEFC Certificado",
+      "Marcado CE",
+      "Certificado de Resistencia Climática Nórdica",
+    ],
+  },
 };
 
 export const getTechnicalSpecs = (slug: string): TechnicalSpecs | undefined => {

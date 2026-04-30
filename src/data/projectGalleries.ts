@@ -503,6 +503,171 @@ export const projectGalleries: ProjectGallery[] = [
       },
     ],
   },
+  {
+    slug: "inari",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=800&fit=crop",
+        title: "Fachada principal Inari",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+        title: "Vista lateral moderna",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1200&h=800&fit=crop",
+        title: "Detalle fachada revestimiento",
+        category: "detalles",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
+        title: "Cocina abierta Inari",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&h=800&fit=crop",
+        title: "Dormitorio principal",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&h=800&fit=crop",
+        title: "Ventanales panorámicos",
+        category: "detalles",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1575460711063-f32bee8e6f06?w=1200&h=800&fit=crop",
+        title: "Escaleras diseño",
+        category: "detalles",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1552948110-fac1076e7b04?w=1200&h=800&fit=crop",
+        title: "Baño suite",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1576305325570-4e7b2d8b8c84?w=1200&h=800&fit=crop",
+        title: "Patio y terraza",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1600566753376-12c8ab7d8a28?w=1200&h=800&fit=crop",
+        title: "Acceso entrada",
+        category: "exterior",
+      },
+    ],
+  },
+  {
+    slug: "rovaniemi",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+        title: "Fachada principal Rovaniemi",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=800&fit=crop",
+        title: "Vista lateral luminosa",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1200&h=800&fit=crop",
+        title: "Detalle ventanería",
+        category: "detalles",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
+        title: "Sala comedor",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&h=800&fit=crop",
+        title: "Dormitorio",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&h=800&fit=crop",
+        title: "Grandes ventanas",
+        category: "detalles",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1575460711063-f32bee8e6f06?w=1200&h=800&fit=crop",
+        title: "Estructura interior",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1552948110-fac1076e7b04?w=1200&h=800&fit=crop",
+        title: "Baño moderno",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1576305325570-4e7b2d8b8c84?w=1200&h=800&fit=crop",
+        title: "Zona exterior",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1600566753376-12c8ab7d8a28?w=1200&h=800&fit=crop",
+        title: "Entrada frontal",
+        category: "exterior",
+      },
+    ],
+  },
+  {
+    slug: "saariselka",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+        title: "Cabaña Saariselkä",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=800&fit=crop",
+        title: "Detalle exterior",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1200&h=800&fit=crop",
+        title: "Ventanas ampias",
+        category: "detalles",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
+        title: "Cocina compacta",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&h=800&fit=crop",
+        title: "Dormitorio principal",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&h=800&fit=crop",
+        title: "Vistas exteriores",
+        category: "detalles",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1575460711063-f32bee8e6f06?w=1200&h=800&fit=crop",
+        title: "Sala estar",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1552948110-fac1076e7b04?w=1200&h=800&fit=crop",
+        title: "Baño pequeño",
+        category: "interior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1576305325570-4e7b2d8b8c84?w=1200&h=800&fit=crop",
+        title: "Terraza",
+        category: "exterior",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1600566753376-12c8ab7d8a28?w=1200&h=800&fit=crop",
+        title: "Entrada cabaña",
+        category: "exterior",
+      },
+    ],
+  },
 ];
 
 export const getProjectGallery = (slug: string): ProjectGallery | undefined => {
