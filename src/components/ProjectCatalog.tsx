@@ -1,8 +1,20 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, BedDouble, Bath, ArrowUpDown, Search, X, Grid2X2, List } from "lucide-react";
+import {
+  Maximize2,
+  BedDouble,
+  Bath,
+  ArrowUpDown,
+  Search,
+  X,
+  Grid2X2,
+  List,
+  SlidersHorizontal,
+  ChevronDown,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects, type Project } from "@/data/projects";
+import { Slider } from "@/components/ui/slider";
 
 const categories = [
   { key: "all", label: "Todos" },
@@ -18,6 +30,8 @@ const sortOptions = [
   { value: "area-desc", label: "Más grande primero" },
   { value: "name-asc", label: "Nombre: A-Z" },
 ];
+
+const formatPrice = (value: number) => `€ ${value.toLocaleString()}`;
 
 const calculateAvailableRange = (category: string, search: string): [number, number] => {
   const searchLower = search.toLowerCase();
@@ -61,8 +75,7 @@ const ProjectCatalog = () => {
 
   const [priceRange, setPriceRange] = useState<[number, number]>(availableRange);
 
-  // Update priceRange when availableRange changes
-  useMemo(() => {
+  useEffect(() => {
     setPriceRange((prev) => {
       const [minAvail, maxAvail] = availableRange;
       const [minCurrent, maxCurrent] = prev;
@@ -108,147 +121,166 @@ const ProjectCatalog = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Nuestros Proyectos</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Explore nuestra colección de casas de diseño escandinavo, cabañas y soluciones de construcción.
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Buscar casas</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            Encuentra la casa o cabaña perfecta para tu próxima escapada.
           </p>
         </motion.div>
 
-        {/* Search Input */}
-        <div className="mb-6 flex items-center gap-2 bg-background border border-border rounded-lg px-3 py-2 w-full max-w-sm">
-          <Search className="w-4 h-4 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Buscar proyectos..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-1 bg-transparent text-foreground outline-none text-sm"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery("")}
-              className="p-1 hover:bg-border rounded transition-colors"
-            >
-              <X className="w-4 h-4 text-muted-foreground" />
-            </button>
-          )}
-        </div>
+        <div className="mb-4 rounded-[26px] border border-border bg-background px-6 py-6 shadow-[0_20px_60px_rgba(15,15,15,0.06)]">
+          <div className="flex flex-col gap-6 xl:flex-row xl:items-center">
+            <div className="flex min-w-0 flex-1 items-center rounded-2xl border border-border bg-white px-5 py-4">
+              <Search className="mr-4 h-5 w-5 flex-shrink-0 text-foreground" />
+              <input
+                type="text"
+                placeholder="Buscar por nombre, ubicación o característica..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="ml-3 rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  aria-label="Limpiar búsqueda"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
 
-        {/* View Mode Toggle */}
-        <div className="mb-6 flex items-center gap-2">
-          <button
-            onClick={() => handleViewModeChange("grid")}
-            className={`p-2 rounded-lg transition-all ${viewMode === "grid"
-              ? "bg-primary text-primary-foreground"
-              : "bg-background text-muted-foreground hover:bg-border"
-              }`}
-            title="Vista Grid"
-          >
-            <Grid2X2 className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => handleViewModeChange("list")}
-            className={`p-2 rounded-lg transition-all ${viewMode === "list"
-              ? "bg-primary text-primary-foreground"
-              : "bg-background text-muted-foreground hover:bg-border"
-              }`}
-            title="Vista Lista"
-          >
-            <List className="w-5 h-5" />
-          </button>
-        </div>
+            <div className="flex flex-[1.25] flex-col gap-3">
+              <span className="text-base font-semibold text-foreground">Precio</span>
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="number"
+                    min={availableRange[0]}
+                    max={availableRange[1]}
+                    value={priceRange[0]}
+                    onChange={(e) => {
+                      const newMin = Number(e.target.value);
+                      if (newMin <= priceRange[1]) {
+                        setPriceRange([newMin, priceRange[1]]);
+                      }
+                    }}
+                    className="h-14 w-full min-w-[150px] rounded-2xl border border-border bg-white px-5 text-lg text-foreground outline-none transition-colors focus:border-accent md:w-[170px]"
+                  />
+                  <span className="text-xl text-muted-foreground">-</span>
+                  <input
+                    type="number"
+                    min={availableRange[0]}
+                    max={availableRange[1]}
+                    value={priceRange[1]}
+                    onChange={(e) => {
+                      const newMax = Number(e.target.value);
+                      if (newMax >= priceRange[0]) {
+                        setPriceRange([priceRange[0], newMax]);
+                      }
+                    }}
+                    className="h-14 w-full min-w-[150px] rounded-2xl border border-border bg-white px-5 text-lg text-foreground outline-none transition-colors focus:border-accent md:w-[170px]"
+                  />
+                </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap items-center gap-3 mb-6">
-          {categories.map((cat) => (
-            <button
-              key={cat.key}
-              onClick={() => setActiveCategory(cat.key)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeCategory === cat.key
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-muted-foreground hover:bg-border"
-                }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap items-center gap-4 mb-8">
-          <div className="flex items-center gap-2">
-            <ArrowUpDown className="w-4 h-4 text-muted-foreground" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground"
-            >
-              {sortOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="flex flex-col gap-3 flex-1 min-w-[250px]">
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-foreground whitespace-nowrap">Precio:</span>
-              <div className="flex items-center gap-2 flex-1">
-                <input
-                  type="number"
-                  min={availableRange[0]}
-                  max={availableRange[1]}
-                  value={priceRange[0]}
-                  onChange={(e) => {
-                    const newMin = Number(e.target.value);
-                    if (newMin <= priceRange[1]) {
-                      setPriceRange([newMin, priceRange[1]]);
-                    }
-                  }}
-                  className="w-24 bg-background border border-border rounded px-2 py-1 text-sm text-foreground"
-                />
-                <span className="text-sm text-muted-foreground">-</span>
-                <input
-                  type="number"
-                  min={availableRange[0]}
-                  max={availableRange[1]}
-                  value={priceRange[1]}
-                  onChange={(e) => {
-                    const newMax = Number(e.target.value);
-                    if (newMax >= priceRange[0]) {
-                      setPriceRange([priceRange[0], newMax]);
-                    }
-                  }}
-                  className="w-24 bg-background border border-border rounded px-2 py-1 text-sm text-foreground"
-                />
+                <div className="min-w-0 flex-1 px-1">
+                  <Slider
+                    min={availableRange[0]}
+                    max={availableRange[1]}
+                    step={1000}
+                    value={priceRange}
+                    onValueChange={(value) => setPriceRange([value[0], value[1]])}
+                    className="[&_[data-radix-slider-range]]:bg-accent [&_[data-radix-slider-thumb]]:h-5 [&_[data-radix-slider-thumb]]:w-5 [&_[data-radix-slider-thumb]]:border-accent [&_[data-radix-slider-thumb]]:bg-accent [&_[data-radix-slider-track]]:h-1.5 [&_[data-radix-slider-track]]:bg-accent/20"
+                  />
+                  <div className="mt-3 flex items-center justify-between text-sm text-muted-foreground">
+                    <span>{formatPrice(priceRange[0])}</span>
+                    <span>{formatPrice(priceRange[1])}</span>
+                  </div>
+                </div>
               </div>
-              <span className="text-sm text-muted-foreground whitespace-nowrap">
-                (€{availableRange[0].toLocaleString()} - €{availableRange[1].toLocaleString()})
-              </span>
             </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="range"
-                min={availableRange[0]}
-                max={availableRange[1]}
-                step={5000}
-                value={priceRange[0]}
-                onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
-                className="flex-1 accent-accent"
-              />
-              <input
-                type="range"
-                min={availableRange[0]}
-                max={availableRange[1]}
-                step={5000}
-                value={priceRange[1]}
-                onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                className="flex-1 accent-accent"
-              />
-            </div>
+
+            <button className="inline-flex h-14 items-center justify-center gap-3 rounded-2xl bg-primary px-8 text-base font-semibold text-primary-foreground transition-transform hover:scale-[1.01]">
+              <Search className="h-5 w-5" />
+              Buscar
+            </button>
           </div>
+        </div>
+
+        <div className="mb-8 rounded-[26px] border border-border bg-background px-6 py-5 shadow-[0_20px_60px_rgba(15,15,15,0.05)]">
+          <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-center">
+              <div className="relative">
+                <ArrowUpDown className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="h-12 min-w-[270px] appearance-none rounded-2xl border border-border bg-white pl-12 pr-12 text-base text-foreground outline-none transition-colors focus:border-accent"
+                >
+                  {sortOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.key}
+                    onClick={() => setActiveCategory(cat.key)}
+                    className={`rounded-2xl border px-5 py-3 text-base font-medium transition-all ${
+                      activeCategory === cat.key
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-white text-foreground hover:border-accent/50"
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button className="inline-flex h-12 items-center justify-center gap-3 self-start rounded-2xl border border-border bg-white px-5 text-base text-foreground transition-colors hover:border-accent/50">
+              <SlidersHorizontal className="h-4 w-4" />
+              Filtros avanzados
+              <ChevronDown className="h-4 w-4 text-muted-foreground" />
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleViewModeChange("grid")}
+              className={`rounded-2xl p-3 transition-all ${
+                viewMode === "grid"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-background text-muted-foreground hover:bg-border"
+              }`}
+              title="Vista Grid"
+            >
+              <Grid2X2 className="h-5 w-5" />
+            </button>
+            <button
+              onClick={() => handleViewModeChange("list")}
+              className={`rounded-2xl p-3 transition-all ${
+                viewMode === "list"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-background text-muted-foreground hover:bg-border"
+              }`}
+              title="Vista Lista"
+            >
+              <List className="h-5 w-5" />
+            </button>
+          </div>
+
+          <p className="text-right text-lg text-muted-foreground">
+            {filtered.length} resultados encontrados
+          </p>
         </div>
 
         {/* Grid */}
