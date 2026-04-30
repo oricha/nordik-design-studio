@@ -10,12 +10,20 @@ interface QuotationModalProps {
 }
 
 type ProjectType = "houses" | "cabins" | "materials" | "reforms";
+type BudgetRange = "under-50k" | "50k-100k" | "100k-200k" | "over-200k";
 
 const PROJECT_TYPES: { value: ProjectType; label: string }[] = [
   { value: "houses", label: "Casas" },
   { value: "cabins", label: "Cabañas" },
   { value: "materials", label: "Materiales" },
   { value: "reforms", label: "Reformas" },
+];
+
+const BUDGET_RANGES: { value: BudgetRange; label: string }[] = [
+  { value: "under-50k", label: "Menos de €50,000" },
+  { value: "50k-100k", label: "€50,000 - €100,000" },
+  { value: "100k-200k", label: "€100,000 - €200,000" },
+  { value: "over-200k", label: "Más de €200,000" },
 ];
 
 const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" }: QuotationModalProps) => {
@@ -26,6 +34,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     projectTypes: [] as ProjectType[],
     specificProject: projectName,
     service: serviceOption,
+    budget: "" as BudgetRange | "",
     message: "",
   });
 
@@ -40,6 +49,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
       newErrors.email = "Email no válido";
     if (!formData.phone.trim()) newErrors.phone = "El teléfono es requerido";
     if (formData.projectTypes.length === 0) newErrors.projectTypes = "Selecciona al menos un tipo de proyecto";
+    if (!formData.budget) newErrors.budget = "Selecciona un rango de presupuesto";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -56,6 +66,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
         projectTypes: [],
         specificProject: projectName,
         service: serviceOption,
+        budget: "",
         message: "",
       });
       setErrors({});
@@ -195,6 +206,29 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                   ))}
                 </div>
                 {errors.projectTypes && <p className="text-sm text-red-500 mt-2">{errors.projectTypes}</p>}
+              </div>
+
+              {/* Budget Range */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">
+                  Presupuesto Aproximado *
+                </label>
+                <select
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-2 rounded-lg border ${
+                    errors.budget ? "border-red-500 bg-red-50" : "border-border bg-background"
+                  } text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent`}
+                >
+                  <option value="">Selecciona un rango de presupuesto</option>
+                  {BUDGET_RANGES.map((range) => (
+                    <option key={range.value} value={range.value}>
+                      {range.label}
+                    </option>
+                  ))}
+                </select>
+                {errors.budget && <p className="text-sm text-red-500 mt-1">{errors.budget}</p>}
               </div>
 
               {/* Specific Project (Optional) */}
