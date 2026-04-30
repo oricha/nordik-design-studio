@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { ChevronRight, Home } from "lucide-react";
 import { projects } from "@/data/projects";
 import { getProjectGallery } from "@/data/projectGalleries";
+import { getTechnicalSpecs } from "@/data/projectTechnicalSpecs";
 import ImageGallery from "./ImageGallery";
+import TechnicalSpecs from "./TechnicalSpecs";
 import NotFound from "@/pages/NotFound";
 
 const ProjectDetail = () => {
@@ -163,6 +165,12 @@ const ProjectDetail = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Technical Specifications Section */}
+      {(() => {
+        const specs = getTechnicalSpecs(slug!);
+        return specs ? <TechnicalSpecs specs={specs} /> : null;
+      })()}
 
       {/* CTA Section */}
       <section className="section-padding">
