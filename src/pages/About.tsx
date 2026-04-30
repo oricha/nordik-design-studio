@@ -3,6 +3,7 @@ import { MissionValuesSection } from "@/components/MissionValuesSection";
 import { StatisticsSection } from "@/components/StatisticsSection";
 import { TeamSection } from "@/components/TeamSection";
 import { CertificationsSection } from "@/components/CertificationsSection";
+import { ConstructionProcessSection } from "@/components/ConstructionProcessSection";
 
 const About = () => {
   return (
@@ -13,6 +14,7 @@ const About = () => {
         <StatisticsSection />
         <TeamSection />
         <CertificationsSection />
+        <ConstructionProcessSection />
       </main>
     </div>
   );
