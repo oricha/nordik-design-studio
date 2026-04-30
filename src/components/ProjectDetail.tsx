@@ -10,6 +10,7 @@ import ImageGallery from "./ImageGallery";
 import TechnicalSpecs from "./TechnicalSpecs";
 import ConstructionTimeline from "./ConstructionTimeline";
 import ServiceOptions from "./ServiceOptions";
+import ConstructionProcess from "./ConstructionProcess";
 import NotFound from "@/pages/NotFound";
 
 const ProjectDetail = () => {
@@ -187,6 +188,9 @@ const ProjectDetail = () => {
         const serviceOptions = getServiceOptions(slug!);
         return serviceOptions ? <ServiceOptions serviceOptions={serviceOptions} /> : null;
       })()}
+
+      {/* Construction Process Section */}
+      <ConstructionProcess />
 
       {/* CTA Section */}
       <section className="section-padding">
