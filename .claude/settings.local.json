@@ -27,7 +27,16 @@
       "mcp__playwright__browser_evaluate",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_wait_for",
-      "mcp__playwright__browser_run_code"
+      "mcp__playwright__browser_run_code",
+      "Bash(curl -s http://localhost:5173/)",
+      "mcp__playwright__browser_fill_form",
+      "Bash(pkill -f \"npm run dev\")",
+      "mcp__playwright__browser_select_option",
+      "Bash(curl -s http://localhost:8080)",
+      "Bash(npx tsc *)",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__computer",
+      "mcp__Claude_in_Chrome__resize_window"
     ]
   }
 }

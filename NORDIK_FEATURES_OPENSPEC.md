@@ -122,7 +122,8 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] 3 cards o tabs: Opciones de Servicio
   - [ ] Descripción clara de cada una
   - [ ] Diferencia de precio explícita
-  - [ ] Incluidos/excluidos en cada opción
+  - [ ] Incluidos/excluidos en cada opción, nevio, estudio de terreno
+  - [ ] Garantia y normatica europea
 
 **F1.2.6 - Proceso Constructivo Explicado**
 - Descripción: Sección con descripción de cómo se construye, ventajas de SIP
@@ -131,6 +132,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] 4-6 pasos del proceso con imágenes/íconos
   - [ ] Explicación de por qué SIP es mejor (velocidad, eficiencia, calidad)
   - [ ] Comparativa con construcción tradicional (tiempo/costo)
+  - [ ] Garantia Europea, normativa europea de eficiencia
 
 **F1.2.7 - CTA Contextual: "Solicitar Cotización"**
 - Descripción: Botón prominente en detalle de proyecto que abre formulario pre-filled
@@ -204,6 +206,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] Checkbox simple sí/no
   - [ ] Condicional: si sí, muestra opciones de entidades
   - [ ] Datos enviados al CRM
+  - [ ] Contactamos con Bancos Especializados
 
 **F1.4.5 - Casilla de Términos y Privacidad**
 - Descripción: Agregar checkbox obligatorio: "Acepto términos y privacidad"
@@ -240,14 +243,14 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] SLA: contacto en 24-48 horas
   - [ ] Link a FAQ o recursos útiles
 
-**F1.4.9 - Opción de Subir Documentos/Planos**
+<!-- **F1.4.9 - Opción de Subir Documentos/Planos**
 - Descripción: Agregar file upload para referencias, planos, imágenes
 - Beneficio: Contexto más rico para propuesta, customización posible
 - Criterios de aceptación:
   - [ ] Input file: PDF, JPG, PNG, max 10MB
   - [ ] Múltiple archivos (3-5 máximo)
   - [ ] Preview de archivos antes de envío
-  - [ ] Almacenaje seguro en backend
+  - [ ] Almacenaje seguro en backend -->
 
 ---
 
