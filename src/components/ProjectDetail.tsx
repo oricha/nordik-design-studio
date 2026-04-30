@@ -4,8 +4,10 @@ import { ChevronRight, Home } from "lucide-react";
 import { projects } from "@/data/projects";
 import { getProjectGallery } from "@/data/projectGalleries";
 import { getTechnicalSpecs } from "@/data/projectTechnicalSpecs";
+import { getProjectTimeline } from "@/data/projectTimelines";
 import ImageGallery from "./ImageGallery";
 import TechnicalSpecs from "./TechnicalSpecs";
+import ConstructionTimeline from "./ConstructionTimeline";
 import NotFound from "@/pages/NotFound";
 
 const ProjectDetail = () => {
@@ -170,6 +172,12 @@ const ProjectDetail = () => {
       {(() => {
         const specs = getTechnicalSpecs(slug!);
         return specs ? <TechnicalSpecs specs={specs} /> : null;
+      })()}
+
+      {/* Construction Timeline Section */}
+      {(() => {
+        const timeline = getProjectTimeline(slug!);
+        return timeline ? <ConstructionTimeline timeline={timeline} /> : null;
       })()}
 
       {/* CTA Section */}
