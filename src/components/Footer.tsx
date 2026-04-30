@@ -1,4 +1,5 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import { siteContact } from "@/data/siteContact";
 
 const Footer = () => {
   return (
@@ -17,20 +18,59 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
             <nav className="flex flex-col gap-2 text-sm text-primary-foreground/70">
-              <a href="#projects" className="hover:text-primary-foreground transition-colors">Proyectos</a>
-              <a href="#services" className="hover:text-primary-foreground transition-colors">Opciones de Construcción</a>
-              <a href="#why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
-              <a href="#gallery" className="hover:text-primary-foreground transition-colors">Galería</a>
-              <a href="#contact" className="hover:text-primary-foreground transition-colors">Contacto</a>
+              <a href="/#projects" className="hover:text-primary-foreground transition-colors">Proyectos</a>
+              <a href="/#services" className="hover:text-primary-foreground transition-colors">Opciones de Construcción</a>
+              <a href="/#services-b2c" className="hover:text-primary-foreground transition-colors">Particulares</a>
+              <a href="/#services-b2b" className="hover:text-primary-foreground transition-colors">Empresas y SIP</a>
+              <a href="/testimonios" className="hover:text-primary-foreground transition-colors">Testimonios</a>
+              <a href="/casos" className="hover:text-primary-foreground transition-colors">Casos de estudio</a>
+              <a href="/#why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
+              <a href="/#gallery" className="hover:text-primary-foreground transition-colors">Galería</a>
+              <a href="/#contact" className="hover:text-primary-foreground transition-colors">Contacto</a>
             </nav>
           </div>
 
           <div>
             <h4 className="font-semibold mb-4">Contacto</h4>
             <div className="flex flex-col gap-3 text-sm text-primary-foreground/70">
-              <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> Helsinki, Finland</span>
-              <span className="flex items-center gap-2"><Phone className="w-4 h-4" /> +358 40 123 4567</span>
-              <span className="flex items-center gap-2"><Mail className="w-4 h-4" /> info@nordik.fi</span>
+              <span className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 shrink-0" aria-hidden />
+                {siteContact.locationLine}
+              </span>
+              <a href={`tel:${siteContact.phoneHref}`} className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+                <Phone className="w-4 h-4 shrink-0" aria-hidden />
+                {siteContact.phoneDisplay}{" "}
+                <span className="text-primary-foreground/50">· Helsinki HQ</span>
+              </a>
+              <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-primary-foreground/75">
+                {siteContact.offices
+                  .filter((o) => o.id !== "helsinki")
+                  .map((o) => (
+                    <a key={o.id} href={`tel:${o.phoneHref}`} className="hover:text-primary-foreground">
+                      {o.phoneDisplay}
+                    </a>
+                  ))}
+                {siteContact.regionalDialIn.map((r) => (
+                  <a key={r.region} href={`tel:${r.phoneHref}`} className="hover:text-primary-foreground">
+                    {r.phoneDisplay}{" "}
+                    <span className="text-primary-foreground/50">({r.region})</span>
+                  </a>
+                ))}
+              </div>
+              <a
+                href={siteContact.whatsapp.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-2 text-xs font-medium hover:text-primary-foreground"
+              >
+                <MessageCircle className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                {siteContact.whatsapp.label}
+              </a>
+              <a href={`mailto:${siteContact.emailHref}`} className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+                <Mail className="w-4 h-4 shrink-0" aria-hidden />
+                {siteContact.emailDisplay}
+              </a>
+              <span className="block text-xs text-primary-foreground/60">{siteContact.hoursLong}</span>
             </div>
           </div>
         </div>

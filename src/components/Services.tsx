@@ -1,65 +1,170 @@
 import { motion } from "framer-motion";
 import { Home, Layers, Wrench } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const services = [
+type ServiceAudience = "b2c" | "b2b" | "both";
+
+type ServiceItem = {
+  icon: LucideIcon;
+  title: string;
+  subtitle: string;
+  audience: ServiceAudience;
+  audienceLabel: string;
+  bullets: string[];
+  description: string;
+  ctaLabel: string;
+  ctaHash: string;
+};
+
+const audienceIntro = {
+  b2c: {
+    id: "services-b2c" as const,
+    eyebrow: "Particulares y hogares",
+    title: "Vive nordic SIP",
+    description:
+      "Casas y cabañas llave en mano, así como reformas y ampliaciones. Ideal si buscas moverte con tu familia, teletrabajar o invertir en una segunda residencia con consumo muy reducido.",
+  },
+  b2b: {
+    id: "services-b2b" as const,
+    eyebrow: "Empresas, comunidades de propietarios y promotores",
+    title: "Materiales, kits y grandes volúmenes",
+    description:
+      "Suministro de paneles SIP, kits dimensionados para obra y soporte técnico para tus equipos. Cotizamos por proyecto, lote estándar o contrato repetitivo fuera del catálogo B2C.",
+  },
+};
+
+const services: ServiceItem[] = [
   {
     icon: Home,
-    title: "Casas Completamente Terminadas",
-    subtitle: "Soluciones Llave en Mano",
+    title: "Casas completamente terminadas",
+    subtitle: "Llave en mano · proyecto residencial",
+    audience: "b2c",
+    audienceLabel: "Particulares",
+    bullets: ["Diseño escandinavo a medida", "Entrega con acabados y certificaciones donde aplique"],
     description:
-      "Experimente la propiedad de una vivienda sin estrés con nuestras casas prémium llave en mano con estructura de madera. Desde el diseño escandinavo inicial hasta los acabados interiores finales, gestionamos cada etapa de la construcción. Nuestras casas energéticamente eficientes con calificación A se entregan listas para mudarse, combinando el confort moderno con la arquitectura sostenible.",
+      "Un solo interlocutor de cimentación a llaves: proyecto, fabricación SIP, montaje en obra y opciones premium de interiorismo. Transparente desde el briefing comercial inicial.",
+    ctaLabel: "Solicitar estudio sin compromiso",
+    ctaHash: "#contact",
   },
   {
     icon: Layers,
-    title: "Paneles Prefabricados",
-    subtitle: "Venta de SIP y Materiales",
+    title: "Paneles SIP y kits de envolvente",
+    subtitle: "Suministro B2B y promotores",
+    audience: "b2b",
+    audienceLabel: "Profesional",
+    bullets: ["Listas de corte CNC y cargas agrupadas", "Documentación para obra UE"],
     description:
-      "Acelere su construcción con nuestros SIP (Paneles Estructurales Aislados) de alto rendimiento y componentes de madera prefabricados. Suministramos materiales de construcción certificados y kits cortados con precisión diseñados para un montaje rápido. Ideal para promotores y constructores de bricolaje que buscan un aislamiento térmico y una integridad estructural superiores.",
+      "Paneles Estructurales Aislados, encargos por m² o por kit de planta repetitiva: ideal si ya tienes equipo de obra o eres desarrollador promoviendo comunidades nordic-lite.",
+    ctaLabel: "Pedir dossier técnico y precios",
+    ctaHash: "#contact",
   },
   {
     icon: Wrench,
-    title: "Construcción In Situ",
-    subtitle: "Reformas y Servicios",
+    title: "Reformas y construcción in situ",
+    subtitle: "Particulares y contratas",
+    audience: "both",
+    audienceLabel: "Mixto · B2C & B2B",
+    bullets: ["Renovaciones de apartamentos/chalets SIP", "Obra nueva colaborativa con tu equipo"],
     description:
-      "Más allá de la construcción nueva, nos especializamos en renovaciones modernas de apartamentos y construcciones in situ a medida. Ya sea que busque una remodelación interior de estilo escandinavo o extensiones de madera especializadas, nuestro equipo ofrece una artesanía profesional utilizando materiales de alta calidad para aumentar el valor y la eficiencia de su propiedad.",
+      "Renovamos viviendas con enfoque nórdico y gestionamos in situ proyectos donde mezclas tu contrata con nuestra ingeniería o prefabricamos piezas volumétricas concretas.",
+    ctaLabel: "Consultar proyecto",
+    ctaHash: "#contact",
   },
 ];
+
+const AudiencePanel = ({
+  eyebrow,
+  title,
+  description,
+  id,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  id: string;
+}) => (
+  <div
+    id={id}
+    className="scroll-mt-28 rounded-2xl border border-border bg-background p-6 shadow-sm lg:p-7"
+    tabIndex={-1}
+  >
+    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{eyebrow}</p>
+    <h3 className="mt-2 text-xl font-bold text-foreground md:text-2xl">{title}</h3>
+    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
+  </div>
+);
 
 const Services = () => {
   return (
     <section id="services" className="section-padding bg-warm-gray">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12 text-center md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Opciones de Construcción
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-accent">
+            Casas · Paneles SIP · Reformas escandinavas
+          </p>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            Opciones claras para particulares y para empresas
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Desde casas llave en mano hasta suministro de materiales — ofrecemos soluciones flexibles para cada etapa de su proyecto.
+          <p className="mx-auto max-w-2xl text-muted-foreground">
+            NordiK combina proyectos terminados para quien quiere moverse rápido, con líneas industriales SIP
+            para quien ejecuta grandes volúmenes. El mismo catálogo público muestra proyectos ejemplo; estas
+            líneas distinguen cómo contratar cada servicio en NordiK.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="mb-12 grid gap-6 md:grid-cols-2">
+          <AudiencePanel {...audienceIntro.b2c} />
+          <AudiencePanel {...audienceIntro.b2b} />
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-3">
           {services.map((service, i) => (
-            <motion.div
+            <motion.article
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="bg-background rounded-2xl p-8 hover-lift"
+              transition={{ delay: i * 0.08 }}
+              className="flex h-full flex-col rounded-2xl bg-background p-8 hover-lift"
             >
-              <div className="w-14 h-14 rounded-xl bg-wood-light flex items-center justify-center mb-6">
-                <service.icon className="w-7 h-7 text-wood" strokeWidth={1.5} />
+              <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
+                <span
+                  className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide ${
+                    service.audience === "b2b"
+                      ? "border border-accent/45 bg-accent/10 text-accent-foreground"
+                      : service.audience === "b2c"
+                        ? "border border-border bg-muted text-foreground"
+                        : "border border-primary/35 bg-primary/10 text-primary"
+                  }`}
+                >
+                  {service.audienceLabel}
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-1">{service.title}</h3>
-              <p className="text-sm text-accent font-medium mb-4">{service.subtitle}</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-            </motion.div>
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-wood-light">
+                <service.icon className="h-7 w-7 text-wood" strokeWidth={1.5} />
+              </div>
+              <h3 className="text-xl font-bold text-foreground">{service.title}</h3>
+              <p className="mb-4 text-sm font-medium text-accent">{service.subtitle}</p>
+              <ul className="mb-4 space-y-2 text-xs text-muted-foreground">
+                {service.bullets.map((line) => (
+                  <li key={line} className="relative pl-3 before:absolute before:left-0 before:top-[0.45rem] before:h-1 before:w-1 before:rounded-full before:bg-accent">
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <p className="mb-6 flex-1 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+              <a
+                href={service.ctaHash}
+                className="inline-flex justify-center rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+              >
+                {service.ctaLabel}
+              </a>
+            </motion.article>
           ))}
         </div>
       </div>

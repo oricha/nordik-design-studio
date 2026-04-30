@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Testimonials from "./pages/Testimonials";
+import CaseStudies from "./pages/CaseStudies";
 import ProjectTorku from "./pages/ProjectTorku";
 import ProjectTampere from "./pages/ProjectTampere";
 import ProjectKuusamo from "./pages/ProjectKuusamo";
@@ -17,6 +19,7 @@ import ProjectDetail from "./components/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LiveChatAssist from "@/components/LiveChatAssist";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +33,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/testimonios" element={<Testimonials />} />
+          <Route path="/casos" element={<CaseStudies />} />
           {/* Legacy routes - kept for backward compatibility */}
           <Route path="/project/torku" element={<ProjectTorku />} />
           <Route path="/project/tampere" element={<ProjectTampere />} />
@@ -47,6 +52,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <LiveChatAssist />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

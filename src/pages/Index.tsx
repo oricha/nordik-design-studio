@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import { SocialProofRibbon } from "@/components/SocialProofRibbon";
 import ProjectCatalog from "@/components/ProjectCatalog";
 import WhySection from "@/components/WhySection";
 import Services from "@/components/Services";
@@ -11,6 +12,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
             <main>
         <Hero />
+        <SocialProofRibbon />
         <ProjectCatalog />
         <WhySection />
         <Services />

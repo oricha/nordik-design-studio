@@ -54,9 +54,11 @@ export function MissionValuesSection() {
                 <h3 className="text-xl font-semibold text-foreground mb-3">
                   Visión
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {companyMission.vision}
-                </p>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  {companyMission.visionParagraphs.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -75,7 +77,7 @@ export function MissionValuesSection() {
                 <motion.div
                   key={value.id}
                   variants={itemVariants}
-                  className="p-6 border border-gray-200 rounded-lg hover:border-accent hover:shadow-lg transition-all duration-300"
+                  className="p-6 border border-border rounded-lg hover:border-accent hover:shadow-lg transition-all duration-300"
                 >
                   <IconComponent className="w-8 h-8 text-accent mb-3" />
                   <h3 className="text-lg font-semibold text-foreground mb-2">

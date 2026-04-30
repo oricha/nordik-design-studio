@@ -12,9 +12,11 @@ import {
   SlidersHorizontal,
   ChevronDown,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { PROJECT_CATALOG_QUERY_KEY } from "@/constants/projectCatalog";
 import { projects, type Project } from "@/data/projects";
 import { Slider } from "@/components/ui/slider";
+import { projectMatchesSearch } from "@/utils/projectCatalogSearch";
 
 const categories = [
   { key: "all", label: "Todos" },
@@ -34,11 +36,9 @@ const sortOptions = [
 const formatPrice = (value: number) => `€ ${value.toLocaleString()}`;
 
 const calculateAvailableRange = (category: string, search: string): [number, number] => {
-  const searchLower = search.toLowerCase();
-  let filtered = projects.filter(
+  const filtered = projects.filter(
     (p) =>
-      (category === "all" || p.category === category) &&
-      (search === "" || p.name.toLowerCase().includes(searchLower))
+      (category === "all" || p.category === category) && projectMatchesSearch(p, search)
   );
 
   if (filtered.length === 0) return [0, 400000];
@@ -50,10 +50,30 @@ const calculateAvailableRange = (category: string, search: string): [number, num
   return [minPrice, maxPrice];
 };
 
+const QUERY_KEY = PROJECT_CATALOG_QUERY_KEY;
+
 const ProjectCatalog = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [sortBy, setSortBy] = useState("price-asc");
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchQuery = searchParams.get(QUERY_KEY) ?? "";
+
+  const setCatalogSearch = (value: string) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (!value.trim()) {
+          next.delete(QUERY_KEY);
+        } else {
+          next.set(QUERY_KEY, value);
+        }
+        return next;
+      },
+      { replace: true }
+    );
+  };
+
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   useEffect(() => {
@@ -91,14 +111,12 @@ const ProjectCatalog = () => {
   }, [availableRange]);
 
   const filtered = useMemo(() => {
-    const searchLower = searchQuery.toLowerCase();
-
-    let result = projects.filter(
+    const result = projects.filter(
       (p) =>
         (activeCategory === "all" || p.category === activeCategory) &&
         p.price >= priceRange[0] &&
         p.price <= priceRange[1] &&
-        (searchQuery === "" || p.name.toLowerCase().includes(searchLower))
+        projectMatchesSearch(p, searchQuery)
     );
 
     const [field, dir] = sortBy.split("-");
@@ -135,14 +153,15 @@ const ProjectCatalog = () => {
               <Search className="mr-4 h-5 w-5 flex-shrink-0 text-foreground" />
               <input
                 type="text"
-                placeholder="Buscar por nombre, ubicación o característica..."
+                placeholder="Buscar por nombre, ciudad (p. ej. Oulu), tipo como «cabaña», «sip»..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setCatalogSearch(e.target.value)}
                 className="w-full bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery("")}
+                  type="button"
+                  onClick={() => setCatalogSearch("")}
                   className="ml-3 rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                   aria-label="Limpiar búsqueda"
                 >
@@ -161,10 +180,12 @@ const ProjectCatalog = () => {
                     max={availableRange[1]}
                     value={priceRange[0]}
                     onChange={(e) => {
-                      const newMin = Number(e.target.value);
-                      if (newMin <= priceRange[1]) {
-                        setPriceRange([newMin, priceRange[1]]);
-                      }
+                      const parsed = Number(e.target.value.replace(",", "."));
+                      if (Number.isNaN(parsed)) return;
+                      const [lo, hi] = availableRange;
+                      const capped = Math.min(hi, Math.max(lo, parsed));
+                      const nextMin = Math.min(capped, priceRange[1]);
+                      setPriceRange([nextMin, priceRange[1]]);
                     }}
                     className="h-14 w-full min-w-[150px] rounded-2xl border border-border bg-white px-5 text-lg text-foreground outline-none transition-colors focus:border-accent md:w-[170px]"
                   />
@@ -175,10 +196,12 @@ const ProjectCatalog = () => {
                     max={availableRange[1]}
                     value={priceRange[1]}
                     onChange={(e) => {
-                      const newMax = Number(e.target.value);
-                      if (newMax >= priceRange[0]) {
-                        setPriceRange([priceRange[0], newMax]);
-                      }
+                      const parsed = Number(e.target.value.replace(",", "."));
+                      if (Number.isNaN(parsed)) return;
+                      const [lo, hi] = availableRange;
+                      const capped = Math.min(hi, Math.max(lo, parsed));
+                      const nextMax = Math.max(capped, priceRange[0]);
+                      setPriceRange([priceRange[0], nextMax]);
                     }}
                     className="h-14 w-full min-w-[150px] rounded-2xl border border-border bg-white px-5 text-lg text-foreground outline-none transition-colors focus:border-accent md:w-[170px]"
                   />
@@ -201,7 +224,11 @@ const ProjectCatalog = () => {
               </div>
             </div>
 
-            <button className="inline-flex h-14 items-center justify-center gap-3 rounded-2xl bg-primary px-8 text-base font-semibold text-primary-foreground transition-transform hover:scale-[1.01]">
+            <button
+              type="button"
+              className="inline-flex h-14 items-center justify-center gap-3 rounded-2xl bg-primary px-8 text-base font-semibold text-primary-foreground transition-transform hover:scale-[1.01]"
+              onClick={() => document.getElementById("catalog-results-anchor")?.scrollIntoView({ behavior: "smooth" })}
+            >
               <Search className="h-5 w-5" />
               Buscar
             </button>
@@ -231,6 +258,7 @@ const ProjectCatalog = () => {
                 {categories.map((cat) => (
                   <button
                     key={cat.key}
+                    type="button"
                     onClick={() => setActiveCategory(cat.key)}
                     className={`rounded-2xl border px-5 py-3 text-base font-medium transition-all ${
                       activeCategory === cat.key
@@ -252,10 +280,12 @@ const ProjectCatalog = () => {
           </div>
         </div>
 
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between" id="catalog-results-anchor">
+          <div className="flex items-center gap-2" role="group" aria-label="Vista de resultados">
             <button
+              type="button"
               onClick={() => handleViewModeChange("grid")}
+              aria-pressed={viewMode === "grid"}
               className={`rounded-2xl p-3 transition-all ${
                 viewMode === "grid"
                   ? "bg-primary text-primary-foreground"
@@ -266,7 +296,9 @@ const ProjectCatalog = () => {
               <Grid2X2 className="h-5 w-5" />
             </button>
             <button
+              type="button"
               onClick={() => handleViewModeChange("list")}
+              aria-pressed={viewMode === "list"}
               className={`rounded-2xl p-3 transition-all ${
                 viewMode === "list"
                   ? "bg-primary text-primary-foreground"
@@ -299,8 +331,9 @@ const ProjectCatalog = () => {
         </div>
 
         {filtered.length === 0 && (
-          <p className="text-center text-muted-foreground py-12">
-            No hay proyectos que coincidan con sus criterios. Intente ajustar los filtros.
+          <p className="text-center text-muted-foreground py-12" role="status">
+            <span className="font-medium text-foreground">No hay resultados.</span>{" "}
+            Pruebe otros términos o ajuste el rango de precio y categoría.
           </p>
         )}
       </div>
@@ -336,11 +369,12 @@ const ProjectCard = ({ project, listView }: { project: Project; listView?: boole
           </span>
         )}
       </div>
-      <div className="flex-1 flex flex-col justify-between">
+      <div className="flex min-w-0 flex-1 flex-col justify-between">
         <div>
           <h3 className="font-semibold text-foreground text-lg mb-2">{project.name}</h3>
+          <p className="text-sm text-muted-foreground mb-2">{project.city}</p>
           {project.area > 0 && (
-            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3 flex-wrap">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
               <span className="flex items-center gap-1">
                 <Maximize2 className="w-3.5 h-3.5" /> {project.area} m²
               </span>
@@ -353,9 +387,7 @@ const ProjectCard = ({ project, listView }: { project: Project; listView?: boole
             </div>
           )}
         </div>
-        <div className="text-xl font-bold text-accent">
-          €{project.price.toLocaleString()}
-        </div>
+        <div className="text-xl font-bold text-accent">€{project.price.toLocaleString()}</div>
       </div>
     </motion.div>
   ) : (
@@ -387,6 +419,7 @@ const ProjectCard = ({ project, listView }: { project: Project; listView?: boole
       </div>
       <div className="p-5">
         <h3 className="font-semibold text-foreground text-lg mb-2">{project.name}</h3>
+        <p className="text-sm text-muted-foreground mb-2">{project.city}</p>
         {project.area > 0 && (
           <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
             <span className="flex items-center gap-1">

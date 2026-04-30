@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { Menu, X, Globe } from "lucide-react";
+import { FormEvent, useEffect, useState } from "react";
+import { Menu, X, Globe, Search, Phone, Mail, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { PROJECT_CATALOG_QUERY_KEY } from "@/constants/projectCatalog";
+import { siteContact } from "@/data/siteContact";
 
 const navLinks = [
   { label: "Nuestros Proyectos", href: "/#projects" },
   { label: "Sobre Nosotros", href: "/about" },
+  { label: "Testimonios", href: "/testimonios" },
   { label: "Opciones de Construcción", href: "/#services" },
   { label: "Servicios", href: "/#why" },
   { label: "Galería", href: "/#gallery" },
@@ -14,45 +17,140 @@ const navLinks = [
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [catalogQueryDraft, setCatalogQueryDraft] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      return;
+    }
+    const fromUrl =
+      new URLSearchParams(location.search).get(PROJECT_CATALOG_QUERY_KEY) ?? "";
+    setCatalogQueryDraft(fromUrl);
+  }, [location.pathname, location.search]);
+
+  const submitCatalogSearch = (e?: FormEvent) => {
+    e?.preventDefault();
+    const trimmed = catalogQueryDraft.trim();
+    navigate({
+      pathname: "/",
+      search: trimmed ? `${PROJECT_CATALOG_QUERY_KEY}=${encodeURIComponent(trimmed)}` : "",
+      hash: "#projects",
+    });
+    setMobileOpen(false);
+  };
+
+  const mobileContactLinks = (
+    <div className="rounded-xl border border-border bg-muted/40 px-4 py-3 text-sm lg:hidden">
+      <div className="flex flex-col gap-3 text-muted-foreground">
+        <a
+          href={`tel:${siteContact.phoneHref}`}
+          className="inline-flex items-center gap-2 font-medium text-foreground hover:text-accent"
+        >
+          <Phone className="h-4 w-4 shrink-0" aria-hidden />
+          {siteContact.phoneDisplay}
+        </a>
+        <a
+          href={`mailto:${siteContact.emailHref}`}
+          className="inline-flex items-center gap-2 font-medium text-foreground hover:text-accent"
+        >
+          <Mail className="h-4 w-4 shrink-0" aria-hidden />
+          {siteContact.emailDisplay}
+        </a>
+        <span className="inline-flex items-center gap-2">
+          <Clock className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
+          {siteContact.hoursShort}
+        </span>
+        <a
+          href={siteContact.whatsapp.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex font-medium text-foreground hover:text-accent"
+        >
+          WhatsApp
+        </a>
+        <a href="/#regional-contact" className="inline-flex font-medium text-foreground hover:text-accent">
+          Más teléfonos por país
+        </a>
+      </div>
+    </div>
+  );
+
+  const catalogSearchForm = (
+    <form onSubmit={submitCatalogSearch} className="relative flex w-full max-w-xl flex-1 items-center gap-2">
+      <div className="flex min-h-10 flex-1 items-center gap-2 rounded-xl border border-border bg-white/90 px-3 py-1.5 backdrop-blur-sm">
+        <Search className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
+        <input
+          id="header-catalog-search"
+          type="search"
+          enterKeyHint="search"
+          value={catalogQueryDraft}
+          onChange={(ev) => setCatalogQueryDraft(ev.target.value)}
+          placeholder="Nombre, ciudad, tipo..."
+          aria-label="Buscar proyectos en el catálogo"
+          className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+        />
+      </div>
+      <button
+        type="submit"
+        className="rounded-lg bg-muted px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:bg-border"
+      >
+        Buscar
+      </button>
+    </form>
+  );
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold tracking-tight text-foreground">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-300 bg-[#f7f7fb]/95 backdrop-blur-md">
+      <div className="mx-auto flex min-h-[58px] items-center px-6 lg:hidden">
+        <Link to="/" className="shrink-0 text-[1.95rem] font-bold tracking-[-0.045em] text-foreground">
           Nordi<span className="text-accent">K</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-8">
+        <button
+          type="button"
+          className="ml-auto text-foreground"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+        >
+          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      <div className="mx-auto hidden min-h-[58px] max-w-[1320px] grid-cols-[auto_1fr_auto] items-center gap-10 px-10 lg:grid">
+        <Link to="/" className="shrink-0 text-[1.75rem] font-bold tracking-[-0.05em] leading-none text-foreground">
+          Nordi<span className="text-accent">K</span>
+        </Link>
+
+        <nav className="flex min-w-0 items-center justify-center gap-8 xl:gap-11">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="whitespace-nowrap text-[0.96rem] font-medium text-[#6f7280] transition-colors hover:text-foreground"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-4">
-          <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <Globe className="w-4 h-4" />
+        <div className="ml-auto flex shrink-0 items-center gap-6">
+          <button
+            type="button"
+            className="flex items-center gap-1.5 text-[0.96rem] font-medium text-[#6f7280] transition-colors hover:text-foreground"
+          >
+            <Globe className="h-[15px] w-[15px]" />
             ES / €
           </button>
           <a
             href="/#contact"
-            className="bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
+            className="whitespace-nowrap rounded-[10px] bg-accent px-7 py-[0.9rem] text-[0.95rem] font-semibold uppercase tracking-[0.01em] text-white transition-opacity hover:opacity-90"
           >
             OBTENER PRESUPUESTO
           </a>
         </div>
-
-        <button
-          className="lg:hidden text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </div>
 
       <AnimatePresence>
@@ -61,27 +159,38 @@ const Header = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden overflow-hidden bg-background border-b border-border"
+            className="overflow-hidden border-b border-border bg-background lg:hidden"
           >
-            <nav className="flex flex-col px-6 py-4 gap-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground py-2"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="/#contact"
-                onClick={() => setMobileOpen(false)}
-                className="bg-accent text-accent-foreground px-5 py-2.5 rounded-lg text-sm font-semibold text-center mt-2"
+            <div className="flex flex-col gap-4 px-6 py-4">
+              {mobileContactLinks}
+              <button
+                type="button"
+                className="flex w-fit items-center gap-1.5 text-sm font-medium text-muted-foreground"
               >
-                OBTENER PRESUPUESTO
-              </a>
-            </nav>
+                <Globe className="h-4 w-4" />
+                ES / €
+              </button>
+              {catalogSearchForm}
+              <nav className="flex flex-col gap-3">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <a
+                  href="/#contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 rounded-lg bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-foreground"
+                >
+                  OBTENER PRESUPUESTO
+                </a>
+              </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

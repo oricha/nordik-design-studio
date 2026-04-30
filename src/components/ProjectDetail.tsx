@@ -16,12 +16,15 @@ import ConstructionProcess from "./ConstructionProcess";
 import RelatedProjects from "./RelatedProjects";
 import QuotationModal from "./QuotationModal";
 import FloatingQuotationButton from "./FloatingQuotationButton";
+import PaymentMilestones from "./PaymentMilestones";
+import ProjectAddonsConfigurator from "./ProjectAddonsConfigurator";
 import NotFound from "@/pages/NotFound";
+import { getPaymentScheme } from "@/data/projectPaymentSchemes";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
-  const { isOpen, openModal, closeModal, projectName, serviceOption } = useQuotationModal();
+  const { isOpen, openModal, closeModal, projectName, serviceOption, quotationContext } = useQuotationModal();
 
   if (!project) {
     return <NotFound />;
@@ -30,7 +33,13 @@ const ProjectDetail = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Quotation Modal */}
-      <QuotationModal isOpen={isOpen} onClose={closeModal} projectName={projectName} serviceOption={serviceOption} />
+      <QuotationModal
+        isOpen={isOpen}
+        onClose={closeModal}
+        projectName={projectName}
+        serviceOption={serviceOption}
+        quotationContext={quotationContext}
+      />
 
       {/* Floating Quotation Button */}
       <FloatingQuotationButton projectName={project.name} onClick={() => openModal(project.name)} />
@@ -156,6 +165,12 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      <PaymentMilestones
+        scheme={getPaymentScheme(slug!)}
+        projectName={project.name}
+        onRequestQuote={(msg) => openModal(project.name, "", msg)}
+      />
+
       {/* Features Section */}
       <section className="section-padding bg-warm-gray">
         <div className="max-w-7xl mx-auto">
@@ -197,14 +212,40 @@ const ProjectDetail = () => {
         return timeline ? <ConstructionTimeline timeline={timeline} /> : null;
       })()}
 
+      <ProjectAddonsConfigurator
+        slug={slug!}
+        projectBaseEUR={project.price}
+        projectLabel={project.name}
+        onRequestQuote={(msg) => openModal(project.name, "", msg)}
+      />
+
       {/* Service Options Section */}
       {(() => {
         const serviceOptions = getServiceOptions(slug!);
-        return serviceOptions ? <ServiceOptions serviceOptions={serviceOptions} /> : null;
+        return serviceOptions ? (
+          <ServiceOptions
+            serviceOptions={serviceOptions}
+            onRequestQuote={(tierName) => openModal(project.name, tierName)}
+          />
+        ) : null;
       })()}
 
       {/* Construction Process Section */}
       <ConstructionProcess />
+
+      <section aria-label="Líneas B2C y SIP" className="border-y border-border bg-muted/35">
+        <div className="mx-auto max-w-7xl px-6 py-6 text-center text-sm leading-relaxed text-muted-foreground">
+          ¿Este modelo es para tu hogar o buscas&nbsp;
+          <Link to="/#services-b2b" className="font-semibold text-foreground underline underline-offset-2 hover:text-accent">
+            suministro SIP para empresa
+          </Link>
+          ? NordiK separa particulares y profesionales:{" "}
+          <Link to="/#services-b2c" className="font-semibold text-foreground underline underline-offset-2 hover:text-accent">
+            casas llave en mano
+          </Link>{" "}
+          vs kits industriales descritos en la home.
+        </div>
+      </section>
 
       {/* Related Projects Section */}
       <RelatedProjects projects={findRelatedProjects(project, projects)} />

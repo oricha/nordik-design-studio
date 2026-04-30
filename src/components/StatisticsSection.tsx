@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { statistics } from "@/data/about";
+import { statistics, statsReportingMeta } from "@/data/about";
 
 export function StatisticsSection() {
   const containerVariants = {
@@ -36,6 +36,10 @@ export function StatisticsSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
+          <p className="mx-auto mb-4 max-w-2xl text-sm text-muted-foreground">
+            <span className="block">{statsReportingMeta.dataSnapshotLabel}</span>
+            <span className="block">{statsReportingMeta.quarterlyReviewLabel}</span>
+          </p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Nuestro Impacto
           </h2>
@@ -58,7 +62,7 @@ export function StatisticsSection() {
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
-                className="text-center p-8 rounded-lg border border-gray-200 hover:border-accent hover:shadow-lg transition-all duration-300 group"
+                className="text-center p-8 rounded-lg border border-border hover:border-accent hover:shadow-lg transition-all duration-300 group"
               >
                 <div className="flex justify-center mb-4">
                   <div className="p-4 rounded-full bg-accent/10 group-hover:bg-accent/20 transition-colors">
@@ -77,6 +81,9 @@ export function StatisticsSection() {
                 <p className="text-sm text-muted-foreground">
                   {stat.description}
                 </p>
+                {stat.yoyCaption ? (
+                  <p className="mt-3 text-xs font-medium text-accent">{stat.yoyCaption}</p>
+                ) : null}
               </motion.div>
             );
           })}

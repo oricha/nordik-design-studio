@@ -1,12 +1,23 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle } from "lucide-react";
+import { X, CheckCircle, FileText, Trash2 } from "lucide-react";
+import {
+  ATTACH_ACCEPT,
+  ATTACH_MAX_FILES,
+  mergeAttachmentFiles,
+  revokeAttachmentPreview,
+  type QuotationAttachment,
+} from "@/lib/attachments";
+import { generateQuotationTicketId } from "@/utils/quotationTicket";
+import { siteContact } from "@/data/siteContact";
 
 interface QuotationModalProps {
   isOpen: boolean;
   onClose: () => void;
   projectName?: string;
   serviceOption?: string;
+  quotationContext?: string;
 }
 
 type ProjectType = "houses" | "cabins" | "materials" | "reforms";
@@ -26,7 +37,13 @@ const BUDGET_RANGES: { value: BudgetRange; label: string }[] = [
   { value: "over-200k", label: "Más de €200,000" },
 ];
 
-const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" }: QuotationModalProps) => {
+const QuotationModal = ({
+  isOpen,
+  onClose,
+  projectName = "",
+  serviceOption = "",
+  quotationContext = "",
+}: QuotationModalProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,6 +61,31 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showSuccess, setShowSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
+  const [attachments, setAttachments] = useState<QuotationAttachment[]>([]);
+  const [attachErr, setAttachErr] = useState("");
+  const [submissionTicket, setSubmissionTicket] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    setFormData((prev) => ({
+      ...prev,
+      specificProject: projectName,
+      service: serviceOption ?? "",
+      message: quotationContext ?? "",
+    }));
+    setErrors({});
+  }, [isOpen, projectName, serviceOption, quotationContext]);
+
+  useEffect(() => {
+    if (isOpen) return;
+    setAttachments((prev) => {
+      prev.forEach(revokeAttachmentPreview);
+      return [];
+    });
+    setAttachErr("");
+    setSubmissionTicket(null);
+    setShowSuccess(false);
+  }, [isOpen]);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -61,11 +103,36 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     return Object.keys(newErrors).length === 0;
   };
 
+  const handlePickAttachments = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const list = e.target.files;
+    if (!list?.length) return;
+    const { next, error } = mergeAttachmentFiles(attachments, list);
+    setAttachments(next);
+    setAttachErr(error ?? "");
+    e.target.value = "";
+  };
+
+  const removeAttachmentRow = (id: string) => {
+    setAttachments((prev) => {
+      const row = prev.find((r) => r.id === id);
+      if (row) revokeAttachmentPreview(row);
+      return prev.filter((r) => r.id !== id);
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("Formulario enviado:", formData);
+      const ticket = generateQuotationTicketId();
+      console.log("Formulario enviado:", {
+        formData,
+        ticket,
+        attachments: attachments.map((a) => ({ name: a.file.name, size: a.file.size })),
+      });
+      attachments.forEach(revokeAttachmentPreview);
+      setAttachments([]);
       setSubmittedData(formData);
+      setSubmissionTicket(ticket);
       setShowSuccess(true);
       setFormData({
         name: "",
@@ -78,7 +145,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
         location: "",
         financing: "",
         termsAccepted: false,
-        message: "",
+        message: quotationContext ?? "",
       });
       setErrors({});
     } else {
@@ -387,6 +454,50 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                 />
               </div>
 
+              {/* Adjuntos — F1.4.9 (subida API en backend pendiente) */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">
+                  Planos o referencias (opcional)
+                </label>
+                <input
+                  type="file"
+                  accept={ATTACH_ACCEPT}
+                  multiple
+                  onChange={handlePickAttachments}
+                  className="w-full cursor-pointer rounded-lg border border-border bg-background px-3 py-2 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-sm file:font-medium"
+                />
+                <p className="mt-1 text-xs text-muted-foreground">
+                  PDF, JPG o PNG. Hasta {ATTACH_MAX_FILES} archivos, 10 MB cada uno. Previsualización local; la subida
+                  segura al servidor se configurará después.
+                </p>
+                {attachErr ? <p className="mt-2 text-sm text-red-600">{attachErr}</p> : null}
+                {attachments.length > 0 ? (
+                  <ul className="mt-3 space-y-2">
+                    {attachments.map((row) => (
+                      <li
+                        key={row.id}
+                        className="flex items-center gap-3 rounded-lg border border-border px-3 py-2 text-sm text-foreground"
+                      >
+                        {row.previewUrl ? (
+                          <img src={row.previewUrl} alt="" role="presentation" className="h-10 w-10 shrink-0 rounded object-cover" />
+                        ) : (
+                          <FileText className="h-8 w-8 shrink-0 text-muted-foreground" aria-hidden />
+                        )}
+                        <span className="min-w-0 flex-1 truncate">{row.file.name}</span>
+                        <button
+                          type="button"
+                          aria-label={`Quitar ${row.file.name}`}
+                          onClick={() => removeAttachmentRow(row.id)}
+                          className="shrink-0 rounded-lg p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+
               {/* Terms and Privacy */}
               <div>
                 <label className="flex items-start gap-3 p-3 rounded-lg border border-border hover:bg-accent/5 cursor-pointer transition-colors">
@@ -470,9 +581,19 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                   </h2>
 
                   {/* Success Message */}
-                  <p className="text-muted-foreground mb-6">
+                  <p className="text-muted-foreground mb-4">
                     Gracias por tu interés en nuestros servicios. Hemos recibido tu solicitud de cotización.
                   </p>
+
+                  {submissionTicket ? (
+                    <div className="mb-4 w-full rounded-lg border border-border bg-muted/50 p-4 text-left">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Referencia</p>
+                      <p className="mt-1 font-mono text-lg font-bold text-foreground">{submissionTicket}</p>
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        Guárdala para cualquier gestión con comercial.
+                      </p>
+                    </div>
+                  ) : null}
 
                   {/* Submitted Info */}
                   {submittedData && (
@@ -489,9 +610,20 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                     </div>
                   )}
 
+                  <p className="mb-3 text-left text-xs leading-relaxed text-muted-foreground">
+                    <strong className="text-foreground">Autorespuesta (F1.4.8):</strong> al conectar el formulario al
+                    correo automático recibirás en <strong className="text-foreground">{submittedData?.email}</strong>{" "}
+                    un resumen con esta referencia, el SLA laborable 24–48 h y enlaces útiles. Mientras tanto, puedes
+                    revisar{" "}
+                    <Link to={siteContact.resources.faqHref} className="font-semibold text-accent underline-offset-2 hover:underline">
+                      {siteContact.resources.faqLabel}
+                    </Link>
+                    .
+                  </p>
+
                   {/* Follow-up Message */}
                   <p className="text-sm text-muted-foreground mb-6">
-                    Te contactaremos en 24-48 horas para discutir los detalles de tu proyecto.
+                    Te contactaremos en 24-48 horas laborables para concretar los detalles de tu proyecto.
                   </p>
 
                   {/* Close Button */}

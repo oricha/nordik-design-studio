@@ -1,48 +1,68 @@
 import { motion } from "framer-motion";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
+import ImageGallery, { type GalleryImage } from "@/components/ImageGallery";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import BeforeAfterComparison from "@/components/BeforeAfterComparison";
+import ConstructionVideosSection from "@/components/ConstructionVideosSection";
+import {
+  type CommercialGalleryItem,
+  type CommercialGalleryPhase,
+  galleryItemsByPhase,
+} from "@/data/commercialGallery";
 
-const images = [
-  { src: gallery1, alt: "Modern Scandinavian living room interior" },
-  { src: gallery2, alt: "Wooden house construction in progress" },
-  { src: gallery3, alt: "Minimalist Scandinavian kitchen design" },
-  { src: gallery4, alt: "Timber cladding construction detail" },
+const PHASE_CONFIG: Array<{ value: CommercialGalleryPhase; label: string }> = [
+  { value: "exterior", label: "Exterior" },
+  { value: "interior", label: "Interiores" },
+  { value: "detalles", label: "Detalle / proceso" },
+  { value: "acabados", label: "Acabados" },
 ];
+
+function toGalleryImages(items: CommercialGalleryItem[]): GalleryImage[] {
+  return items.map(({ url, title, category }) => ({ url, title, category }));
+}
 
 const Gallery = () => {
   return (
     <section id="gallery" className="section-padding bg-background">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-10 space-y-3 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Fotos del Proyecto</h2>
-          <p className="text-muted-foreground">Un vistazo a nuestra artesanía y atención al detalle.</p>
+          <h2 className="text-3xl font-bold text-foreground md:text-4xl">Fotos del proyecto</h2>
+          <p className="text-muted-foreground">
+            Un vistazo al ciclo construcción: parcela y envolvente, interiores, proceso técnico y entrega terminada.
+          </p>
+          <p className="text-xs text-muted-foreground/90 md:text-sm">
+            Imágenes archivo NordiK. Uso campaña comercial sólo tras permiso cliente y proyecto concreto.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {images.map((img, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="aspect-square rounded-xl overflow-hidden group cursor-pointer"
-            >
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
+        <Tabs defaultValue={PHASE_CONFIG[0]?.value ?? "exterior"} className="w-full">
+          <TabsList className="mx-auto flex h-auto w-full max-w-2xl flex-wrap justify-center gap-1 px-2 py-2 md:max-w-3xl">
+            {PHASE_CONFIG.map(({ value, label }) => (
+              <TabsTrigger key={value} value={value} className="shrink min-w-fit px-4">
+                {label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {PHASE_CONFIG.map(({ value, label }) => (
+            <TabsContent key={value} value={value} className="mt-6 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <ImageGallery
+                key={value}
+                embedded
+                title={`Galería comercial NordiK: ${label}`}
+                images={toGalleryImages(galleryItemsByPhase(value))}
               />
-            </motion.div>
+            </TabsContent>
           ))}
+        </Tabs>
+
+        <div className="mt-16 space-y-16">
+          <BeforeAfterComparison />
+          <ConstructionVideosSection />
         </div>
       </div>
     </section>
