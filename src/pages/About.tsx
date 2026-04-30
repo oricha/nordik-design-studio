@@ -1,6 +1,7 @@
 import { AboutHero } from "@/components/AboutHero";
 import { MissionValuesSection } from "@/components/MissionValuesSection";
 import { StatisticsSection } from "@/components/StatisticsSection";
+import { TeamSection } from "@/components/TeamSection";
 
 const About = () => {
   return (
@@ -9,6 +10,7 @@ const About = () => {
         <AboutHero />
         <MissionValuesSection />
         <StatisticsSection />
+        <TeamSection />
       </main>
     </div>
   );
