@@ -79,6 +79,16 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
       setErrors({});
       onClose();
       alert("¡Gracias! Tu solicitud ha sido enviada. Te contactaremos en 24-48 horas.");
+    } else {
+      // Scroll to the first error
+      const firstErrorField = Object.keys(errors)[0];
+      if (firstErrorField) {
+        const element = document.querySelector(`[name="${firstErrorField}"]`);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+          (element as HTMLElement).focus();
+        }
+      }
     }
   };
 
@@ -144,6 +154,32 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              {/* Error Summary */}
+              {Object.keys(errors).length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="rounded-lg border border-red-200 bg-red-50 p-4"
+                >
+                  <div className="flex gap-3">
+                    <div className="text-red-600 font-semibold flex-shrink-0">⚠</div>
+                    <div>
+                      <p className="text-sm font-semibold text-red-900 mb-2">
+                        Por favor corrige {Object.keys(errors).length} error{Object.keys(errors).length > 1 ? "es" : ""}:
+                      </p>
+                      <ul className="text-sm text-red-800 space-y-1">
+                        {Object.entries(errors).map(([field, message]) => (
+                          <li key={field} className="flex gap-2">
+                            <span>•</span>
+                            <span>{message}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
               {/* Name */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1">
@@ -154,9 +190,9 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg border ${
-                    errors.name ? "border-red-500 bg-red-50" : "border-border bg-background"
-                  } text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent`}
+                  className={`w-full px-4 py-2 rounded-lg border-2 transition-colors ${
+                    errors.name ? "border-red-500 bg-red-50 focus:ring-red-500" : "border-border bg-background focus:ring-accent"
+                  } text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2`}
                   placeholder="Tu nombre"
                 />
                 {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
