@@ -5,9 +5,11 @@ import { projects } from "@/data/projects";
 import { getProjectGallery } from "@/data/projectGalleries";
 import { getTechnicalSpecs } from "@/data/projectTechnicalSpecs";
 import { getProjectTimeline } from "@/data/projectTimelines";
+import { getServiceOptions } from "@/data/projectServiceOptions";
 import ImageGallery from "./ImageGallery";
 import TechnicalSpecs from "./TechnicalSpecs";
 import ConstructionTimeline from "./ConstructionTimeline";
+import ServiceOptions from "./ServiceOptions";
 import NotFound from "@/pages/NotFound";
 
 const ProjectDetail = () => {
@@ -178,6 +180,12 @@ const ProjectDetail = () => {
       {(() => {
         const timeline = getProjectTimeline(slug!);
         return timeline ? <ConstructionTimeline timeline={timeline} /> : null;
+      })()}
+
+      {/* Service Options Section */}
+      {(() => {
+        const serviceOptions = getServiceOptions(slug!);
+        return serviceOptions ? <ServiceOptions serviceOptions={serviceOptions} /> : null;
       })()}
 
       {/* CTA Section */}
