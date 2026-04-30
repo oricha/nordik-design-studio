@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, CheckCircle } from "lucide-react";
 
 interface QuotationModalProps {
   isOpen: boolean;
@@ -42,6 +42,8 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [submittedData, setSubmittedData] = useState<typeof formData | null>(null);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -63,6 +65,8 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     e.preventDefault();
     if (validateForm()) {
       console.log("Formulario enviado:", formData);
+      setSubmittedData(formData);
+      setShowSuccess(true);
       setFormData({
         name: "",
         email: "",
@@ -77,8 +81,6 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
         message: "",
       });
       setErrors({});
-      onClose();
-      alert("¡Gracias! Tu solicitud ha sido enviada. Te contactaremos en 24-48 horas.");
     } else {
       // Scroll to the first error
       const firstErrorField = Object.keys(errors)[0];
@@ -91,6 +93,16 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
       }
     }
   };
+
+  useEffect(() => {
+    if (showSuccess) {
+      const timer = setTimeout(() => {
+        setShowSuccess(false);
+        onClose();
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccess, onClose]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -422,6 +434,82 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
               </p>
             </form>
           </motion.div>
+
+          {/* Success Modal */}
+          {showSuccess && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowSuccess(false)}
+                className="fixed inset-0 bg-black/50 z-40"
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.2 }}
+                className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg mx-4 bg-background rounded-xl shadow-2xl z-50 p-8"
+              >
+                {/* Success Content */}
+                <div className="flex flex-col items-center text-center">
+                  {/* Success Icon */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                    className="mb-4"
+                  >
+                    <CheckCircle className="w-16 h-16 text-green-500" />
+                  </motion.div>
+
+                  {/* Success Title */}
+                  <h2 className="text-2xl font-bold text-foreground mb-2">
+                    ¡Solicitud Enviada!
+                  </h2>
+
+                  {/* Success Message */}
+                  <p className="text-muted-foreground mb-6">
+                    Gracias por tu interés en nuestros servicios. Hemos recibido tu solicitud de cotización.
+                  </p>
+
+                  {/* Submitted Info */}
+                  {submittedData && (
+                    <div className="w-full bg-accent/5 rounded-lg p-4 mb-6 text-left">
+                      <p className="text-sm text-muted-foreground mb-2">Información registrada:</p>
+                      <div className="space-y-1">
+                        <p className="text-sm font-medium text-foreground">
+                          <span className="text-muted-foreground">Nombre:</span> {submittedData.name}
+                        </p>
+                        <p className="text-sm font-medium text-foreground">
+                          <span className="text-muted-foreground">Email:</span> {submittedData.email}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Follow-up Message */}
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Te contactaremos en 24-48 horas para discutir los detalles de tu proyecto.
+                  </p>
+
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setShowSuccess(false)}
+                    className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+                  >
+                    Entendido
+                  </button>
+
+                  {/* Auto-close hint */}
+                  <p className="text-xs text-muted-foreground mt-4">
+                    Esta ventana se cerrará automáticamente en unos segundos
+                  </p>
+                </div>
+              </motion.div>
+            </>
+          )}
         </>
       )}
     </AnimatePresence>
