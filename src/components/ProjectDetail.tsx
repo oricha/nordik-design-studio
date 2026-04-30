@@ -7,11 +7,13 @@ import { getTechnicalSpecs } from "@/data/projectTechnicalSpecs";
 import { getProjectTimeline } from "@/data/projectTimelines";
 import { getServiceOptions } from "@/data/projectServiceOptions";
 import { useQuotationModal } from "@/hooks/useQuotationModal";
+import { findRelatedProjects } from "@/utils/relatedProjects";
 import ImageGallery from "./ImageGallery";
 import TechnicalSpecs from "./TechnicalSpecs";
 import ConstructionTimeline from "./ConstructionTimeline";
 import ServiceOptions from "./ServiceOptions";
 import ConstructionProcess from "./ConstructionProcess";
+import RelatedProjects from "./RelatedProjects";
 import QuotationModal from "./QuotationModal";
 import FloatingQuotationButton from "./FloatingQuotationButton";
 import NotFound from "@/pages/NotFound";
@@ -203,6 +205,9 @@ const ProjectDetail = () => {
 
       {/* Construction Process Section */}
       <ConstructionProcess />
+
+      {/* Related Projects Section */}
+      <RelatedProjects projects={findRelatedProjects(project, projects)} />
 
       {/* CTA Section */}
       <section className="section-padding">
