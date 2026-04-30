@@ -6,16 +6,20 @@ import { getProjectGallery } from "@/data/projectGalleries";
 import { getTechnicalSpecs } from "@/data/projectTechnicalSpecs";
 import { getProjectTimeline } from "@/data/projectTimelines";
 import { getServiceOptions } from "@/data/projectServiceOptions";
+import { useQuotationModal } from "@/hooks/useQuotationModal";
 import ImageGallery from "./ImageGallery";
 import TechnicalSpecs from "./TechnicalSpecs";
 import ConstructionTimeline from "./ConstructionTimeline";
 import ServiceOptions from "./ServiceOptions";
 import ConstructionProcess from "./ConstructionProcess";
+import QuotationModal from "./QuotationModal";
+import FloatingQuotationButton from "./FloatingQuotationButton";
 import NotFound from "@/pages/NotFound";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const project = projects.find((p) => p.slug === slug);
+  const { isOpen, openModal, closeModal, projectName, serviceOption } = useQuotationModal();
 
   if (!project) {
     return <NotFound />;
@@ -23,6 +27,11 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Quotation Modal */}
+      <QuotationModal isOpen={isOpen} onClose={closeModal} projectName={projectName} serviceOption={serviceOption} />
+
+      {/* Floating Quotation Button */}
+      <FloatingQuotationButton projectName={project.name} onClick={() => openModal(project.name)} />
       {/* Breadcrumbs */}
       <nav className="bg-warm-gray border-b border-border">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-2 text-sm">
@@ -103,7 +112,10 @@ const ProjectDetail = () => {
                   </div>
                 </div>
 
-                <button className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                <button
+                  onClick={() => openModal(project.name)}
+                  className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+                >
                   Solicitar Cotización
                 </button>
               </div>
@@ -206,7 +218,10 @@ const ProjectDetail = () => {
               Contacta con nuestro equipo para obtener más información y una cotización personalizada.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+              <button
+                onClick={() => openModal(project.name)}
+                className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+              >
                 Solicitar Cotización
               </button>
               <Link
