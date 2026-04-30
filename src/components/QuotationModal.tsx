@@ -35,6 +35,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     specificProject: projectName,
     service: serviceOption,
     budget: "" as BudgetRange | "",
+    location: "",
     message: "",
   });
 
@@ -67,6 +68,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
         specificProject: projectName,
         service: serviceOption,
         budget: "",
+        location: "",
         message: "",
       });
       setErrors({});
@@ -229,6 +231,21 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                   ))}
                 </select>
                 {errors.budget && <p className="text-sm text-red-500 mt-1">{errors.budget}</p>}
+              </div>
+
+              {/* Project Location */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">
+                  Ubicación del Proyecto
+                </label>
+                <input
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                  placeholder="Ej: Madrid, Barcelona, región..."
+                />
               </div>
 
               {/* Specific Project (Optional) */}
