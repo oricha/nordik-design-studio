@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import About from "./pages/About";
 import ProjectTorku from "./pages/ProjectTorku";
 import ProjectTampere from "./pages/ProjectTampere";
 import ProjectKuusamo from "./pages/ProjectKuusamo";
@@ -28,6 +29,7 @@ const App = () => (
         <Header />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
           {/* Legacy routes - kept for backward compatibility */}
           <Route path="/project/torku" element={<ProjectTorku />} />
           <Route path="/project/tampere" element={<ProjectTampere />} />

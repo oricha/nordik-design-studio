@@ -36,7 +36,8 @@
       "Bash(npx tsc *)",
       "mcp__Claude_in_Chrome__navigate",
       "mcp__Claude_in_Chrome__computer",
-      "mcp__Claude_in_Chrome__resize_window"
+      "mcp__Claude_in_Chrome__resize_window",
+      "mcp__Claude_in_Chrome__read_console_messages"
     ]
   }
 }
