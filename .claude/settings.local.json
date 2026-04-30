@@ -18,7 +18,16 @@
       "Bash(grep -v \"^\\(slug|images|url|title|category|description|getProjectGallery\\)$\")",
       "Bash(grep -c \"^\\\\s*[a-z]*: {$\\\\|^\\\\s*slug:\" src/data/projectTechnicalSpecs.ts)",
       "Bash(grep -E \"^\\\\s+\\\\{$\" src/data/projectGalleries.ts)",
-      "Bash(grep \"^\\\\s*[a-z]*: {$\" src/data/projectTechnicalSpecs.ts)"
+      "Bash(grep \"^\\\\s*[a-z]*: {$\" src/data/projectTechnicalSpecs.ts)",
+      "Bash(opsx:new feature *)",
+      "mcp__playwright__browser_navigate",
+      "Bash(curl -s http://localhost:5173)",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_run_code"
     ]
   }
 }

@@ -9,12 +9,22 @@ interface QuotationModalProps {
   serviceOption?: string;
 }
 
+type ProjectType = "houses" | "cabins" | "materials" | "reforms";
+
+const PROJECT_TYPES: { value: ProjectType; label: string }[] = [
+  { value: "houses", label: "Casas" },
+  { value: "cabins", label: "Cabañas" },
+  { value: "materials", label: "Materiales" },
+  { value: "reforms", label: "Reformas" },
+];
+
 const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" }: QuotationModalProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    project: projectName,
+    projectTypes: [] as ProjectType[],
+    specificProject: projectName,
     service: serviceOption,
     message: "",
   });
@@ -29,7 +39,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       newErrors.email = "Email no válido";
     if (!formData.phone.trim()) newErrors.phone = "El teléfono es requerido";
-    if (!formData.project.trim()) newErrors.project = "Selecciona un proyecto";
+    if (formData.projectTypes.length === 0) newErrors.projectTypes = "Selecciona al menos un tipo de proyecto";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -43,7 +53,8 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
         name: "",
         email: "",
         phone: "",
-        project: projectName,
+        projectTypes: [],
+        specificProject: projectName,
         service: serviceOption,
         message: "",
       });
@@ -58,6 +69,18 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleProjectTypeChange = (type: ProjectType) => {
+    setFormData((prev) => ({
+      ...prev,
+      projectTypes: prev.projectTypes.includes(type)
+        ? prev.projectTypes.filter((t) => t !== type)
+        : [...prev.projectTypes, type],
+    }));
+    if (errors.projectTypes) {
+      setErrors((prev) => ({ ...prev, projectTypes: "" }));
     }
   };
 
@@ -150,24 +173,44 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                 {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone}</p>}
               </div>
 
-              {/* Project */}
+              {/* Project Types */}
               <div>
-                <label className="block text-sm font-medium text-foreground mb-1">
-                  Proyecto Interesado *
+                <label className="block text-sm font-medium text-foreground mb-3">
+                  Tipos de Proyecto de Interés *
                 </label>
-                <input
-                  type="text"
-                  name="project"
-                  value={formData.project}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-2 rounded-lg border ${
-                    errors.project ? "border-red-500 bg-red-50" : "border-border bg-background"
-                  } text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent`}
-                  placeholder="Nombre del proyecto"
-                  readOnly
-                />
-                {errors.project && <p className="text-sm text-red-500 mt-1">{errors.project}</p>}
+                <div className="space-y-2">
+                  {PROJECT_TYPES.map((type) => (
+                    <label
+                      key={type.value}
+                      className="flex items-center p-3 rounded-lg border border-border hover:bg-accent/5 cursor-pointer transition-colors"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={formData.projectTypes.includes(type.value)}
+                        onChange={() => handleProjectTypeChange(type.value)}
+                        className="w-4 h-4 rounded border-border accent-primary cursor-pointer"
+                      />
+                      <span className="ml-3 text-sm font-medium text-foreground">{type.label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.projectTypes && <p className="text-sm text-red-500 mt-2">{errors.projectTypes}</p>}
               </div>
+
+              {/* Specific Project (Optional) */}
+              {projectName && (
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1">
+                    Proyecto Específico
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.specificProject}
+                    className="w-full px-4 py-2 rounded-lg border border-border bg-muted text-foreground focus:outline-none focus:ring-2 focus:ring-accent"
+                    readOnly
+                  />
+                </div>
+              )}
 
               {/* Service Option */}
               <div>

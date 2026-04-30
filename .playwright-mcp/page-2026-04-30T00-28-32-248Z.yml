@@ -1,0 +1,399 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "NordiK" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e6]:
+        - link "Nuestros Proyectos" [ref=e7] [cursor=pointer]:
+          - /url: /#projects
+        - link "Opciones de Construcción" [ref=e8] [cursor=pointer]:
+          - /url: /#services
+        - link "Servicios" [ref=e9] [cursor=pointer]:
+          - /url: /#why
+        - link "Galería" [ref=e10] [cursor=pointer]:
+          - /url: /#gallery
+        - link "Contactos" [ref=e11] [cursor=pointer]:
+          - /url: /#contact
+      - generic [ref=e12]:
+        - button "ES / €" [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+          - text: ES / €
+        - link "OBTENER PRESUPUESTO" [ref=e17] [cursor=pointer]:
+          - /url: /#contact
+  - main [ref=e19]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - heading "Casas modernas y de alta calidad con estructura de madera" [level=1] [ref=e25]
+        - paragraph [ref=e26]: Una vida sostenible y energéticamente eficiente diseñada para el futuro.
+        - generic [ref=e27]:
+          - link "Ver Proyectos" [ref=e28] [cursor=pointer]:
+            - /url: "#projects"
+          - link "Obtener Cotización" [ref=e29] [cursor=pointer]:
+            - /url: "#contact"
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - img [ref=e33]
+          - generic [ref=e36]:
+            - generic [ref=e37]: 5+
+            - generic [ref=e38]: Años de Experiencia
+        - generic [ref=e39]:
+          - img [ref=e41]
+          - generic [ref=e46]:
+            - generic [ref=e47]: 100%
+            - generic [ref=e48]: Satisfacción del Cliente
+        - generic [ref=e49]:
+          - img [ref=e51]
+          - generic [ref=e55]:
+            - generic [ref=e56]: 240+
+            - generic [ref=e57]: Proyectos Entregados
+    - generic [ref=e59]:
+      - generic [ref=e60]:
+        - heading "Nuestros Proyectos" [level=2] [ref=e61]
+        - paragraph [ref=e62]: Explore nuestra colección de casas de diseño escandinavo, cabañas y soluciones de construcción.
+      - generic [ref=e63]:
+        - img [ref=e64]
+        - textbox "Buscar proyectos..." [ref=e67]
+      - generic [ref=e68]:
+        - button "Vista Grid" [ref=e69] [cursor=pointer]:
+          - img [ref=e70]
+        - button "Vista Lista" [ref=e72] [cursor=pointer]:
+          - img [ref=e73]
+      - generic [ref=e74]:
+        - button "Todos" [ref=e75] [cursor=pointer]
+        - button "Casas" [ref=e76] [cursor=pointer]
+        - button "Cabañas" [ref=e77] [cursor=pointer]
+        - button "Materiales" [ref=e78] [cursor=pointer]
+        - button "Reformas" [ref=e79] [cursor=pointer]
+      - generic [ref=e80]:
+        - generic [ref=e81]:
+          - img [ref=e82]
+          - combobox [ref=e85]:
+            - 'option "Precio: Menor a Mayor" [selected]'
+            - 'option "Precio: Mayor a Menor"'
+            - option "Más grande primero"
+            - 'option "Nombre: A-Z"'
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - generic [ref=e88]: "Precio:"
+            - generic [ref=e89]:
+              - spinbutton [ref=e90]: "32000"
+              - generic [ref=e91]: "-"
+              - spinbutton [ref=e92]: "320000"
+            - generic [ref=e93]: (€32,000 - €320,000)
+          - generic [ref=e94]:
+            - slider [ref=e95]: "32000"
+            - slider [ref=e96]: "317000"
+      - generic [ref=e97]:
+        - link "Torku Popular Torku 48 m² 2 1 €32,400" [ref=e98] [cursor=pointer]:
+          - /url: /proyecto/torku
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - img "Torku" [ref=e101]
+              - generic [ref=e102]: Popular
+            - generic [ref=e103]:
+              - heading "Torku" [level=3] [ref=e104]
+              - generic [ref=e105]:
+                - generic [ref=e106]:
+                  - img [ref=e107]
+                  - text: 48 m²
+                - generic [ref=e112]:
+                  - img [ref=e113]
+                  - text: "2"
+                - generic [ref=e116]:
+                  - img [ref=e117]
+                  - text: "1"
+              - generic [ref=e120]: €32,400
+        - link "Tampere Tampere €35,000" [ref=e121] [cursor=pointer]:
+          - /url: /proyecto/tampere
+          - generic [ref=e122]:
+            - img "Tampere" [ref=e124]
+            - generic [ref=e125]:
+              - heading "Tampere" [level=3] [ref=e126]
+              - generic [ref=e127]: €35,000
+        - link "Saariselkä New Saariselkä 45 m² 1 1 €62,000" [ref=e128] [cursor=pointer]:
+          - /url: /proyecto/saariselka
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - img "Saariselkä" [ref=e131]
+              - generic [ref=e132]: New
+            - generic [ref=e133]:
+              - heading "Saariselkä" [level=3] [ref=e134]
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - img [ref=e137]
+                  - text: 45 m²
+                - generic [ref=e142]:
+                  - img [ref=e143]
+                  - text: "1"
+                - generic [ref=e146]:
+                  - img [ref=e147]
+                  - text: "1"
+              - generic [ref=e150]: €62,000
+        - link "Kuusamo Kuusamo 80 m² 2 1 €95,000" [ref=e151] [cursor=pointer]:
+          - /url: /proyecto/kuusamo
+          - generic [ref=e152]:
+            - img "Kuusamo" [ref=e154]
+            - generic [ref=e155]:
+              - heading "Kuusamo" [level=3] [ref=e156]
+              - generic [ref=e157]:
+                - generic [ref=e158]:
+                  - img [ref=e159]
+                  - text: 80 m²
+                - generic [ref=e164]:
+                  - img [ref=e165]
+                  - text: "2"
+                - generic [ref=e168]:
+                  - img [ref=e169]
+                  - text: "1"
+              - generic [ref=e172]: €95,000
+        - link "Oulu Oulu 95 m² 3 1 €125,000" [ref=e173] [cursor=pointer]:
+          - /url: /proyecto/oulu
+          - generic [ref=e174]:
+            - img "Oulu" [ref=e176]
+            - generic [ref=e177]:
+              - heading "Oulu" [level=3] [ref=e178]
+              - generic [ref=e179]:
+                - generic [ref=e180]:
+                  - img [ref=e181]
+                  - text: 95 m²
+                - generic [ref=e186]:
+                  - img [ref=e187]
+                  - text: "3"
+                - generic [ref=e190]:
+                  - img [ref=e191]
+                  - text: "1"
+              - generic [ref=e194]: €125,000
+        - link "Levi Levi 110 m² 3 2 €145,000" [ref=e195] [cursor=pointer]:
+          - /url: /proyecto/levi
+          - generic [ref=e196]:
+            - img "Levi" [ref=e198]
+            - generic [ref=e199]:
+              - heading "Levi" [level=3] [ref=e200]
+              - generic [ref=e201]:
+                - generic [ref=e202]:
+                  - img [ref=e203]
+                  - text: 110 m²
+                - generic [ref=e208]:
+                  - img [ref=e209]
+                  - text: "3"
+                - generic [ref=e212]:
+                  - img [ref=e213]
+                  - text: "2"
+              - generic [ref=e216]: €145,000
+        - link "Helsinki Helsinki 120 m² 3 2 €175,000" [ref=e217] [cursor=pointer]:
+          - /url: /proyecto/helsinki
+          - generic [ref=e218]:
+            - img "Helsinki" [ref=e220]
+            - generic [ref=e221]:
+              - heading "Helsinki" [level=3] [ref=e222]
+              - generic [ref=e223]:
+                - generic [ref=e224]:
+                  - img [ref=e225]
+                  - text: 120 m²
+                - generic [ref=e230]:
+                  - img [ref=e231]
+                  - text: "3"
+                - generic [ref=e234]:
+                  - img [ref=e235]
+                  - text: "2"
+              - generic [ref=e238]: €175,000
+        - link "Tunturi Popular Tunturi 145 m² 4 2 €185,000" [ref=e239] [cursor=pointer]:
+          - /url: /proyecto/tunturi
+          - generic [ref=e240]:
+            - generic [ref=e241]:
+              - img "Tunturi" [ref=e242]
+              - generic [ref=e243]: Popular
+            - generic [ref=e244]:
+              - heading "Tunturi" [level=3] [ref=e245]
+              - generic [ref=e246]:
+                - generic [ref=e247]:
+                  - img [ref=e248]
+                  - text: 145 m²
+                - generic [ref=e253]:
+                  - img [ref=e254]
+                  - text: "4"
+                - generic [ref=e257]:
+                  - img [ref=e258]
+                  - text: "2"
+              - generic [ref=e261]: €185,000
+        - link "Rovaniemi Rovaniemi 160 m² 4 2 €210,000" [ref=e262] [cursor=pointer]:
+          - /url: /proyecto/rovaniemi
+          - generic [ref=e263]:
+            - img "Rovaniemi" [ref=e265]
+            - generic [ref=e266]:
+              - heading "Rovaniemi" [level=3] [ref=e267]
+              - generic [ref=e268]:
+                - generic [ref=e269]:
+                  - img [ref=e270]
+                  - text: 160 m²
+                - generic [ref=e275]:
+                  - img [ref=e276]
+                  - text: "4"
+                - generic [ref=e279]:
+                  - img [ref=e280]
+                  - text: "2"
+              - generic [ref=e283]: €210,000
+        - link "Sodankylä New Sodankylä 180 m² 5 3 €245,000" [ref=e284] [cursor=pointer]:
+          - /url: /proyecto/sodankyla
+          - generic [ref=e285]:
+            - generic [ref=e286]:
+              - img "Sodankylä" [ref=e287]
+              - generic [ref=e288]: New
+            - generic [ref=e289]:
+              - heading "Sodankylä" [level=3] [ref=e290]
+              - generic [ref=e291]:
+                - generic [ref=e292]:
+                  - img [ref=e293]
+                  - text: 180 m²
+                - generic [ref=e298]:
+                  - img [ref=e299]
+                  - text: "5"
+                - generic [ref=e302]:
+                  - img [ref=e303]
+                  - text: "3"
+              - generic [ref=e306]: €245,000
+        - link "Inari Popular Inari 220 m² 5 3 €320,000" [ref=e307] [cursor=pointer]:
+          - /url: /proyecto/inari
+          - generic [ref=e308]:
+            - generic [ref=e309]:
+              - img "Inari" [ref=e310]
+              - generic [ref=e311]: Popular
+            - generic [ref=e312]:
+              - heading "Inari" [level=3] [ref=e313]
+              - generic [ref=e314]:
+                - generic [ref=e315]:
+                  - img [ref=e316]
+                  - text: 220 m²
+                - generic [ref=e321]:
+                  - img [ref=e322]
+                  - text: "5"
+                - generic [ref=e325]:
+                  - img [ref=e326]
+                  - text: "3"
+              - generic [ref=e329]: €320,000
+    - generic [ref=e331]:
+      - heading "¿Por qué los países escandinavos están cambiando a este formato de vivienda?" [level=2] [ref=e332]
+      - generic [ref=e333]:
+        - generic [ref=e334] [cursor=pointer]:
+          - img "Scandinavian house construction" [ref=e335]
+          - img [ref=e338]
+        - generic [ref=e340]:
+          - generic [ref=e341]:
+            - img [ref=e343]
+            - heading "Madera Natural" [level=3] [ref=e345]
+            - paragraph [ref=e346]: Madera escandinava de origen sostenible
+          - generic [ref=e347]:
+            - img [ref=e349]
+            - heading "Precio Asequible" [level=3] [ref=e354]
+            - paragraph [ref=e355]: Precios competitivos sin compromisos
+          - generic [ref=e356]:
+            - img [ref=e358]
+            - heading "Eficiencia Energética" [level=3] [ref=e360]
+            - paragraph [ref=e361]: Rendimiento térmico con calificación A
+          - generic [ref=e362]:
+            - img [ref=e364]
+            - heading "Construcción Rápida" [level=3] [ref=e367]
+            - paragraph [ref=e368]: Ensamblado en semanas, no en meses
+          - generic [ref=e369]:
+            - img [ref=e371]
+            - heading "Experiencia Profesional" [level=3] [ref=e374]
+            - paragraph [ref=e375]: Artesanía experta garantizada
+          - generic [ref=e376]:
+            - img [ref=e378]
+            - heading "Garantía" [level=3] [ref=e380]
+            - paragraph [ref=e381]: 10 años de garantía estructural
+    - generic [ref=e383]:
+      - generic [ref=e384]:
+        - heading "Opciones de Construcción" [level=2] [ref=e385]
+        - paragraph [ref=e386]: Desde casas llave en mano hasta suministro de materiales — ofrecemos soluciones flexibles para cada etapa de su proyecto.
+      - generic [ref=e387]:
+        - generic [ref=e388]:
+          - img [ref=e390]
+          - heading "Casas Completamente Terminadas" [level=3] [ref=e393]
+          - paragraph [ref=e394]: Soluciones Llave en Mano
+          - paragraph [ref=e395]: Experimente la propiedad de una vivienda sin estrés con nuestras casas prémium llave en mano con estructura de madera. Desde el diseño escandinavo inicial hasta los acabados interiores finales, gestionamos cada etapa de la construcción. Nuestras casas energéticamente eficientes con calificación A se entregan listas para mudarse, combinando el confort moderno con la arquitectura sostenible.
+        - generic [ref=e396]:
+          - img [ref=e398]
+          - heading "Paneles Prefabricados" [level=3] [ref=e402]
+          - paragraph [ref=e403]: Venta de SIP y Materiales
+          - paragraph [ref=e404]: Acelere su construcción con nuestros SIP (Paneles Estructurales Aislados) de alto rendimiento y componentes de madera prefabricados. Suministramos materiales de construcción certificados y kits cortados con precisión diseñados para un montaje rápido. Ideal para promotores y constructores de bricolaje que buscan un aislamiento térmico y una integridad estructural superiores.
+        - generic [ref=e405]:
+          - img [ref=e407]
+          - heading "Construcción In Situ" [level=3] [ref=e409]
+          - paragraph [ref=e410]: Reformas y Servicios
+          - paragraph [ref=e411]: Más allá de la construcción nueva, nos especializamos en renovaciones modernas de apartamentos y construcciones in situ a medida. Ya sea que busque una remodelación interior de estilo escandinavo o extensiones de madera especializadas, nuestro equipo ofrece una artesanía profesional utilizando materiales de alta calidad para aumentar el valor y la eficiencia de su propiedad.
+    - generic [ref=e413]:
+      - generic [ref=e414]:
+        - heading "Fotos del Proyecto" [level=2] [ref=e415]
+        - paragraph [ref=e416]: Un vistazo a nuestra artesanía y atención al detalle.
+      - generic [ref=e417]:
+        - img "Modern Scandinavian living room interior" [ref=e419] [cursor=pointer]
+        - img "Wooden house construction in progress" [ref=e421] [cursor=pointer]
+        - img "Minimalist Scandinavian kitchen design" [ref=e423] [cursor=pointer]
+        - img "Timber cladding construction detail" [ref=e425] [cursor=pointer]
+    - generic [ref=e427]:
+      - generic [ref=e428]:
+        - heading "Contáctanos" [level=2] [ref=e429]
+        - paragraph [ref=e430]: Cuéntanos sobre tu proyecto y te responderemos en 24 horas.
+      - generic [ref=e431]:
+        - img "NordiK house exterior" [ref=e433]
+        - generic [ref=e434]:
+          - generic [ref=e435]:
+            - generic [ref=e436]: Nombre
+            - textbox "Tu nombre completo" [ref=e437]
+          - generic [ref=e438]:
+            - generic [ref=e439]:
+              - generic [ref=e440]: Correo electrónico
+              - textbox "correo@ejemplo.com" [ref=e441]
+            - generic [ref=e442]:
+              - generic [ref=e443]: Teléfono
+              - textbox "+34 600 123 456" [ref=e444]
+          - generic [ref=e445]:
+            - generic [ref=e446]: Tipo de Proyecto
+            - generic [ref=e447]:
+              - button "Casa Llave en Mano" [ref=e448] [cursor=pointer]
+              - button "Cabaña" [ref=e449] [cursor=pointer]
+              - button "Paneles SIP" [ref=e450] [cursor=pointer]
+              - button "Renovación" [ref=e451] [cursor=pointer]
+              - button "Otro" [ref=e452] [cursor=pointer]
+          - generic [ref=e453]:
+            - generic [ref=e454]: Mensaje
+            - textbox "Háblanos sobre tu proyecto..." [ref=e455]
+          - button "Enviar Solicitud" [ref=e456] [cursor=pointer]:
+            - img [ref=e457]
+            - text: Enviar Solicitud
+  - contentinfo [ref=e460]:
+    - generic [ref=e461]:
+      - generic [ref=e462]:
+        - generic [ref=e463]:
+          - heading "NordiK" [level=3] [ref=e464]
+          - paragraph [ref=e465]: Casas nórdicas prémium con estructura de madera, diseñadas para la sostenibilidad, el confort y la vida moderna. Construyendo el futuro con la naturaleza.
+        - generic [ref=e466]:
+          - heading "Enlaces Rápidos" [level=4] [ref=e467]
+          - navigation [ref=e468]:
+            - link "Proyectos" [ref=e469] [cursor=pointer]:
+              - /url: "#projects"
+            - link "Opciones de Construcción" [ref=e470] [cursor=pointer]:
+              - /url: "#services"
+            - link "Por qué NordiK" [ref=e471] [cursor=pointer]:
+              - /url: "#why"
+            - link "Galería" [ref=e472] [cursor=pointer]:
+              - /url: "#gallery"
+            - link "Contacto" [ref=e473] [cursor=pointer]:
+              - /url: "#contact"
+        - generic [ref=e474]:
+          - heading "Contacto" [level=4] [ref=e475]
+          - generic [ref=e476]:
+            - generic [ref=e477]:
+              - img [ref=e478]
+              - text: Helsinki, Finland
+            - generic [ref=e481]:
+              - img [ref=e482]
+              - text: +358 40 123 4567
+            - generic [ref=e484]:
+              - img [ref=e485]
+              - text: info@nordik.fi
+      - generic [ref=e488]: © 2026 NordiK. Todos los derechos reservados.

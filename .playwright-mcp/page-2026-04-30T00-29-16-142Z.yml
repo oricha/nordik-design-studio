@@ -1,0 +1,560 @@
+- generic [ref=e2]:
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "NordiK" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e6]:
+        - link "Nuestros Proyectos" [ref=e7] [cursor=pointer]:
+          - /url: /#projects
+        - link "Opciones de Construcción" [ref=e8] [cursor=pointer]:
+          - /url: /#services
+        - link "Servicios" [ref=e9] [cursor=pointer]:
+          - /url: /#why
+        - link "Galería" [ref=e10] [cursor=pointer]:
+          - /url: /#gallery
+        - link "Contactos" [ref=e11] [cursor=pointer]:
+          - /url: /#contact
+      - generic [ref=e12]:
+        - button "ES / €" [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+          - text: ES / €
+        - link "OBTENER PRESUPUESTO" [ref=e17] [cursor=pointer]:
+          - /url: /#contact
+  - generic [ref=e489]:
+    - navigation [ref=e490]:
+      - generic [ref=e491]:
+        - link "Inicio" [ref=e492] [cursor=pointer]:
+          - /url: /
+          - img [ref=e493]
+          - text: Inicio
+        - img [ref=e496]
+        - link "Proyectos" [ref=e498] [cursor=pointer]:
+          - /url: /#projects
+        - img [ref=e499]
+        - generic [ref=e501]: Torku
+    - generic [ref=e505]:
+      - generic [ref=e506]:
+        - img "Torku" [ref=e507]
+        - generic [ref=e508]: Popular
+      - generic [ref=e509]:
+        - heading "Torku" [level=1] [ref=e510]
+        - paragraph [ref=e511]: Descubre este hermoso proyecto de arquitectura nórdica. Diseño moderno, eficiencia energética y construcción sostenible.
+        - generic [ref=e512]:
+          - generic [ref=e513]:
+            - paragraph [ref=e514]: Área
+            - paragraph [ref=e515]: 48 m²
+          - generic [ref=e516]:
+            - paragraph [ref=e517]: Dormitorios
+            - paragraph [ref=e518]: "2"
+          - generic [ref=e519]:
+            - paragraph [ref=e520]: Baños
+            - paragraph [ref=e521]: "1"
+          - generic [ref=e522]:
+            - paragraph [ref=e523]: Precio
+            - paragraph [ref=e524]: €32,400
+        - button "Solicitar Cotización" [ref=e525] [cursor=pointer]
+    - generic [ref=e528]:
+      - heading "Galería del Proyecto" [level=2] [ref=e529]
+      - generic [ref=e530]:
+        - generic [ref=e531] [cursor=pointer]:
+          - img "Cabaña frontal" [ref=e532]
+          - generic [ref=e534]: 1 / 10
+          - img [ref=e536]
+          - button [ref=e541]:
+            - img [ref=e542]
+          - button [ref=e544]:
+            - img [ref=e545]
+        - generic [ref=e547]:
+          - generic [ref=e548]:
+            - heading "Cabaña frontal" [level=3] [ref=e549]
+            - paragraph [ref=e550]: Exterior
+          - button "Ver en grande" [ref=e551] [cursor=pointer]:
+            - img [ref=e552]
+            - text: Ver en grande
+      - generic [ref=e557]:
+        - paragraph [ref=e558]: Miniaturas
+        - generic [ref=e559]:
+          - button "Cabaña frontal" [ref=e560] [cursor=pointer]:
+            - img "Cabaña frontal" [ref=e561]
+          - button "Detalle construcción" [ref=e562] [cursor=pointer]:
+            - img "Detalle construcción" [ref=e563]
+          - button "Interior cabaña" [ref=e564] [cursor=pointer]:
+            - img "Interior cabaña" [ref=e565]
+          - button "Cocina cabaña" [ref=e566] [cursor=pointer]:
+            - img "Cocina cabaña" [ref=e567]
+          - button "Dormitorio cabaña" [ref=e568] [cursor=pointer]:
+            - img "Dormitorio cabaña" [ref=e569]
+          - button "Ventanas cabaña" [ref=e570] [cursor=pointer]:
+            - img "Ventanas cabaña" [ref=e571]
+    - generic [ref=e574]:
+      - heading "Sobre este Proyecto" [level=2] [ref=e575]
+      - paragraph [ref=e576]: Este proyecto representa lo mejor de la arquitectura nórdica moderna. Con paneles SIP de última generación, aislamiento superior y diseño sostenible, ofrece confort, eficiencia y estética en una sola solución.
+      - paragraph [ref=e577]: Cada detalle ha sido cuidadosamente diseñado para garantizar la máxima satisfacción del cliente. Desde la selección de materiales hasta la instalación final, nuestro equipo asegura la calidad en cada paso del proceso.
+    - generic [ref=e580]:
+      - heading "Características Principales" [level=2] [ref=e581]
+      - generic [ref=e582]:
+        - generic [ref=e583]:
+          - heading "Paneles SIP" [level=3] [ref=e584]
+          - paragraph [ref=e585]: Aislamiento superior y construcción rápida
+        - generic [ref=e586]:
+          - heading "Eficiencia Energética" [level=3] [ref=e587]
+          - paragraph [ref=e588]: Reducción de consumo hasta 70%
+        - generic [ref=e589]:
+          - heading "Sostenible" [level=3] [ref=e590]
+          - paragraph [ref=e591]: Materiales ecológicos certificados
+        - generic [ref=e592]:
+          - heading "Diseño Moderno" [level=3] [ref=e593]
+          - paragraph [ref=e594]: Arquitectura escandinava contemporánea
+        - generic [ref=e595]:
+          - heading "Instalación Rápida" [level=3] [ref=e596]
+          - paragraph [ref=e597]: Reducción de tiempo de construcción
+        - generic [ref=e598]:
+          - heading "Garantía 10 años" [level=3] [ref=e599]
+          - paragraph [ref=e600]: Protección integral de tu inversión
+    - generic [ref=e603]:
+      - heading "Especificaciones Técnicas" [level=2] [ref=e604]
+      - generic [ref=e605]:
+        - generic [ref=e606]:
+          - generic [ref=e607]:
+            - img [ref=e608]
+            - heading "Paneles SIP" [level=3] [ref=e612]
+          - list [ref=e613]:
+            - listitem [ref=e614]:
+              - generic [ref=e615]: "Espesor:"
+              - text: 18 cm
+            - listitem [ref=e616]:
+              - generic [ref=e617]: "R-Value:"
+              - text: 4.6 m²K/W
+        - generic [ref=e618]:
+          - generic [ref=e619]:
+            - img [ref=e620]
+            - heading "Cantidad" [level=3] [ref=e623]
+          - list [ref=e624]:
+            - listitem [ref=e625]:
+              - generic [ref=e626]: "Dormitorios:"
+              - text: "2"
+            - listitem [ref=e627]:
+              - generic [ref=e628]: "Baños:"
+              - text: "1"
+            - listitem [ref=e629]:
+              - generic [ref=e630]: "Área Útil:"
+              - text: 48 m²
+        - generic [ref=e631]:
+          - generic [ref=e632]:
+            - img [ref=e633]
+            - heading "Acabados Incluidos" [level=3] [ref=e639]
+          - list [ref=e640]:
+            - listitem [ref=e641]:
+              - generic [ref=e642]: "Techo:"
+              - text: Tejas cerámicas tradicionales
+            - listitem [ref=e643]:
+              - generic [ref=e644]: "Piso:"
+              - text: Suelo de hormigón pulido
+            - listitem [ref=e645]:
+              - generic [ref=e646]: "Pintura:"
+              - text: Pintura exterior resistente UV
+            - listitem [ref=e647]:
+              - generic [ref=e648]: "Puertas:"
+              - text: Puerta de entrada de aluminio anodizado
+        - generic [ref=e649]:
+          - generic [ref=e650]:
+            - img [ref=e651]
+            - heading "Opciones de Personalización" [level=3] [ref=e653]
+          - list [ref=e654]:
+            - listitem [ref=e655]:
+              - generic [ref=e656]: •
+              - generic [ref=e657]: Ampliación horizontal
+            - listitem [ref=e658]:
+              - generic [ref=e659]: •
+              - generic [ref=e660]: Terraza cubierta
+            - listitem [ref=e661]:
+              - generic [ref=e662]: •
+              - generic [ref=e663]: Sistema de ventilación mecánica controlada
+        - generic [ref=e664]:
+          - generic [ref=e665]:
+            - img [ref=e666]
+            - heading "Certificaciones" [level=3] [ref=e669]
+          - list [ref=e670]:
+            - listitem [ref=e671]:
+              - generic [ref=e672]: •
+              - generic [ref=e673]: ISO 9001:2015
+            - listitem [ref=e674]:
+              - generic [ref=e675]: •
+              - generic [ref=e676]: PEFC Certificado
+            - listitem [ref=e677]:
+              - generic [ref=e678]: •
+              - generic [ref=e679]: Marcado CE
+    - generic [ref=e682]:
+      - generic [ref=e683]:
+        - heading "Timeline de Construcción" [level=2] [ref=e684]
+        - generic [ref=e686] [cursor=pointer]:
+          - checkbox "Incluir Customización" [ref=e687]
+          - generic [ref=e688]: Incluir Customización
+      - generic [ref=e690]:
+        - generic [ref=e691]:
+          - paragraph [ref=e692]: Duración Total
+          - paragraph [ref=e693]: 7 semanas
+        - generic [ref=e694]:
+          - paragraph [ref=e695]: Aproximadamente
+          - paragraph [ref=e696]: 2 meses
+      - generic [ref=e697]:
+        - generic [ref=e699]:
+          - generic [ref=e700]:
+            - img [ref=e702]
+            - generic [ref=e704]:
+              - generic [ref=e705]:
+                - heading "Diseño" [level=3] [ref=e706]
+                - generic [ref=e707]:
+                  - paragraph [ref=e708]: Duración
+                  - paragraph [ref=e709]: 1 sem
+              - paragraph [ref=e710]: Revisión de planos estándar y ajustes menores
+          - generic [ref=e711]:
+            - img [ref=e713]
+            - generic [ref=e717]:
+              - generic [ref=e718]:
+                - heading "Fabricación" [level=3] [ref=e719]
+                - generic [ref=e720]:
+                  - paragraph [ref=e721]: Duración
+                  - paragraph [ref=e722]: 2 sem
+              - paragraph [ref=e723]: Fabricación rápida de componentes modulares
+          - generic [ref=e724]:
+            - img [ref=e726]
+            - generic [ref=e731]:
+              - generic [ref=e732]:
+                - heading "Transporte" [level=3] [ref=e733]
+                - generic [ref=e734]:
+                  - paragraph [ref=e735]: Duración
+                  - paragraph [ref=e736]: 1 sem
+              - paragraph [ref=e737]: Entrega de componentes al sitio
+          - generic [ref=e738]:
+            - img [ref=e740]
+            - generic [ref=e743]:
+              - generic [ref=e744]:
+                - heading "Instalación" [level=3] [ref=e745]
+                - generic [ref=e746]:
+                  - paragraph [ref=e747]: Duración
+                  - paragraph [ref=e748]: 2 sem
+              - paragraph [ref=e749]: Montaje y conexiones de estructura
+          - generic [ref=e750]:
+            - img [ref=e752]
+            - generic [ref=e756]:
+              - generic [ref=e757]:
+                - heading "Acabados" [level=3] [ref=e758]
+                - generic [ref=e759]:
+                  - paragraph [ref=e760]: Duración
+                  - paragraph [ref=e761]: 1 sem
+              - paragraph [ref=e762]: Pintura, puertas y detalles finales
+        - generic:
+          - img
+      - paragraph [ref=e764]: "Nota: Los tiempos estimados pueden variar según condiciones climáticas, disponibilidad de materiales y cambios en el diseño. Consulta con nuestro equipo para un cronograma exacto."
+    - generic [ref=e767]:
+      - generic [ref=e768]:
+        - heading "Opciones de Servicio" [level=2] [ref=e769]
+        - paragraph [ref=e770]: Elige el nivel de servicio que mejor se adapte a tus necesidades. Desde componentes prefabricados hasta una reforma llave en mano.
+      - generic [ref=e771]:
+        - generic [ref=e773] [cursor=pointer]:
+          - heading "Solo Paneles SIP" [level=3] [ref=e774]
+          - paragraph [ref=e775]: Componentes prefabricados de alta calidad listos para montar. Perfecto si tienes equipo de construcción propio.
+          - generic [ref=e776]:
+            - paragraph [ref=e777]: Precio estimado desde
+            - paragraph [ref=e778]: €32,400
+          - button "Solicitar Cotización" [ref=e779]
+          - generic [ref=e780]:
+            - generic [ref=e781]:
+              - img [ref=e782]
+              - generic [ref=e784]: 5 servicios incluidos
+            - generic [ref=e785]:
+              - img [ref=e786]
+              - generic [ref=e789]: 5 servicios no incluidos
+        - generic [ref=e790] [cursor=pointer]:
+          - generic [ref=e791]:
+            - img [ref=e792]
+            - text: Popular
+          - generic [ref=e794]:
+            - heading "Semi-Llave en Mano" [level=3] [ref=e795]
+            - paragraph [ref=e796]: Incluye estructura, materiales principales e instalación. Tú gestionas acabados y sistemas. Opción recomendada.
+            - generic [ref=e797]:
+              - paragraph [ref=e798]: Precio estimado desde
+              - paragraph [ref=e799]: €48,600
+              - paragraph [ref=e800]: (50% más que solo paneles)
+            - button "Solicitar Cotización" [ref=e801]
+            - generic [ref=e802]:
+              - generic [ref=e803]:
+                - img [ref=e804]
+                - generic [ref=e806]: 8 servicios incluidos
+              - generic [ref=e807]:
+                - img [ref=e808]
+                - generic [ref=e811]: 5 servicios no incluidos
+        - generic [ref=e813] [cursor=pointer]:
+          - heading "Reforma Completa" [level=3] [ref=e814]
+          - paragraph [ref=e815]: Servicio integral llave en mano. Diseño, construcción, acabados premium y sistemas. Nosotros nos encargamos de todo.
+          - generic [ref=e816]:
+            - paragraph [ref=e817]: Precio estimado desde
+            - paragraph [ref=e818]: €71,280
+            - paragraph [ref=e819]: (120% más que solo paneles)
+          - button "Solicitar Cotización" [ref=e820]
+          - generic [ref=e821]:
+            - generic [ref=e822]:
+              - img [ref=e823]
+              - generic [ref=e825]: 12 servicios incluidos
+            - generic [ref=e826]:
+              - img [ref=e827]
+              - generic [ref=e830]: 3 servicios no incluidos
+      - generic [ref=e831]:
+        - heading "Detalle de la Opción Seleccionada" [level=3] [ref=e832]
+        - generic [ref=e833]:
+          - generic [ref=e834]:
+            - heading "Incluido en esta opción" [level=4] [ref=e835]:
+              - img [ref=e836]
+              - text: Incluido en esta opción
+            - list [ref=e838]:
+              - listitem [ref=e839]:
+                - img [ref=e840]
+                - generic [ref=e842]: Paneles SIP completos
+              - listitem [ref=e843]:
+                - img [ref=e844]
+                - generic [ref=e846]: Estructuras e instalación
+              - listitem [ref=e847]:
+                - img [ref=e848]
+                - generic [ref=e850]: Cimentación y preparación
+              - listitem [ref=e851]:
+                - img [ref=e852]
+                - generic [ref=e854]: Sistemas básicos (fontanería, electricidad base)
+              - listitem [ref=e855]:
+                - img [ref=e856]
+                - generic [ref=e858]: Acabados de piso y techo
+              - listitem [ref=e859]:
+                - img [ref=e860]
+                - generic [ref=e862]: Pintura y puertas
+              - listitem [ref=e863]:
+                - img [ref=e864]
+                - generic [ref=e866]: Supervisión de obra
+              - listitem [ref=e867]:
+                - img [ref=e868]
+                - generic [ref=e870]: Garantía 5 años estructura
+          - generic [ref=e871]:
+            - heading "No incluido en esta opción" [level=4] [ref=e872]:
+              - img [ref=e873]
+              - text: No incluido en esta opción
+            - list [ref=e876]:
+              - listitem [ref=e877]:
+                - img [ref=e878]
+                - generic [ref=e881]: Sistemas inteligentes/domótica
+              - listitem [ref=e882]:
+                - img [ref=e883]
+                - generic [ref=e886]: Acabados premium personalizados
+              - listitem [ref=e887]:
+                - img [ref=e888]
+                - generic [ref=e891]: Sistemas solares o geotérmicos
+              - listitem [ref=e892]:
+                - img [ref=e893]
+                - generic [ref=e896]: Mobiliario integrado
+              - listitem [ref=e897]:
+                - img [ref=e898]
+                - generic [ref=e901]: Servicios post-entrega avanzados
+        - generic [ref=e902]:
+          - button "Solicitar Cotización para Semi-Llave en Mano" [ref=e903] [cursor=pointer]
+          - button "Comparar Todas las Opciones" [ref=e904] [cursor=pointer]
+      - table [ref=e906]:
+        - rowgroup [ref=e907]:
+          - row "Característica Solo Paneles SIP Semi-Llave en Mano Reforma Completa" [ref=e908]:
+            - columnheader "Característica" [ref=e909]
+            - columnheader "Solo Paneles SIP" [ref=e910]
+            - columnheader "Semi-Llave en Mano" [ref=e911]
+            - columnheader "Reforma Completa" [ref=e912]
+        - rowgroup [ref=e913]:
+          - row "Paneles SIP" [ref=e914]:
+            - cell "Paneles SIP" [ref=e915]
+            - cell [ref=e916]:
+              - img [ref=e917]
+            - cell [ref=e919]:
+              - img [ref=e920]
+            - cell [ref=e922]:
+              - img [ref=e923]
+          - row "Instalación" [ref=e925]:
+            - cell "Instalación" [ref=e926]
+            - cell [ref=e927]:
+              - img [ref=e928]
+            - cell [ref=e931]:
+              - img [ref=e932]
+            - cell [ref=e934]:
+              - img [ref=e935]
+          - row "Acabados" [ref=e937]:
+            - cell "Acabados" [ref=e938]
+            - cell [ref=e939]:
+              - img [ref=e940]
+            - cell [ref=e943]:
+              - img [ref=e944]
+            - cell [ref=e946]:
+              - img [ref=e947]
+          - row "Sistemas Inteligentes" [ref=e949]:
+            - cell "Sistemas Inteligentes" [ref=e950]
+            - cell [ref=e951]:
+              - img [ref=e952]
+            - cell [ref=e955]:
+              - img [ref=e956]
+            - cell [ref=e959]:
+              - img [ref=e960]
+          - row "Garantía 2 años 5 años 10 años" [ref=e962]:
+            - cell "Garantía" [ref=e963]
+            - cell "2 años" [ref=e964]
+            - cell "5 años" [ref=e965]
+            - cell "10 años" [ref=e966]
+    - generic [ref=e969]:
+      - generic [ref=e970]:
+        - heading "Proceso Constructivo SIP" [level=2] [ref=e971]
+        - paragraph [ref=e972]: Conoce paso a paso cómo construimos tus casas con paneles SIP, desde el diseño hasta la entrega final.
+      - generic [ref=e973]:
+        - generic [ref=e974]:
+          - generic [ref=e975]: "1"
+          - generic [ref=e976]:
+            - img [ref=e978]
+            - heading "Diseño Personalizado" [level=3] [ref=e980]
+            - paragraph [ref=e981]: Desarrollamos el diseño de acuerdo a tus necesidades específicas, optimizando para máxima eficiencia energética.
+        - generic [ref=e982]:
+          - generic [ref=e983]: "2"
+          - generic [ref=e984]:
+            - img [ref=e986]
+            - heading "Fabricación en Fábrica" [level=3] [ref=e988]
+            - paragraph [ref=e989]: Los paneles SIP se cortan y ensamblan con precisión en fábrica bajo control de calidad riguroso.
+        - generic [ref=e990]:
+          - generic [ref=e991]: "3"
+          - generic [ref=e992]:
+            - img [ref=e994]
+            - heading "Logística y Transporte" [level=3] [ref=e999]
+            - paragraph [ref=e1000]: Los componentes se empacan protegidamente y se transportan hasta el sitio de construcción.
+        - generic [ref=e1001]:
+          - generic [ref=e1002]: "4"
+          - generic [ref=e1003]:
+            - img [ref=e1005]
+            - heading "Montaje Estructural" [level=3] [ref=e1009]
+            - paragraph [ref=e1010]: La estructura se monta rápidamente en el terreno, con cimentación completa en solo días.
+        - generic [ref=e1011]:
+          - generic [ref=e1012]: "5"
+          - generic [ref=e1013]:
+            - img [ref=e1015]
+            - heading "Sistemas e Instalaciones" [level=3] [ref=e1018]
+            - paragraph [ref=e1019]: Se instalan sistemas eléctricos, plomería, climatización y todas las instalaciones requeridas.
+        - generic [ref=e1020]:
+          - generic [ref=e1021]: "6"
+          - generic [ref=e1022]:
+            - img [ref=e1024]
+            - heading "Acabados y Entrega" [level=3] [ref=e1027]
+            - paragraph [ref=e1028]: Se completan los acabados interiores, pintura y detalles finales. Inspección y entrega llave en mano.
+      - generic [ref=e1029]:
+        - heading "¿Por qué SIP es Diferente?" [level=3] [ref=e1030]
+        - generic [ref=e1031]:
+          - generic [ref=e1032]:
+            - paragraph [ref=e1033]: 70%
+            - paragraph [ref=e1034]: Más Rápido
+            - paragraph [ref=e1035]: La fabricación en fábrica + montaje rápido reduce 60-70% del tiempo de construcción.
+          - generic [ref=e1036]:
+            - paragraph [ref=e1037]: 40%
+            - paragraph [ref=e1038]: Menor Costo
+            - paragraph [ref=e1039]: Menos mano de obra, menor desperdicio y eficiencia operativa reducen costos significativamente.
+          - generic [ref=e1040]:
+            - paragraph [ref=e1041]: 100%
+            - paragraph [ref=e1042]: Control de Calidad
+            - paragraph [ref=e1043]: Producción en fábrica garantiza estándares consistentes y tolerancias precisas.
+      - generic [ref=e1044]:
+        - heading "SIP vs Construcción Tradicional" [level=3] [ref=e1045]
+        - table [ref=e1047]:
+          - rowgroup [ref=e1048]:
+            - row "Aspecto Paneles SIP Construcción Tradicional" [ref=e1049]:
+              - columnheader "Aspecto" [ref=e1050]
+              - columnheader "Paneles SIP" [ref=e1051]
+              - columnheader "Construcción Tradicional" [ref=e1052]
+          - rowgroup [ref=e1053]:
+            - row "Tiempo de Construcción 4-6 meses 8-12 meses" [ref=e1054]:
+              - cell "Tiempo de Construcción" [ref=e1055]
+              - cell "4-6 meses" [ref=e1056]
+              - cell "8-12 meses" [ref=e1057]
+            - row "Costo Total Aproximado €1.200-1.400/m² €1.600-2.000/m²" [ref=e1058]:
+              - cell "Costo Total Aproximado" [ref=e1059]
+              - cell "€1.200-1.400/m²" [ref=e1060]
+              - cell "€1.600-2.000/m²" [ref=e1061]
+            - row "Eficiencia Energética A+ / Pasiva B / C típica" [ref=e1062]:
+              - cell "Eficiencia Energética" [ref=e1063]
+              - cell "A+ / Pasiva" [ref=e1064]
+              - cell "B / C típica" [ref=e1065]
+            - row "Desperdicio de Materiales 5-10% 20-30%" [ref=e1066]:
+              - cell "Desperdicio de Materiales" [ref=e1067]
+              - cell "5-10%" [ref=e1068]
+              - cell "20-30%" [ref=e1069]
+            - row "Durabilidad 50+ años 30-40 años típica" [ref=e1070]:
+              - cell "Durabilidad" [ref=e1071]
+              - cell "50+ años" [ref=e1072]
+              - cell "30-40 años típica" [ref=e1073]
+            - row "Impacto Ambiental Bajo / Madera Certificada Moderado / Alto" [ref=e1074]:
+              - cell "Impacto Ambiental" [ref=e1075]
+              - cell "Bajo / Madera Certificada" [ref=e1076]
+              - cell "Moderado / Alto" [ref=e1077]
+            - row "Control de Calidad Fábrica / Certificado En sitio / Variable" [ref=e1078]:
+              - cell "Control de Calidad" [ref=e1079]
+              - cell "Fábrica / Certificado" [ref=e1080]
+              - cell "En sitio / Variable" [ref=e1081]
+      - generic [ref=e1082]:
+        - generic [ref=e1083]:
+          - heading "✓ Ventajas de SIP" [level=4] [ref=e1084]
+          - list [ref=e1085]:
+            - listitem [ref=e1086]: • Construcción 60-70% más rápida
+            - listitem [ref=e1087]: • Menor costo total de proyecto
+            - listitem [ref=e1088]: • Máxima eficiencia energética (ahorro 70%)
+            - listitem [ref=e1089]: • Menos residuos y más sostenible
+            - listitem [ref=e1090]: • Mejor aislamiento acústico
+            - listitem [ref=e1091]: • Mayor durabilidad y resistencia
+            - listitem [ref=e1092]: • Flexibilidad de diseño
+            - listitem [ref=e1093]: • Mejor control de calidad
+        - generic [ref=e1094]:
+          - heading "⊘ Limitaciones Tradicionales" [level=4] [ref=e1095]
+          - list [ref=e1096]:
+            - listitem [ref=e1097]: • Construcción lenta y dependiente del clima
+            - listitem [ref=e1098]: • Mayor gasto en mano de obra
+            - listitem [ref=e1099]: • Eficiencia energética limitada
+            - listitem [ref=e1100]: • Desperdicio de materiales elevado
+            - listitem [ref=e1101]: • Mayor contaminación acústica
+            - listitem [ref=e1102]: • Durabilidad limitada en tiempo
+            - listitem [ref=e1103]: • Diseños estandarizados
+            - listitem [ref=e1104]: • Control de calidad variable
+    - generic [ref=e1107]:
+      - heading "¿Interesado en este Proyecto?" [level=2] [ref=e1108]
+      - paragraph [ref=e1109]: Contacta con nuestro equipo para obtener más información y una cotización personalizada.
+      - generic [ref=e1110]:
+        - button "Solicitar Cotización" [ref=e1111] [cursor=pointer]
+        - link "Ver Más Proyectos" [ref=e1112] [cursor=pointer]:
+          - /url: /#projects
+  - contentinfo [ref=e460]:
+    - generic [ref=e461]:
+      - generic [ref=e462]:
+        - generic [ref=e463]:
+          - heading "NordiK" [level=3] [ref=e464]
+          - paragraph [ref=e465]: Casas nórdicas prémium con estructura de madera, diseñadas para la sostenibilidad, el confort y la vida moderna. Construyendo el futuro con la naturaleza.
+        - generic [ref=e466]:
+          - heading "Enlaces Rápidos" [level=4] [ref=e467]
+          - navigation [ref=e468]:
+            - link "Proyectos" [ref=e469] [cursor=pointer]:
+              - /url: "#projects"
+            - link "Opciones de Construcción" [ref=e470] [cursor=pointer]:
+              - /url: "#services"
+            - link "Por qué NordiK" [ref=e471] [cursor=pointer]:
+              - /url: "#why"
+            - link "Galería" [ref=e472] [cursor=pointer]:
+              - /url: "#gallery"
+            - link "Contacto" [ref=e473] [cursor=pointer]:
+              - /url: "#contact"
+        - generic [ref=e474]:
+          - heading "Contacto" [level=4] [ref=e475]
+          - generic [ref=e476]:
+            - generic [ref=e477]:
+              - img [ref=e478]
+              - text: Helsinki, Finland
+            - generic [ref=e481]:
+              - img [ref=e482]
+              - text: +358 40 123 4567
+            - generic [ref=e484]:
+              - img [ref=e485]
+              - text: info@nordik.fi
+      - generic [ref=e488]: © 2026 NordiK. Todos los derechos reservados.
