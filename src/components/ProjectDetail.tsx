@@ -2,6 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronRight, Home } from "lucide-react";
 import { projects } from "@/data/projects";
+import { getProjectGallery } from "@/data/projectGalleries";
+import ImageGallery from "./ImageGallery";
 import NotFound from "@/pages/NotFound";
 
 const ProjectDetail = () => {
@@ -102,6 +104,12 @@ const ProjectDetail = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Gallery Section */}
+      {(() => {
+        const gallery = getProjectGallery(slug!);
+        return gallery ? <ImageGallery images={gallery.images} title="Galería del Proyecto" /> : null;
+      })()}
 
       {/* Description Section */}
       <section className="section-padding">
