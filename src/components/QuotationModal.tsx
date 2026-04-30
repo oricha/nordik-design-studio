@@ -37,6 +37,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     budget: "" as BudgetRange | "",
     location: "",
     financing: "" as "yes" | "no" | "",
+    termsAccepted: false,
     message: "",
   });
 
@@ -52,6 +53,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     if (!formData.phone.trim()) newErrors.phone = "El teléfono es requerido";
     if (formData.projectTypes.length === 0) newErrors.projectTypes = "Selecciona al menos un tipo de proyecto";
     if (!formData.budget) newErrors.budget = "Selecciona un rango de presupuesto";
+    if (!formData.termsAccepted) newErrors.termsAccepted = "Debes aceptar los términos y privacidad para continuar";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -71,6 +73,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
         budget: "",
         location: "",
         financing: "",
+        termsAccepted: false,
         message: "",
       });
       setErrors({});
@@ -96,6 +99,13 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     }));
     if (errors.projectTypes) {
       setErrors((prev) => ({ ...prev, projectTypes: "" }));
+    }
+  };
+
+  const handleTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, termsAccepted: e.target.checked }));
+    if (errors.termsAccepted) {
+      setErrors((prev) => ({ ...prev, termsAccepted: "" }));
     }
   };
 
@@ -327,6 +337,30 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                   className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent resize-none"
                   placeholder="Cuéntanos más sobre tu proyecto..."
                 />
+              </div>
+
+              {/* Terms and Privacy */}
+              <div>
+                <label className="flex items-start gap-3 p-3 rounded-lg border border-border hover:bg-accent/5 cursor-pointer transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={formData.termsAccepted}
+                    onChange={handleTermsChange}
+                    className="w-4 h-4 mt-1 rounded accent-primary cursor-pointer flex-shrink-0"
+                  />
+                  <span className="text-sm text-foreground">
+                    Acepto los{" "}
+                    <a href="#" className="text-accent hover:underline font-medium">
+                      términos y condiciones
+                    </a>
+                    {" "}y la{" "}
+                    <a href="#" className="text-accent hover:underline font-medium">
+                      política de privacidad
+                    </a>
+                    {" "}*
+                  </span>
+                </label>
+                {errors.termsAccepted && <p className="text-sm text-red-500 mt-2">{errors.termsAccepted}</p>}
               </div>
 
               {/* Submit Button */}
