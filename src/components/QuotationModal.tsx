@@ -36,6 +36,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
     service: serviceOption,
     budget: "" as BudgetRange | "",
     location: "",
+    financing: "" as "yes" | "no" | "",
     message: "",
   });
 
@@ -69,6 +70,7 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
         service: serviceOption,
         budget: "",
         location: "",
+        financing: "",
         message: "",
       });
       setErrors({});
@@ -246,6 +248,37 @@ const QuotationModal = ({ isOpen, onClose, projectName = "", serviceOption = "" 
                   className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent"
                   placeholder="Ej: Madrid, Barcelona, región..."
                 />
+              </div>
+
+              {/* Financing */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-3">
+                  ¿Busca Financiamiento?
+                </label>
+                <div className="space-y-2">
+                  <label className="flex items-center p-3 rounded-lg border border-border hover:bg-accent/5 cursor-pointer transition-colors">
+                    <input
+                      type="radio"
+                      name="financing"
+                      value="yes"
+                      checked={formData.financing === "yes"}
+                      onChange={handleChange}
+                      className="w-4 h-4 cursor-pointer accent-primary"
+                    />
+                    <span className="ml-3 text-sm font-medium text-foreground">Sí, estoy interesado en opciones de financiamiento</span>
+                  </label>
+                  <label className="flex items-center p-3 rounded-lg border border-border hover:bg-accent/5 cursor-pointer transition-colors">
+                    <input
+                      type="radio"
+                      name="financing"
+                      value="no"
+                      checked={formData.financing === "no"}
+                      onChange={handleChange}
+                      className="w-4 h-4 cursor-pointer accent-primary"
+                    />
+                    <span className="ml-3 text-sm font-medium text-foreground">No, no necesito financiamiento</span>
+                  </label>
+                </div>
               </div>
 
               {/* Specific Project (Optional) */}
