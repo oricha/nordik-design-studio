@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Testimonials from "./pages/Testimonials";
+import CaseStudies from "./pages/CaseStudies";
 import ProjectTorku from "./pages/ProjectTorku";
 import ProjectTampere from "./pages/ProjectTampere";
 import ProjectKuusamo from "./pages/ProjectKuusamo";
@@ -17,6 +19,12 @@ import ProjectDetail from "./components/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LiveChatAssist from "@/components/LiveChatAssist";
+import GlobalScrollCta from "@/components/GlobalScrollCta";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import FaqPage from "@/pages/FaqPage";
+import ContactPage from "@/pages/ContactPage";
+import ServicesPage from "@/pages/ServicesPage";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +38,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/testimonios" element={<Testimonials />} />
+          <Route path="/casos" element={<CaseStudies />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/contactos" element={<ContactPage />} />
+          <Route path="/servicios" element={<ServicesPage />} />
           {/* Legacy routes - kept for backward compatibility */}
           <Route path="/project/torku" element={<ProjectTorku />} />
           <Route path="/project/tampere" element={<ProjectTampere />} />
@@ -47,6 +60,9 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <GlobalScrollCta />
+        <FloatingWhatsApp />
+        <LiveChatAssist />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

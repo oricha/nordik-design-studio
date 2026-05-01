@@ -3,7 +3,7 @@ export type ProjectGallery = {
   images: Array<{
     url: string;
     title: string;
-    category: "exterior" | "interior" | "detalles";
+    category: "exterior" | "interior" | "detalles" | "acabados";
   }>;
 };
 
@@ -444,61 +444,6 @@ export const projectGalleries: ProjectGallery[] = [
       {
         url: "https://images.unsplash.com/photo-1600566753376-12c8ab7d8a28?w=1200&h=800&fit=crop",
         title: "Puerta entrada",
-        category: "exterior",
-      },
-    ],
-  },
-  {
-    slug: "kuusamo",
-    images: [
-      {
-        url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
-        title: "Casa Kuusamo",
-        category: "exterior",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1200&h=800&fit=crop",
-        title: "Detalles arquitectónicos",
-        category: "detalles",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=800&fit=crop",
-        title: "Sala estar",
-        category: "interior",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
-        title: "Comedor integrado",
-        category: "interior",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=1200&h=800&fit=crop",
-        title: "Recámara principal",
-        category: "interior",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&h=800&fit=crop",
-        title: "Acristalamiento",
-        category: "detalles",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1575460711063-f32bee8e6f06?w=1200&h=800&fit=crop",
-        title: "Escaleras diseño",
-        category: "detalles",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1552948110-fac1076e7b04?w=1200&h=800&fit=crop",
-        title: "Suite baño",
-        category: "interior",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1576305325570-4e7b2d8b8c84?w=1200&h=800&fit=crop",
-        title: "Patio Kuusamo",
-        category: "exterior",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1600566753376-12c8ab7d8a28?w=1200&h=800&fit=crop",
-        title: "Entrada casa",
         category: "exterior",
       },
     ],

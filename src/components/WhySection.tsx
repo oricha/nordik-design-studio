@@ -1,67 +1,91 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { TreePine, Coins, Zap, Clock, Award, Shield, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import videoThumb from "@/assets/video-thumbnail.jpg";
+import { whyValuesWithProof } from "@/data/whyWithTestimonials";
 
-const values = [
-  { icon: TreePine, title: "Madera Natural", desc: "Madera escandinava de origen sostenible" },
-  { icon: Coins, title: "Precio Asequible", desc: "Precios competitivos sin compromisos" },
-  { icon: Zap, title: "Eficiencia Energética", desc: "Rendimiento térmico con calificación A" },
-  { icon: Clock, title: "Construcción Rápida", desc: "Ensamblado en semanas, no en meses" },
-  { icon: Award, title: "Experiencia Profesional", desc: "Artesanía experta garantizada" },
-  { icon: Shield, title: "Garantía", desc: "10 años de garantía estructural" },
-];
-
+/** F2.2.6: seis valores con micro-testimonio y mini avatar */
 const WhySection = () => {
   return (
     <section id="why" className="section-padding bg-background">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-foreground mb-12 max-w-lg"
+          className="mb-12 max-w-xl text-3xl font-semibold tracking-tight text-foreground md:max-w-2xl md:text-[2.25rem] md:leading-[1.22] lg:text-4xl"
         >
-          ¿Por qué los países escandinavos están cambiando a este formato de vivienda?
+          ¿Por qué los mercados nórdicos apuestan por vivienda SIP?
         </motion.h2>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid items-start gap-12 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-2xl overflow-hidden aspect-video group cursor-pointer"
+            className="relative aspect-video cursor-pointer overflow-hidden rounded-2xl group"
           >
-            <img
-              src={videoThumb}
-              alt="Scandinavian house construction"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-charcoal/30 flex items-center justify-center group-hover:bg-charcoal/40 transition-colors">
-              <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center">
-                <Play className="w-6 h-6 text-accent-foreground ml-1" />
+            <img src={videoThumb} alt="Construcción casa escandinava" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 flex items-center justify-center bg-charcoal/30 transition-colors group-hover:bg-charcoal/40">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-accent">
+                <Play className="ml-1 h-6 w-6 text-accent-foreground" />
               </div>
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-6">
-            {values.map((item, i) => (
-              <motion.div
+          <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {whyValuesWithProof.map((item, i) => (
+              <motion.li
                 key={item.title}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex flex-col gap-3"
+                transition={{ delay: i * 0.05 }}
+                className="flex flex-col rounded-xl border border-border bg-card p-6 shadow-sm"
               >
-                <div className="w-10 h-10 rounded-lg bg-wood-light flex items-center justify-center">
-                  <item.icon className="w-5 h-5 text-wood-dark" />
+                <div className="flex items-start gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-wood-light">
+                    <item.icon className="h-5 w-5 text-wood-dark" strokeWidth={2} aria-hidden />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-foreground">{item.title}</h3>
+                    <p className="mt-1 text-base leading-relaxed text-muted-foreground">{item.desc}</p>
+                  </div>
                 </div>
-                <h3 className="font-semibold text-foreground">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </motion.div>
+                <blockquote className="mt-4 border-l-2 border-accent pl-3 text-base italic leading-relaxed text-muted-foreground">
+                  {item.quote}
+                </blockquote>
+                <div className="mt-3 flex items-center gap-2">
+                  <img
+                    src={item.avatar}
+                    alt=""
+                    role="presentation"
+                    className="h-9 w-9 rounded-full object-cover"
+                  />
+                  <span className="text-xs text-muted-foreground">{item.cite}</span>
+                </div>
+              </motion.li>
             ))}
-          </div>
+          </ul>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-14 flex flex-col items-center rounded-2xl border border-border bg-card px-8 py-10 text-center shadow-sm"
+        >
+          <p className="text-lg font-semibold text-foreground">La confianza viene de transparencia BIM y plazos escritos</p>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Equipo finlandés–español, sede dual y documentación lista para banca y permisos donde aplique.
+          </p>
+          <Link
+            to="/about"
+            className="mt-8 inline-flex rounded-xl bg-accent px-8 py-3.5 text-base font-bold text-accent-foreground transition-opacity hover:opacity-95"
+          >
+            Conoce más sobre NordiK
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

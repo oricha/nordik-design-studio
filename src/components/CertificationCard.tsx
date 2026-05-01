@@ -12,7 +12,7 @@ export function CertificationCard({ certification }: CertificationCardProps) {
       href={certification.certificateUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col items-center p-6 border border-gray-200 rounded-lg hover:border-accent hover:shadow-lg transition-all duration-300 cursor-pointer"
+      className="group flex cursor-pointer flex-col items-center rounded-lg border border-border p-6 transition-all duration-300 hover:border-accent hover:shadow-lg"
     >
       <div className="p-4 rounded-full bg-accent/10 group-hover:bg-accent/20 transition-colors duration-300 mb-3">
         <IconComponent className="w-8 h-8 text-accent" />

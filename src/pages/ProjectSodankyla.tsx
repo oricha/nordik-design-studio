@@ -81,7 +81,7 @@ const ProjectSodankyla = () => {
             <p className="text-background/70 text-sm">
               Tiempo de construcción: <strong className="text-background">6 months</strong>
             </p>
-            <a href="#contact" className="mt-6 inline-block bg-accent text-accent-foreground px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+            <a href="/contactos" className="mt-6 inline-block bg-accent text-accent-foreground px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
               Solicitar presupuesto
             </a>
           </div>
@@ -119,7 +119,7 @@ const ProjectSodankyla = () => {
                   ))}
                 </ul>
               </div>
-              <a href="#contact" className="mt-8 inline-block bg-foreground text-background px-10 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+              <a href="/contactos" className="mt-8 inline-block bg-foreground text-background px-10 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-opacity">
                 Solicitar presupuesto
               </a>
             </div>
@@ -164,7 +164,7 @@ const ProjectSodankyla = () => {
               <div className="text-lg font-semibold text-foreground mb-4">{basePrice.toLocaleString()} € + VAT</div>
               <div className="text-sm text-muted-foreground mb-1">PRECIO TOTAL</div>
               <div className="text-3xl font-bold text-foreground mb-6">{totalPrice.toLocaleString()} € + VAT</div>
-              <a href="#contact" className="block text-center bg-foreground text-background px-10 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+              <a href="/contactos" className="block text-center bg-foreground text-background px-10 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-opacity">
                 Solicitar presupuesto
               </a>
             </div>

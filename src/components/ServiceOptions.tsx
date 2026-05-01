@@ -5,9 +5,10 @@ import { ServiceOptions, calculateServicePrice } from "@/data/projectServiceOpti
 
 interface ServiceOptionsProps {
   serviceOptions: ServiceOptions;
+  onRequestQuote?: (optionName: string) => void;
 }
 
-const ServiceOptionsComponent = ({ serviceOptions }: ServiceOptionsProps) => {
+const ServiceOptionsComponent = ({ serviceOptions, onRequestQuote }: ServiceOptionsProps) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
 
   return (
@@ -73,11 +74,17 @@ const ServiceOptionsComponent = ({ serviceOptions }: ServiceOptionsProps) => {
 
                     {/* CTA Button */}
                     <button
+                      type="button"
                       className={`w-full py-3 rounded-lg font-semibold transition-colors mb-6 ${
                         selectedIndex === idx
                           ? "bg-primary text-primary-foreground hover:bg-primary/90"
                           : "bg-border text-foreground hover:bg-border/80"
                       }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedIndex(idx);
+                        onRequestQuote?.(option.name);
+                      }}
                     >
                       Solicitar Cotización
                     </button>
@@ -149,10 +156,19 @@ const ServiceOptionsComponent = ({ serviceOptions }: ServiceOptionsProps) => {
 
             {/* CTA */}
             <div className="mt-8 flex gap-4">
-              <button className="flex-1 bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+              <button
+                type="button"
+                onClick={() =>
+                  onRequestQuote?.(serviceOptions.options[selectedIndex].name)
+                }
+                className="flex-1 bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+              >
                 Solicitar Cotización para {serviceOptions.options[selectedIndex].name}
               </button>
-              <button className="flex-1 bg-border text-foreground px-8 py-3 rounded-lg font-semibold hover:bg-border/80 transition-colors">
+              <button
+                type="button"
+                className="flex-1 bg-border text-foreground px-8 py-3 rounded-lg font-semibold hover:bg-border/80 transition-colors"
+              >
                 Comparar Todas las Opciones
               </button>
             </div>

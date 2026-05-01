@@ -92,7 +92,7 @@ const ProjectTampere = () => {
               Tiempo de construcción: <strong className="text-background">3–4 months</strong>
             </p>
             <a
-              href="#contact"
+              href="/contactos"
               className="mt-6 inline-block bg-accent text-accent-foreground px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
             >
               Solicitar presupuesto
@@ -149,7 +149,7 @@ const ProjectTampere = () => {
                 </ul>
               </div>
               <a
-                href="#contact"
+                href="/contactos"
                 className="mt-8 inline-block bg-foreground text-background px-10 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-opacity"
               >
                 Solicitar presupuesto
@@ -241,7 +241,7 @@ const ProjectTampere = () => {
                 {totalPrice.toLocaleString()} € + VAT
               </div>
               <a
-                href="#contact"
+                href="/contactos"
                 className="block text-center bg-foreground text-background px-10 py-3.5 rounded-lg font-semibold hover:opacity-90 transition-opacity"
               >
                 Solicitar presupuesto
