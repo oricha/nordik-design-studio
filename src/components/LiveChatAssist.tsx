@@ -8,7 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { siteContact } from "@/data/siteContact";
+import { siteContact, whatsappConversationHref } from "@/data/siteContact";
 
 /** Asistente ligero hasta integrar widget/LLM (F1.5.4). */
 const LiveChatAssist = () => {
@@ -16,7 +16,7 @@ const LiveChatAssist = () => {
 
   return (
     <>
-      <div className="fixed bottom-5 right-5 z-[45] md:bottom-8 md:right-8">
+      <div className="fixed bottom-28 right-6 z-[45] md:bottom-36 md:right-8">
         <button
           type="button"
           onClick={() => setOpen(true)}
@@ -43,15 +43,15 @@ const LiveChatAssist = () => {
                 <li>
                   ·{" "}
                   <Link
-                    to={siteContact.resources.faqHref}
+                    to="/faq"
                     className="font-medium text-accent underline-offset-4 hover:underline"
                   >
-                    Dudas sobre paneles SIP y cerramiento
+                    Preguntas frecuentes (FAQ NordiK)
                   </Link>
                 </li>
                 <li>
                   ·{" "}
-                  <Link to="/#contact" className="font-medium text-accent underline-offset-4 hover:underline">
+                  <Link to="/contactos" className="font-medium text-accent underline-offset-4 hover:underline">
                     Cotización por zona / envíos
                   </Link>
                 </li>
@@ -73,7 +73,7 @@ const LiveChatAssist = () => {
                   Escribir a {siteContact.emailDisplay}
                 </a>
                 <a
-                  href={siteContact.whatsapp.href}
+                  href={whatsappConversationHref()}
                   className="rounded-lg bg-emerald-500/15 py-2 text-center font-semibold text-emerald-800 hover:bg-emerald-500/20"
                 >
                   {siteContact.whatsapp.label}

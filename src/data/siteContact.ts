@@ -71,16 +71,28 @@ export const siteContact = {
   offices: [helsinkiOffice, madridOffice] as const,
   regionalDialIn: regionalDialInLines,
 
+  /** Recursos tras envío de formulario / chat (F1.4.8, F3.3.x) */
+  resources: {
+    faqHref: "/faq",
+    faqLabel: "Ver preguntas frecuentes (FAQ)",
+  } as const,
+
   whatsapp: {
     href: "https://wa.me/358401234567",
     label: "WhatsApp",
-  } as const,
-
-  /** Recursos tras envío de formulario (F1.4.8) */
-  resources: {
-    faqHref: "/#why",
-    faqLabel: "Preguntas frecuentes (Por qué NordiK)",
+    /** Mensaje inicial sugerido (F3.4.6) — se codifica en URL al abrir. */
+    defaultMessage:
+      "Hola, quiero información sobre casas y cabañas NordiK con paneles SIP.",
   } as const,
 } as const;
 
 export type SiteContact = typeof siteContact;
+
+/** wa.me/{digits}?text=… para mensaje pre-relleno (F3.4.6). */
+export function whatsappConversationHref(c: SiteContact["whatsapp"] = siteContact.whatsapp): string {
+  const match =
+    /^https?:\/\/wa\.me\/(\d+)/i.exec(c.href) ??
+    /^https?:\/\/api\.whatsapp\.com\/send\?phone=(\d+)/i.exec(c.href);
+  const digits = match?.[1] ?? "358401234567";
+  return `https://wa.me/${digits}?text=${encodeURIComponent(c.defaultMessage)}`;
+}

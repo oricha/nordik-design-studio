@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import videoThumb from "@/assets/video-thumbnail.jpg";
 import { whyValuesWithProof } from "@/data/whyWithTestimonials";
@@ -13,7 +13,7 @@ const WhySection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 max-w-xl text-3xl font-bold tracking-tight text-foreground md:text-4xl md:max-w-2xl"
+          className="mb-12 max-w-xl text-3xl font-semibold tracking-tight text-foreground md:max-w-2xl md:text-[2.25rem] md:leading-[1.22] lg:text-4xl"
         >
           ¿Por qué los mercados nórdicos apuestan por vivienda SIP?
         </motion.h2>
@@ -41,18 +41,18 @@ const WhySection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="flex flex-col rounded-xl border border-border bg-card p-4 shadow-sm"
+                className="flex flex-col rounded-xl border border-border bg-card p-6 shadow-sm"
               >
                 <div className="flex items-start gap-3">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-wood-light">
-                    <item.icon className="h-5 w-5 text-wood-dark" />
+                    <item.icon className="h-5 w-5 text-wood-dark" strokeWidth={2} aria-hidden />
                   </div>
                   <div className="min-w-0">
                     <h3 className="font-semibold text-foreground">{item.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{item.desc}</p>
+                    <p className="mt-1 text-base leading-relaxed text-muted-foreground">{item.desc}</p>
                   </div>
                 </div>
-                <blockquote className="mt-4 border-l-2 border-accent pl-3 text-sm italic leading-relaxed text-muted-foreground">
+                <blockquote className="mt-4 border-l-2 border-accent pl-3 text-base italic leading-relaxed text-muted-foreground">
                   {item.quote}
                 </blockquote>
                 <div className="mt-3 flex items-center gap-2">
@@ -68,6 +68,24 @@ const WhySection = () => {
             ))}
           </ul>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-14 flex flex-col items-center rounded-2xl border border-border bg-card px-8 py-10 text-center shadow-sm"
+        >
+          <p className="text-lg font-semibold text-foreground">La confianza viene de transparencia BIM y plazos escritos</p>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Equipo finlandés–español, sede dual y documentación lista para banca y permisos donde aplique.
+          </p>
+          <Link
+            to="/about"
+            className="mt-8 inline-flex rounded-xl bg-accent px-8 py-3.5 text-base font-bold text-accent-foreground transition-opacity hover:opacity-95"
+          >
+            Conoce más sobre NordiK
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

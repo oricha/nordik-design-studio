@@ -6,13 +6,13 @@ import { PROJECT_CATALOG_QUERY_KEY } from "@/constants/projectCatalog";
 import { siteContact } from "@/data/siteContact";
 
 const navLinks = [
-  { label: "Nuestros Proyectos", href: "/#projects" },
-  { label: "Sobre Nosotros", href: "/about" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
   { label: "Testimonios", href: "/testimonios" },
   { label: "Opciones de Construcción", href: "/#services" },
-  { label: "Servicios", href: "/#why" },
+  { label: "Servicios", href: "/servicios" },
   { label: "Galería", href: "/#gallery" },
-  { label: "Contactos", href: "/#contact" },
+  { label: "Contactos", href: "/contactos" },
 ];
 
 const Header = () => {
@@ -70,7 +70,7 @@ const Header = () => {
         >
           WhatsApp
         </a>
-        <a href="/#regional-contact" className="inline-flex font-medium text-foreground hover:text-accent">
+        <a href="/contactos#regional-contact" className="inline-flex font-medium text-foreground hover:text-accent">
           Más teléfonos por país
         </a>
       </div>
@@ -102,7 +102,7 @@ const Header = () => {
   );
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-300 bg-[#f7f7fb]/95 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-300/90 bg-[#f7f7fb]/95 shadow-[0_8px_32px_-28px_rgb(15_23_42/0.35)] backdrop-blur-md">
       <div className="mx-auto flex min-h-[58px] items-center px-6 lg:hidden">
         <Link to="/" className="shrink-0 text-[1.95rem] font-bold tracking-[-0.045em] text-foreground">
           Nordi<span className="text-accent">K</span>
@@ -119,17 +119,17 @@ const Header = () => {
         </button>
       </div>
 
-      <div className="mx-auto hidden min-h-[58px] max-w-[1320px] grid-cols-[auto_1fr_auto] items-center gap-10 px-10 lg:grid">
-        <Link to="/" className="shrink-0 text-[1.75rem] font-bold tracking-[-0.05em] leading-none text-foreground">
+      <div className="mx-auto hidden min-h-[62px] max-w-[1320px] grid-cols-[auto_1fr_auto] items-center gap-10 px-10 lg:grid">
+        <Link to="/" className="shrink-0 text-[1.8125rem] font-bold tracking-[-0.05em] leading-none text-foreground">
           Nordi<span className="text-accent">K</span>
         </Link>
 
-        <nav className="flex min-w-0 items-center justify-center gap-8 xl:gap-11">
+        <nav className="flex min-w-0 items-center justify-center gap-7 xl:gap-10" aria-label="Principal">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="whitespace-nowrap text-[0.96rem] font-medium text-[#6f7280] transition-colors hover:text-foreground"
+              className="whitespace-nowrap text-[15px] font-semibold tracking-tight text-foreground/60 underline-offset-8 transition-colors hover:text-foreground hover:underline decoration-foreground/25"
             >
               {link.label}
             </a>
@@ -139,16 +139,17 @@ const Header = () => {
         <div className="ml-auto flex shrink-0 items-center gap-6">
           <button
             type="button"
-            className="flex items-center gap-1.5 text-[0.96rem] font-medium text-[#6f7280] transition-colors hover:text-foreground"
+            className="flex items-center gap-1.5 text-[15px] font-semibold tracking-tight text-foreground/60 transition-colors hover:text-foreground"
           >
             <Globe className="h-[15px] w-[15px]" />
             ES / €
           </button>
           <a
-            href="/#contact"
-            className="whitespace-nowrap rounded-[10px] bg-accent px-7 py-[0.9rem] text-[0.95rem] font-semibold uppercase tracking-[0.01em] text-white transition-opacity hover:opacity-90"
+            href="/contactos"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-[10px] bg-accent px-4 py-[0.72rem] text-[0.84rem] font-semibold uppercase tracking-[0.01em] text-white transition-opacity hover:opacity-90"
           >
-            OBTENER PRESUPUESTO
+            <Phone className="h-4 w-4 shrink-0" />
+            Presupuesto gratis
           </a>
         </div>
       </div>
@@ -183,11 +184,12 @@ const Header = () => {
                   </a>
                 ))}
                 <a
-                  href="/#contact"
+                  href="/contactos"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-2 rounded-lg bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-foreground"
+                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-foreground"
                 >
-                  OBTENER PRESUPUESTO
+                  <Phone className="h-4 w-4 shrink-0" />
+                  Presupuesto gratis
                 </a>
               </nav>
             </div>

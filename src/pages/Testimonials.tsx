@@ -117,6 +117,34 @@ const Testimonials = () => {
             </motion.li>
           ))}
         </ul>
+
+        <motion.section
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 rounded-2xl border border-accent/40 bg-accent/10 px-8 py-12 text-center md:px-14"
+          aria-labelledby="cta-testimonios-section"
+        >
+          <h2 id="cta-testimonios-section" className="sr-only">
+            Siguiente paso — presupuesto
+          </h2>
+          <p className="text-xl font-semibold text-foreground md:text-2xl">¿Te encaja el ritmo SIP que describen?</p>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Agenda una consulta comercial: responderemos con referencia de ticket y guía FAQ.
+          </p>
+          <Link
+            to="/contactos"
+            className="mt-8 inline-flex rounded-xl bg-accent px-8 py-4 text-base font-bold text-accent-foreground shadow-[0_12px_40px_-12px_rgb(89_73_61/0.45)] hover:opacity-95"
+          >
+            Solicitar presupuesto gratis
+          </Link>
+          <Link
+            to="/faq"
+            className="mt-5 block text-sm font-semibold text-accent underline-offset-4 hover:underline"
+          >
+            Resolver dudas en el centro FAQ antes de llamar →
+          </Link>
+        </motion.section>
       </div>
     </div>
   );

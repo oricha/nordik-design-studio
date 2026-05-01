@@ -1,10 +1,20 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Clock, FileText, Mail, MessageCircle, Phone, Send, Trash2 } from "lucide-react";
 import contactImage from "@/assets/contact-house.jpg";
-import { siteContact } from "@/data/siteContact";
+import { siteContact, whatsappConversationHref } from "@/data/siteContact";
+import { projects } from "@/data/projects";
+import { CONTACT_PROJECT_PREFILL_QUERY } from "@/constants/contactForm";
 import SupportPresencePanel from "@/components/SupportPresencePanel";
+import { FaqBrowse } from "@/components/FaqBrowse";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   ATTACH_ACCEPT,
   ATTACH_MAX_FILES,
@@ -17,6 +27,8 @@ import { generateQuotationTicketId } from "@/utils/quotationTicket";
 const projectTypes = ["Casa Llave en Mano", "Cabaña", "Paneles SIP", "Renovación", "Otro"];
 
 const ContactSection = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [faqOpen, setFaqOpen] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -28,6 +40,29 @@ const ContactSection = () => {
   const [attachErr, setAttachErr] = useState("");
   const [thanksTicket, setThanksTicket] = useState<string | null>(null);
   const [thanksEmail, setThanksEmail] = useState<string>("");
+
+  const prefillSlug = searchParams.get(CONTACT_PROJECT_PREFILL_QUERY);
+
+  useEffect(() => {
+    if (!prefillSlug) return;
+    const proj = projects.find((p) => p.slug === prefillSlug);
+    const label = proj?.name ?? prefillSlug;
+    setForm((prev) => ({
+      ...prev,
+      message:
+        prev.message.trim().length > 0
+          ? prev.message
+          : `Hola, solicito información y presupuesto orientativo sobre el proyecto «${label}».\n\n`,
+    }));
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.delete(CONTACT_PROJECT_PREFILL_QUERY);
+        return next;
+      },
+      { replace: true },
+    );
+  }, [prefillSlug, setSearchParams]);
 
   const toggleType = (type: string) => {
     setForm((prev) => ({
@@ -91,13 +126,13 @@ const ContactSection = () => {
               <Mail className="h-4 w-4 text-muted-foreground" aria-hidden />
               {siteContact.emailDisplay}
             </a>
-            <a href={siteContact.whatsapp.href} className="inline-flex items-center gap-2 hover:text-accent">
+            <a href={whatsappConversationHref()} className="inline-flex items-center gap-2 hover:text-accent">
               <MessageCircle className="h-4 w-4 text-muted-foreground" aria-hidden />
               {siteContact.whatsapp.label}
             </a>
-            <Link to="/#regional-contact" className="inline-flex items-center gap-2 hover:text-accent">
+            <a href="#regional-contact" className="inline-flex items-center gap-2 hover:text-accent">
               Otros teléfonos
-            </Link>
+            </a>
             <span className="inline-flex items-center gap-2 text-muted-foreground">
               <Clock className="h-4 w-4" aria-hidden />
               {siteContact.hoursLong}
@@ -148,6 +183,18 @@ const ContactSection = () => {
                 </button>
               </div>
             ) : null}
+
+            <Dialog open={faqOpen} onOpenChange={setFaqOpen}>
+              <DialogContent className="max-h-[calc(100dvh-2rem)] gap-6 overflow-y-auto sm:max-w-2xl">
+                <DialogHeader>
+                  <DialogTitle>Preguntas frecuentes</DialogTitle>
+                  <DialogDescription>
+                    Puedes seguir cumplimentando el formulario después de revisar estas respuestas.
+                  </DialogDescription>
+                </DialogHeader>
+                <FaqBrowse intro="Selecciona categoría o busca palabras clave (planes, garantía SIP, zonas UE…)." />
+              </DialogContent>
+            </Dialog>
 
             <motion.form onSubmit={handleSubmit} className="bg-background rounded-2xl p-8 flex flex-col gap-5 shadow-sm">
               <div>
@@ -268,12 +315,32 @@ const ContactSection = () => {
                 ) : null}
               </div>
 
+              <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm leading-relaxed text-muted-foreground">
+                <span>¿Plazos SIP, garantía o coberturas antes de llamarnos?</span>
+                <button
+                  type="button"
+                  onClick={() => setFaqOpen(true)}
+                  className="font-semibold text-accent underline underline-offset-2 hover:opacity-90"
+                >
+                  Ver FAQ primero (modal)
+                </button>
+                <span aria-hidden>/</span>
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  to="/faq"
+                  className="font-semibold text-accent underline underline-offset-2 hover:opacity-90"
+                >
+                  FAQ en nueva pestaña
+                </Link>
+              </p>
+
               <button
                 type="submit"
-                className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2 mt-auto"
+                className="mt-auto flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground transition-opacity hover:opacity-90"
               >
-                <Send className="w-4 h-4" />
-                Enviar solicitud
+                <Send className="h-4 w-4" />
+                Solicitar presupuesto gratis
               </button>
             </motion.form>
           </motion.div>

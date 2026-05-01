@@ -43,28 +43,28 @@ const Hero = () => {
           <p className="mb-4 inline-flex rounded-full bg-primary-foreground/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground backdrop-blur-sm">
             Paneles SIP · Casas prefabricadas · Reformas escandinavas
           </p>
-          <h1 className="mb-5 text-balance text-4xl font-bold leading-tight text-primary-foreground md:text-5xl lg:text-[3.35rem]">
+          <h1 className="mb-5 text-balance text-[clamp(2.375rem,4.5vw,3.5rem)] font-semibold leading-[1.18] tracking-tight text-primary-foreground md:text-[clamp(3rem,3.6vw,3.55rem)]">
             Casas nórdicas SIP con montaje rápido, eficiencia energética y marco técnico europeo
           </h1>
           <p className="mb-3 max-w-2xl text-pretty text-lg text-primary-foreground/90 md:text-xl">
             Presupuesto claro desde el briefing: cerramos proyectos modelo en plazos muy inferiores
             a la obra húmeda tradicional (~60 días objetivo para diseños SIP estándar).
           </p>
-          <p className="mb-8 max-w-xl text-primary-foreground/75">
+          <p className="mb-8 max-w-xl text-base leading-relaxed text-primary-foreground/80 md:text-[1.05rem]">
             Aislamiento certificado SIP, menor consumo térmico y documentación lista para obra en toda la Unión Europea.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
-              href="#contact"
-              className="inline-flex justify-center rounded-lg bg-accent px-7 py-3.5 text-center text-base font-semibold text-accent-foreground shadow-[0_8px_40px_rgba(0,0,0,.2)] hover:opacity-[0.93] hover:brightness-105 transition-all"
-            >
-              Solicitar presupuesto
-            </a>
-            <a
               href="#projects"
-              className="inline-flex justify-center rounded-lg border-2 border-primary-foreground/40 bg-primary-foreground/5 px-7 py-3.5 text-center text-base font-semibold text-primary-foreground backdrop-blur-sm hover:bg-primary-foreground/12 transition-colors"
+              className="inline-flex justify-center rounded-lg bg-accent px-8 py-3.5 text-center text-base font-bold text-accent-foreground shadow-[0_8px_40px_rgba(0,0,0,.2)] transition-[opacity,filter] hover:brightness-105 hover:opacity-[0.97]"
             >
               Explorar proyectos
+            </a>
+            <a
+              href="/contactos"
+              className="inline-flex justify-center rounded-lg border-2 border-primary-foreground/55 bg-primary-foreground/12 px-8 py-3.5 text-center text-base font-bold text-primary-foreground backdrop-blur-sm transition-colors hover:bg-primary-foreground/20"
+            >
+              Solicitar presupuesto gratis
             </a>
           </div>
         </motion.div>
@@ -76,15 +76,15 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 + i * 0.12 }}
-              className="glass-card flex gap-4 rounded-xl p-5 md:flex-col md:items-start"
+              className="glass-card flex gap-4 rounded-xl p-6 md:flex-col md:items-start"
             >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-accent/20">
-                <item.icon className="h-6 w-6 text-accent" aria-hidden />
+                <item.icon className="h-6 w-6 text-accent" strokeWidth={2} aria-hidden />
               </div>
               <div className="min-w-0">
                 <div className="text-sm font-semibold uppercase tracking-wide text-accent">{item.value}</div>
                 <div className="mt-1 text-lg font-bold text-foreground">{item.label}</div>
-                <p className="mt-2 text-xs leading-snug text-muted-foreground">{item.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
               </div>
             </motion.div>
           ))}

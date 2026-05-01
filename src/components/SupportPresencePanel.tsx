@@ -1,5 +1,5 @@
 import { Building2, MessageCircle, Phone } from "lucide-react";
-import { siteContact, type OfficeLocation } from "@/data/siteContact";
+import { siteContact, type OfficeLocation, whatsappConversationHref } from "@/data/siteContact";
 import { isWeekdayBusinessOpen } from "@/utils/businessHours";
 import OfficeEmbedMap from "@/components/OfficeEmbedMap";
 
@@ -57,7 +57,7 @@ const SupportPresencePanel = () => (
         ))}
       </ul>
       <a
-        href={siteContact.whatsapp.href}
+        href={whatsappConversationHref()}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-800 hover:bg-emerald-500/15"

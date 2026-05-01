@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
-import { siteContact } from "@/data/siteContact";
+import { siteContact, whatsappConversationHref } from "@/data/siteContact";
 
 const Footer = () => {
   return (
@@ -19,14 +19,15 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
             <nav className="flex flex-col gap-2 text-sm text-primary-foreground/70">
               <a href="/#projects" className="hover:text-primary-foreground transition-colors">Proyectos</a>
-              <a href="/#services" className="hover:text-primary-foreground transition-colors">Opciones de Construcción</a>
-              <a href="/#services-b2c" className="hover:text-primary-foreground transition-colors">Particulares</a>
-              <a href="/#services-b2b" className="hover:text-primary-foreground transition-colors">Empresas y SIP</a>
+              <a href="/servicios" className="hover:text-primary-foreground transition-colors">Opciones de Construcción</a>
+              <a href="/servicios#services-b2c" className="hover:text-primary-foreground transition-colors">Particulares</a>
+              <a href="/servicios#services-b2b" className="hover:text-primary-foreground transition-colors">Empresas y SIP</a>
               <a href="/testimonios" className="hover:text-primary-foreground transition-colors">Testimonios</a>
               <a href="/casos" className="hover:text-primary-foreground transition-colors">Casos de estudio</a>
               <a href="/#why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
               <a href="/#gallery" className="hover:text-primary-foreground transition-colors">Galería</a>
-              <a href="/#contact" className="hover:text-primary-foreground transition-colors">Contacto</a>
+              <a href="/faq" className="hover:text-primary-foreground transition-colors">FAQ NordiK</a>
+              <a href="/contactos" className="hover:text-primary-foreground transition-colors">Agendar consulta</a>
             </nav>
           </div>
 
@@ -58,7 +59,7 @@ const Footer = () => {
                 ))}
               </div>
               <a
-                href={siteContact.whatsapp.href}
+                href={whatsappConversationHref()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex w-fit items-center gap-2 text-xs font-medium hover:text-primary-foreground"

@@ -20,6 +20,11 @@ import NotFound from "./pages/NotFound";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LiveChatAssist from "@/components/LiveChatAssist";
+import GlobalScrollCta from "@/components/GlobalScrollCta";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import FaqPage from "@/pages/FaqPage";
+import ContactPage from "@/pages/ContactPage";
+import ServicesPage from "@/pages/ServicesPage";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +40,9 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/testimonios" element={<Testimonials />} />
           <Route path="/casos" element={<CaseStudies />} />
+          <Route path="/faq" element={<FaqPage />} />
+          <Route path="/contactos" element={<ContactPage />} />
+          <Route path="/servicios" element={<ServicesPage />} />
           {/* Legacy routes - kept for backward compatibility */}
           <Route path="/project/torku" element={<ProjectTorku />} />
           <Route path="/project/tampere" element={<ProjectTampere />} />
@@ -52,6 +60,8 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <GlobalScrollCta />
+        <FloatingWhatsApp />
         <LiveChatAssist />
       </BrowserRouter>
     </TooltipProvider>

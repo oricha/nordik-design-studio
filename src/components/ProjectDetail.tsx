@@ -43,19 +43,38 @@ const ProjectDetail = () => {
 
       {/* Floating Quotation Button */}
       <FloatingQuotationButton projectName={project.name} onClick={() => openModal(project.name)} />
-      {/* Breadcrumbs */}
-      <nav className="bg-warm-gray border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-2 text-sm">
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
-            <Home className="w-4 h-4" />
-            Inicio
-          </Link>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          <Link to="/#projects" className="text-muted-foreground hover:text-foreground transition-colors">
-            Proyectos
-          </Link>
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          <span className="text-foreground font-medium">{project.name}</span>
+      <nav className="border-b border-border bg-warm-gray" aria-label="Migas de pan">
+        <div className="mx-auto max-w-7xl px-4 py-4">
+          <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm leading-normal text-foreground md:text-base">
+            <li className="flex items-center gap-2">
+              <Link
+                to="/"
+                className="inline-flex items-center gap-1 font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <Home className="size-4 shrink-0" aria-hidden />
+                Inicio
+              </Link>
+            </li>
+            <li aria-hidden className="text-muted-foreground">
+              <ChevronRight className="size-4" />
+            </li>
+            <li>
+              <Link
+                to="/#projects"
+                className="font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Proyectos
+              </Link>
+            </li>
+            <li aria-hidden className="text-muted-foreground">
+              <ChevronRight className="size-4" />
+            </li>
+            <li>
+              <span className="font-semibold text-foreground" aria-current="page">
+                {project.name}
+              </span>
+            </li>
+          </ol>
         </div>
       </nav>
 
@@ -88,10 +107,10 @@ const ProjectDetail = () => {
               </div>
 
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                <h1 className="mb-4 text-balance text-4xl font-semibold leading-[1.18] tracking-tight text-foreground md:text-5xl lg:text-[3.25rem]">
                   {project.name}
                 </h1>
-                <p className="text-muted-foreground text-lg mb-6">
+                <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
                   Descubre este hermoso proyecto de arquitectura nórdica. Diseño moderno, eficiencia
                   energética y construcción sostenible.
                 </p>
@@ -150,13 +169,15 @@ const ProjectDetail = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold text-foreground mb-6">Sobre este Proyecto</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+            <h2 className="mb-6 text-3xl font-semibold tracking-tight text-foreground md:text-[2rem] md:leading-[1.25]">
+              Sobre este Proyecto
+            </h2>
+            <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
               Este proyecto representa lo mejor de la arquitectura nórdica moderna. Con paneles SIP
               de última generación, aislamiento superior y diseño sostenible, ofrece confort,
               eficiencia y estética en una sola solución.
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed">
+            <p className="text-lg leading-relaxed text-muted-foreground">
               Cada detalle ha sido cuidadosamente diseñado para garantizar la máxima satisfacción del
               cliente. Desde la selección de materiales hasta la instalación final, nuestro equipo
               asegura la calidad en cada paso del proceso.
@@ -180,7 +201,9 @@ const ProjectDetail = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold text-foreground mb-8">Características Principales</h2>
+            <h2 className="mb-8 text-3xl font-semibold tracking-tight text-foreground md:text-[2rem] md:leading-[1.25]">
+              Características Principales
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 { title: "Paneles SIP", description: "Aislamiento superior y construcción rápida" },
@@ -236,11 +259,11 @@ const ProjectDetail = () => {
       <section aria-label="Líneas B2C y SIP" className="border-y border-border bg-muted/35">
         <div className="mx-auto max-w-7xl px-6 py-6 text-center text-sm leading-relaxed text-muted-foreground">
           ¿Este modelo es para tu hogar o buscas&nbsp;
-          <Link to="/#services-b2b" className="font-semibold text-foreground underline underline-offset-2 hover:text-accent">
+          <Link to="/servicios#services-b2b" className="font-semibold text-foreground underline underline-offset-2 hover:text-accent">
             suministro SIP para empresa
           </Link>
           ? NordiK separa particulares y profesionales:{" "}
-          <Link to="/#services-b2c" className="font-semibold text-foreground underline underline-offset-2 hover:text-accent">
+          <Link to="/servicios#services-b2c" className="font-semibold text-foreground underline underline-offset-2 hover:text-accent">
             casas llave en mano
           </Link>{" "}
           vs kits industriales descritos en la home.
@@ -259,7 +282,9 @@ const ProjectDetail = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl font-bold text-foreground mb-4">¿Interesado en este Proyecto?</h2>
+            <h2 className="mb-4 text-3xl font-semibold tracking-tight text-foreground md:text-[2rem] md:leading-[1.25]">
+              ¿Interesado en este Proyecto?
+            </h2>
             <p className="text-muted-foreground text-lg mb-8">
               Contacta con nuestro equipo para obtener más información y una cotización personalizada.
             </p>
