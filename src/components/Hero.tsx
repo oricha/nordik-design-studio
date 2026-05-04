@@ -40,18 +40,15 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="mb-14 max-w-3xl lg:max-w-4xl"
         >
-          <p className="mb-4 inline-flex rounded-full bg-primary-foreground/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground backdrop-blur-sm">
-            Paneles SIP · Casas prefabricadas · Reformas escandinavas
-          </p>
           <h1 className="mb-5 text-balance text-[clamp(2.375rem,4.5vw,3.5rem)] font-semibold leading-[1.18] tracking-tight text-primary-foreground md:text-[clamp(3rem,3.6vw,3.55rem)]">
-            Casas nórdicas SIP con montaje rápido, eficiencia energética y marco técnico europeo
+          La casa que siempre soñaste. Ahora es posible.
           </h1>
           <p className="mb-3 max-w-2xl text-pretty text-lg text-primary-foreground/90 md:text-xl">
-            Presupuesto claro desde el briefing: cerramos proyectos modelo en plazos muy inferiores
-            a la obra húmeda tradicional (~60 días objetivo para diseños SIP estándar).
+            Construida rápido. Eficiente energéticamente. A precio justo.
+            Diseño nórdico, normativa europea, fabricación moderna.
           </p>
           <p className="mb-8 max-w-xl text-base leading-relaxed text-primary-foreground/80 md:text-[1.05rem]">
-            Aislamiento certificado SIP, menor consumo térmico y documentación lista para obra en toda la Unión Europea.
+          Casas modernas, sostenibles y construidas en semanas. Tecnología SIP europea. Ahorro energético garantizado.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
