@@ -20,7 +20,7 @@ import { CONTACT_PROJECT_PREFILL_QUERY } from "@/constants/contactForm";
 import { projectCategoryPresentation } from "@/constants/projectCategoryPresentation";
 import { projects, type Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
-import { DELIVERY_RANGES, type ActiveFilters } from "@/types/catalogFilters";
+import { type ActiveFilters } from "@/types/catalogFilters";
 import { filtersToParams, paramsToFilters } from "@/utils/catalogUrl";
 import { projectMatchesSearch } from "@/utils/projectCatalogSearch";
 
@@ -43,8 +43,6 @@ const QUERY_KEY = PROJECT_CATALOG_QUERY_KEY;
 
 const EMPTY_ADVANCED_FILTERS: ActiveFilters = {
   bedrooms: [],
-  energyClass: [],
-  deliveryRange: "",
 };
 
 const energyColors: Record<NonNullable<Project["energyClass"]>, string> = {
@@ -62,19 +60,6 @@ const projectMatchesAdvancedFilters = (project: Project, filters: ActiveFilters)
       bedroom === 4 ? project.bedrooms >= 4 : project.bedrooms === bedroom,
     );
     if (!matchesBedroom) {
-      return false;
-    }
-  }
-
-  if (filters.energyClass.length > 0) {
-    if (project.energyClass == null || !filters.energyClass.includes(project.energyClass)) {
-      return false;
-    }
-  }
-
-  if (filters.deliveryRange) {
-    const deliveryRange = DELIVERY_RANGES.find((range) => range.key === filters.deliveryRange);
-    if (deliveryRange == null || project.deliveryWeeks == null || !deliveryRange.test(project.deliveryWeeks)) {
       return false;
     }
   }
@@ -214,9 +199,7 @@ const ProjectCatalog = () => {
   }, [activeCategory, advancedFilters, priceRange, searchQuery, sortBy]);
 
   const activeFilterCount =
-    advancedFilters.bedrooms.length +
-    advancedFilters.energyClass.length +
-    (advancedFilters.deliveryRange ? 1 : 0);
+    advancedFilters.bedrooms.length;
 
   return (
     <section id="projects" className="section-padding bg-warm-gray">
@@ -241,8 +224,6 @@ const ProjectCatalog = () => {
           <aside className="hidden w-64 shrink-0 lg:block">
             <FilterSidebar
               filters={advancedFilters}
-              resultsCount={filtered.length}
-              totalCount={projects.length}
               onChange={handleFilterChange}
               onClear={clearAdvancedFilters}
             />
@@ -392,10 +373,6 @@ const ProjectCatalog = () => {
                   </div>
                 </div>
 
-                <p className="text-sm text-muted-foreground">
-                  Mostrando <span className="font-semibold text-foreground">{filtered.length}</span> de{" "}
-                  <span className="font-semibold text-foreground">{projects.length}</span> proyectos
-                </p>
               </div>
             </div>
 
@@ -433,8 +410,6 @@ const ProjectCatalog = () => {
           <div className="py-5">
             <FilterSidebar
               filters={advancedFilters}
-              resultsCount={filtered.length}
-              totalCount={projects.length}
               onChange={handleFilterChange}
               onClear={clearAdvancedFilters}
             />
