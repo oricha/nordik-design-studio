@@ -345,22 +345,24 @@ const ProjectCatalog = () => {
                   </button>
                 </div>
 
-                <div className="flex flex-wrap items-start gap-3 lg:flex-nowrap lg:justify-between">
-                  {categories.map((cat) => (
-                    <button
-                      key={cat.key}
-                      type="button"
-                      onClick={() => setActiveCategory(cat.key)}
-                      className={cn(
-                        "rounded-2xl border px-5 py-3 text-base font-medium transition-all",
-                        activeCategory === cat.key
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-white text-foreground hover:border-accent/50",
-                      )}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                  <div className="flex flex-wrap items-center gap-3 lg:justify-start">
+                    {categories.map((cat) => (
+                      <button
+                        key={cat.key}
+                        type="button"
+                        onClick={() => setActiveCategory(cat.key)}
+                        className={cn(
+                          "rounded-2xl border px-5 py-3 text-base font-medium transition-all",
+                          activeCategory === cat.key
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border bg-white text-foreground hover:border-accent/50",
+                        )}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
 
                   <div className="hidden shrink-0 lg:flex lg:min-w-[250px] lg:flex-col lg:items-end">
                     <span className="mb-3 text-sm font-semibold text-foreground">Habitaciones</span>
