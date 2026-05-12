@@ -6,12 +6,11 @@ import { PROJECT_CATALOG_QUERY_KEY } from "@/constants/projectCatalog";
 import { siteContact } from "@/data/siteContact";
 
 const navLinks = [
-  { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Testimonios", href: "/testimonios" },
+  { label: "Galería", href: "/#gallery" },
   { label: "Opciones de Construcción", href: "/#services" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Galería", href: "/#gallery" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contactos", href: "/contactos" },
 ];
 
@@ -156,7 +155,6 @@ const Header = () => {
             href="/contactos"
             className="inline-flex items-center gap-2 whitespace-nowrap rounded-[10px] bg-accent px-4 py-[0.72rem] text-[0.84rem] font-semibold uppercase tracking-[0.01em] text-white transition-opacity hover:opacity-90"
           >
-            <Phone className="h-4 w-4 shrink-0" />
             Presupuesto gratis
           </a>
         </div>
@@ -196,7 +194,6 @@ const Header = () => {
                   onClick={() => setMobileOpen(false)}
                   className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-foreground"
                 >
-                  <Phone className="h-4 w-4 shrink-0" />
                   Presupuesto gratis
                 </a>
               </nav>

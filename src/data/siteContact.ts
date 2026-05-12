@@ -24,16 +24,16 @@ export type RegionalDialIn = {
 
 const helsinkiOffice: OfficeLocation = {
   id: "helsinki",
-  title: "Sede · Helsinki",
-  addressLines: ["Mannerheimintie 1", "00100 Helsinki", "Finlandia"],
-  lat: 60.1699,
-  lon: 24.9384,
-  timeZone: "Europe/Helsinki",
+  title: "Sede · Barcelona",
+  addressLines: ["Passeig de Gràcia 1", "08007 Barcelona", "España"],
+  lat: 41.3874,
+  lon: 2.1686,
+  timeZone: "Europe/Madrid",
   weekdayOpen: "09:00",
-  weekdayClose: "17:30",
-  hoursLabel: "Lun–vie · 9:00–17:30 (EET)",
-  phoneHref: "+358401234567",
-  phoneDisplay: "+358 40 123 4567",
+  weekdayClose: "18:00",
+  hoursLabel: "Lun–vie · 9:00–18:00 (CET)",
+  phoneHref: "+34932123456",
+  phoneDisplay: "+34 932 123456",
 };
 
 const madridOffice: OfficeLocation = {
@@ -57,16 +57,16 @@ const regionalDialInLines: RegionalDialIn[] = [
 ];
 
 export const siteContact = {
-  /** Teléfono principal mostrado en UI compacta (HQ Helsinki) */
+  /** Teléfono principal mostrado en UI compacta (HQ Barcelona) */
   phoneHref: helsinkiOffice.phoneHref,
   phoneDisplay: helsinkiOffice.phoneDisplay,
   emailHref: "info@nordik.fi",
   emailDisplay: "info@nordik.fi",
   hoursShort:
-    "Helsinki lun–vie 9:00–17:30 (EET) · Madrid lun–vie 9:00–18:00 (CET)",
+    "Barcelona lun–vie 9:00–18:00 (CET) · Madrid lun–vie 9:00–18:00 (CET)",
   hoursLong:
-    "Atención comercial lun–viernes. Helsinki 9:00–17:30 (EET), Madrid 9:00–18:00 (CET). Festivos locales cerrado.",
-  locationLine: "Helsinki · Madrid",
+    "Atención comercial lun–viernes. Barcelona 9:00–18:00 (CET), Madrid 9:00–18:00 (CET). Festivos locales cerrado.",
+  locationLine: "Barcelona · Madrid",
 
   offices: [helsinkiOffice, madridOffice] as const,
   regionalDialIn: regionalDialInLines,
@@ -78,7 +78,7 @@ export const siteContact = {
   } as const,
 
   whatsapp: {
-    href: "https://wa.me/358401234567",
+    href: "https://wa.me/34932123456",
     label: "WhatsApp",
     /** Mensaje inicial sugerido (F3.4.6) — se codifica en URL al abrir. */
     defaultMessage:
@@ -93,6 +93,6 @@ export function whatsappConversationHref(c: SiteContact["whatsapp"] = siteContac
   const match =
     /^https?:\/\/wa\.me\/(\d+)/i.exec(c.href) ??
     /^https?:\/\/api\.whatsapp\.com\/send\?phone=(\d+)/i.exec(c.href);
-  const digits = match?.[1] ?? "358401234567";
+  const digits = match?.[1] ?? "34932123456";
   return `https://wa.me/${digits}?text=${encodeURIComponent(c.defaultMessage)}`;
 }

@@ -288,12 +288,12 @@ export const projectGalleries: ProjectGallery[] = [
     images: [
       {
         url: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=800&fit=crop",
-        title: "Casa Helsinki",
+        title: "Casa Barcelona",
         category: "exterior",
       },
       {
         url: "https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=1200&h=800&fit=crop",
-        title: "Arquitectura Helsinki",
+        title: "Arquitectura Barcelona",
         category: "detalles",
       },
       {
@@ -303,7 +303,7 @@ export const projectGalleries: ProjectGallery[] = [
       },
       {
         url: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
-        title: "Cocina Helsinki",
+        title: "Cocina Barcelona",
         category: "interior",
       },
       {

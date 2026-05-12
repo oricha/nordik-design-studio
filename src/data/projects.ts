@@ -33,5 +33,5 @@ export const projects: Project[] = [
   { id: 8, name: "Oulu", city: "Oulu", category: "reforms", area: 95, bedrooms: 3, bathrooms: 1, price: 125000, image: project2, slug: "oulu" },
   { id: 9, name: "Kuusamo", city: "Kuusamo", category: "cabins", area: 80, bedrooms: 2, bathrooms: 1, price: 95000, image: project3, energyClass: "B", deliveryWeeks: 8, slug: "kuusamo" },
   { id: 10, name: "Tampere", city: "Tampere", category: "materials", area: 0, bedrooms: 0, bathrooms: 0, price: 35000, image: project4, slug: "tampere" },
-  { id: 11, name: "Helsinki", city: "Helsinki", category: "reforms", area: 120, bedrooms: 3, bathrooms: 2, price: 175000, image: project5, slug: "helsinki" },
+  { id: 11, name: "Barcelona", city: "Barcelona", category: "reforms", area: 120, bedrooms: 3, bathrooms: 2, price: 175000, image: project5, slug: "helsinki" },
 ];

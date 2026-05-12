@@ -41,7 +41,7 @@ const Footer = () => {
               <a href={`tel:${siteContact.phoneHref}`} className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                 <Phone className="w-4 h-4 shrink-0" aria-hidden />
                 {siteContact.phoneDisplay}{" "}
-                <span className="text-primary-foreground/50">· Helsinki HQ</span>
+                <span className="text-primary-foreground/50">· Barcelona HQ</span>
               </a>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-primary-foreground/75">
                 {siteContact.offices

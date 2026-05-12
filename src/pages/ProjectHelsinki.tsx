@@ -61,13 +61,13 @@ const ProjectHelsinki = () => {
     <div className="min-h-screen bg-background">
             <main className="pt-16">
         <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
-          <img src={images[activeImage]} alt="Helsinki renovation" className="w-full h-full object-cover" />
+          <img src={images[activeImage]} alt="Barcelona renovation" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/60 to-transparent" />
           <div className="absolute bottom-0 left-0 p-8 md:p-16 max-w-lg">
             <Link to="/" className="inline-flex items-center gap-2 text-sm text-background/80 hover:text-background mb-6 transition-colors">
               <ArrowLeft className="w-4 h-4" /> Volver a proyectos
             </Link>
-            <h1 className="text-4xl md:text-5xl font-bold text-background mb-4">Helsinki</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-background mb-4">Barcelona</h1>
             <div className="flex gap-2 mb-4">
               <span className="bg-accent text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">REFORMA</span>
               <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">FASE 2</span>
@@ -97,7 +97,7 @@ const ProjectHelsinki = () => {
         <section className="section-padding bg-background">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
             <div>
-              <img src={project1} alt="Helsinki side view" className="w-full rounded-xl" loading="lazy" />
+              <img src={project1} alt="Barcelona side view" className="w-full rounded-xl" loading="lazy" />
             </div>
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Especificaciones de la casa</h2>
@@ -132,7 +132,7 @@ const ProjectHelsinki = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[gallery1, gallery2, gallery3, gallery4].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="aspect-[4/3] rounded-xl overflow-hidden">
-                  <img src={img} alt={`Helsinki photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img src={img} alt={`Barcelona photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
                 </motion.div>
               ))}
             </div>
@@ -159,7 +159,7 @@ const ProjectHelsinki = () => {
               </div>
             </div>
             <div className="sticky top-24">
-              <img src={project5} alt="Helsinki" className="w-full rounded-xl mb-6" loading="lazy" />
+              <img src={project5} alt="Barcelona" className="w-full rounded-xl mb-6" loading="lazy" />
               <div className="text-sm text-muted-foreground mb-1">PRECIO PAQUETE BÁSICO</div>
               <div className="text-lg font-semibold text-foreground mb-4">{basePrice.toLocaleString()} € + VAT</div>
               <div className="text-sm text-muted-foreground mb-1">PRECIO TOTAL</div>

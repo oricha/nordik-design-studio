@@ -55,7 +55,7 @@ const cases = [
   },
   {
     slug: "helsinki",
-    title: "Bifamiliar Helsinki · BIM ejecutivo para promotora",
+    title: "Bifamiliar Barcelona · BIM ejecutivo para promotora",
     intro:
       "Constructora habitual de bloque cara vista que debía responder a dossier ESG inversionista mediante envolvente industrializada marca NordiK en solar compartido con obra húmeda vecina retardada tiempo.",
     context:

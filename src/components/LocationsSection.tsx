@@ -41,7 +41,7 @@ export function LocationsSection() {
             Nuestras Oficinas
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Presencia comercial en Helsinki y Madrid para acompañarte según proyecto.
+            Presencia comercial en Barcelona y Madrid para acompañarte según proyecto.
             España · Portugal · Francia: consultar disponibilidad por región.
           </p>
         </motion.div>
