@@ -220,16 +220,8 @@ const ProjectCatalog = () => {
           </div>
         </motion.div>
 
-        <div className="flex flex-col gap-8 lg:flex-row">
-          <aside className="hidden w-64 shrink-0 lg:block">
-            <FilterSidebar
-              filters={advancedFilters}
-              onChange={handleFilterChange}
-              onClear={clearAdvancedFilters}
-            />
-          </aside>
-
-          <div className="min-w-0 flex-1">
+        <div className="flex flex-col gap-8">
+          <div className="min-w-0">
             <div className="mb-4 rounded-[26px] border border-border bg-background px-6 py-6 shadow-[0_20px_60px_rgba(15,15,15,0.06)]">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-3">
@@ -289,90 +281,118 @@ const ProjectCatalog = () => {
             </div>
 
             <div className="mb-8 rounded-[26px] border border-border bg-background px-6 py-5 shadow-[0_20px_60px_rgba(15,15,15,0.05)]">
-              <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
-                <div className="flex flex-col gap-4">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <div className="relative">
-                      <ArrowUpDown className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <select
-                        value={sortBy}
-                        onChange={(e) => setSortBy(e.target.value)}
-                        className="h-12 min-w-[270px] appearance-none rounded-2xl border border-border bg-white pl-12 pr-12 text-base text-foreground outline-none transition-colors focus:border-accent"
-                      >
-                        {sortOptions.map((opt) => (
-                          <option key={opt.value} value={opt.value}>
-                            {opt.label}
-                          </option>
-                        ))}
-                      </select>
-                      <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    </div>
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="relative">
+                    <ArrowUpDown className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="h-12 min-w-[270px] appearance-none rounded-2xl border border-border bg-white pl-12 pr-12 text-base text-foreground outline-none transition-colors focus:border-accent"
+                    >
+                      {sortOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  </div>
 
+                  <div className="flex items-center gap-2" role="group" aria-label="Vista de resultados">
                     <button
                       type="button"
-                      onClick={() => setDrawerOpen(true)}
-                      className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent/50 lg:hidden"
-                    >
-                      <SlidersHorizontal className="h-4 w-4" aria-hidden />
-                      Filtros
-                      {activeFilterCount > 0 && (
-                        <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-accent px-1.5 py-0.5 text-xs font-bold text-accent-foreground">
-                          {activeFilterCount}
-                        </span>
+                      onClick={() => handleViewModeChange("grid")}
+                      aria-pressed={viewMode === "grid"}
+                      className={cn(
+                        "rounded-2xl p-3 transition-all",
+                        viewMode === "grid"
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-background text-muted-foreground hover:bg-border",
                       )}
+                      title="Vista Grid"
+                    >
+                      <Grid2X2 className="h-5 w-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleViewModeChange("list")}
+                      aria-pressed={viewMode === "list"}
+                      className={cn(
+                        "rounded-2xl p-3 transition-all",
+                        viewMode === "list"
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-background text-muted-foreground hover:bg-border",
+                      )}
+                      title="Vista Lista"
+                    >
+                      <List className="h-5 w-5" />
                     </button>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3">
-                    {categories.map((cat) => (
-                      <button
-                        key={cat.key}
-                        type="button"
-                        onClick={() => setActiveCategory(cat.key)}
-                        className={cn(
-                          "rounded-2xl border px-5 py-3 text-base font-medium transition-all",
-                          activeCategory === cat.key
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-border bg-white text-foreground hover:border-accent/50",
-                        )}
-                      >
-                        {cat.label}
-                      </button>
-                    ))}
+                  <button
+                    type="button"
+                    onClick={() => setDrawerOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent/50 lg:hidden"
+                  >
+                    <SlidersHorizontal className="h-4 w-4" aria-hidden />
+                    Filtros
+                    {activeFilterCount > 0 && (
+                      <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-accent px-1.5 py-0.5 text-xs font-bold text-accent-foreground">
+                        {activeFilterCount}
+                      </span>
+                    )}
+                  </button>
+                </div>
 
-                    <div className="ml-1 flex items-center gap-2" role="group" aria-label="Vista de resultados">
-                      <button
-                        type="button"
-                        onClick={() => handleViewModeChange("grid")}
-                        aria-pressed={viewMode === "grid"}
-                        className={cn(
-                          "rounded-2xl p-3 transition-all",
-                          viewMode === "grid"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-background text-muted-foreground hover:bg-border",
-                        )}
-                        title="Vista Grid"
-                      >
-                        <Grid2X2 className="h-5 w-5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleViewModeChange("list")}
-                        aria-pressed={viewMode === "list"}
-                        className={cn(
-                          "rounded-2xl p-3 transition-all",
-                          viewMode === "list"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-background text-muted-foreground hover:bg-border",
-                        )}
-                        title="Vista Lista"
-                      >
-                        <List className="h-5 w-5" />
-                      </button>
+                <div className="flex flex-wrap items-start gap-3 lg:flex-nowrap lg:justify-between">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.key}
+                      type="button"
+                      onClick={() => setActiveCategory(cat.key)}
+                      className={cn(
+                        "rounded-2xl border px-5 py-3 text-base font-medium transition-all",
+                        activeCategory === cat.key
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-white text-foreground hover:border-accent/50",
+                      )}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+
+                  <div className="hidden shrink-0 lg:flex lg:min-w-[250px] lg:flex-col lg:items-end">
+                    <span className="mb-3 text-sm font-semibold text-foreground">Habitaciones</span>
+                    <div className="flex items-center gap-2">
+                      {[1, 2, 3, 4].map((bedroom) => {
+                        const selected = advancedFilters.bedrooms.includes(bedroom);
+                        return (
+                          <button
+                            key={`desktop-bed-${bedroom}`}
+                            type="button"
+                            onClick={() =>
+                              handleFilterChange({
+                                ...advancedFilters,
+                                bedrooms: selected
+                                  ? advancedFilters.bedrooms.filter((value) => value !== bedroom)
+                                  : [...advancedFilters.bedrooms, bedroom].sort((a, b) => a - b),
+                              })
+                            }
+                            className={cn(
+                              "rounded-2xl border px-4 py-3 text-base font-medium transition-all",
+                              selected
+                                ? "border-primary bg-primary text-primary-foreground"
+                                : "border-border bg-white text-foreground hover:border-accent/50",
+                            )}
+                          >
+                            {bedroom === 4 ? "4+" : bedroom}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
 
