@@ -2,20 +2,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useParams } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Testimonials from "./pages/Testimonials";
 import CaseStudies from "./pages/CaseStudies";
-import ProjectTorku from "./pages/ProjectTorku";
-import ProjectTampere from "./pages/ProjectTampere";
-import ProjectKuusamo from "./pages/ProjectKuusamo";
-import ProjectOulu from "./pages/ProjectOulu";
-import ProjectLevi from "./pages/ProjectLevi";
-import ProjectHelsinki from "./pages/ProjectHelsinki";
-import ProjectTunturi from "./pages/ProjectTunturi";
-import ProjectSodankyla from "./pages/ProjectSodankyla";
-import ProjectDetail from "./components/ProjectDetail";
 import NotFound from "./pages/NotFound";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -25,8 +16,14 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FaqPage from "@/pages/FaqPage";
 import ContactPage from "@/pages/ContactPage";
 import ServicesPage from "@/pages/ServicesPage";
+import ProjectDetailPage from "@/pages/ProjectDetailPage";
 
 const queryClient = new QueryClient();
+
+const LegacyProjectRedirect = () => {
+  const { slug } = useParams<{ slug: string }>();
+  return <Navigate to={`/proyecto/${slug ?? ""}`} replace />;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -43,18 +40,9 @@ const App = () => (
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/contactos" element={<ContactPage />} />
           <Route path="/servicios" element={<ServicesPage />} />
-          {/* Legacy routes - kept for backward compatibility */}
-          <Route path="/project/torku" element={<ProjectTorku />} />
-          <Route path="/project/tampere" element={<ProjectTampere />} />
-          <Route path="/project/kuusamo" element={<ProjectKuusamo />} />
-          <Route path="/project/oulu" element={<ProjectOulu />} />
-          <Route path="/project/levi" element={<ProjectLevi />} />
-          <Route path="/project/helsinki" element={<ProjectHelsinki />} />
-          <Route path="/project/tunturi" element={<ProjectTunturi />} />
-          <Route path="/project/sodankyla" element={<ProjectSodankyla />} />
 
-          {/* Dynamic project route (Spanish) */}
-          <Route path="/proyecto/:slug" element={<ProjectDetail />} />
+          <Route path="/project/:slug" element={<LegacyProjectRedirect />} />
+          <Route path="/proyecto/:slug" element={<ProjectDetailPage />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

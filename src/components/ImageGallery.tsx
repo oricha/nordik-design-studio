@@ -46,6 +46,13 @@ const ImageGallery = ({ images, title = "Galería de Imágenes", embedded = fals
     setActiveIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   }, [images.length]);
 
+  const goToImage = useCallback(
+    (index: number) => {
+      setActiveIndex(index);
+    },
+    [],
+  );
+
   const lightboxStageRef = useRef<HTMLDivElement>(null);
 
   const toggleFullscreen = useCallback(() => {
