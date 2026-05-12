@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
 import ValueProposition from "@/components/ValueProposition";
 import { SocialProofRibbon } from "@/components/SocialProofRibbon";
 import ProjectCatalog from "@/components/ProjectCatalog";
@@ -13,6 +14,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <main>
         <Hero />
+        <TrustBar />
         <SocialProofRibbon />
         <ValueProposition />
         <ProjectCatalog />

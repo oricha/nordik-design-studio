@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Clock, FileText, Mail, MessageCircle, Phone, Send, Trash2 } from "lucide-react";
+import { AlertCircle, Clock, FileText, Mail, MessageCircle, Phone, Send, Trash2 } from "lucide-react";
 import contactImage from "@/assets/contact-house.jpg";
 import { siteContact, whatsappConversationHref } from "@/data/siteContact";
 import { projects } from "@/data/projects";
@@ -25,6 +25,20 @@ import {
 import { generateQuotationTicketId } from "@/utils/quotationTicket";
 
 const projectTypes = ["Casa Llave en Mano", "Cabaña", "Paneles SIP", "Renovación", "Otro"];
+const budgetOptions = [
+  { value: "lt50", label: "Menos de €50,000" },
+  { value: "50-100", label: "€50,000 – €100,000" },
+  { value: "100-200", label: "€100,000 – €200,000" },
+  { value: "gt200", label: "Más de €200,000" },
+] as const;
+
+const renderFieldError = (message?: string) =>
+  message ? (
+    <p className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-medium text-red-600">
+      <AlertCircle className="h-3.5 w-3.5" aria-hidden />
+      {message}
+    </p>
+  ) : null;
 
 const ContactSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,8 +48,14 @@ const ContactSection = () => {
     email: "",
     phone: "",
     types: [] as string[],
+    budget: "",
+    location: "",
+    financing: false,
+    acceptedTerms: false,
     message: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitAttempted, setSubmitAttempted] = useState(false);
   const [attachments, setAttachments] = useState<QuotationAttachment[]>([]);
   const [attachErr, setAttachErr] = useState("");
   const [thanksTicket, setThanksTicket] = useState<string | null>(null);
@@ -69,6 +89,41 @@ const ContactSection = () => {
       ...prev,
       types: prev.types.includes(type) ? prev.types.filter((t) => t !== type) : [...prev.types, type],
     }));
+    setErrors((prev) => ({ ...prev, types: "" }));
+  };
+
+  const updateFormField = <K extends keyof typeof form>(field: K, value: (typeof form)[K]) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    if (field === "acceptedTerms" && value) {
+      setErrors((prev) => ({ ...prev, terms: "" }));
+      return;
+    }
+    if (field === "budget" && value) {
+      setErrors((prev) => ({ ...prev, budget: "" }));
+      return;
+    }
+    if (field === "name" || field === "email" || field === "phone") {
+      const nextValue = String(value);
+      const nextError = validateField(field, nextValue);
+      if (!nextError) {
+        setErrors((prev) => ({ ...prev, [field]: "" }));
+      }
+    }
+  };
+
+  const validateField = (name: "name" | "email" | "phone", value: string): string => {
+    if (name === "name") {
+      return value.trim().length >= 2 ? "" : "Introduce al menos 2 caracteres.";
+    }
+    if (name === "email") {
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value.trim()) ? "" : "Introduce un email válido.";
+    }
+    return value.replace(/\D/g, "").length >= 8 ? "" : "Introduce al menos 8 dígitos.";
+  };
+
+  const handleFieldBlur = (field: "name" | "email" | "phone") => {
+    const nextError = validateField(field, form[field]);
+    setErrors((prev) => ({ ...prev, [field]: nextError }));
   };
 
   const handlePickAttachments = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,18 +145,57 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitAttempted(true);
+
+    const nextErrors: Record<string, string> = {
+      name: validateField("name", form.name),
+      email: validateField("email", form.email),
+      phone: validateField("phone", form.phone),
+    };
+
+    if (form.types.length === 0) {
+      nextErrors.types = "Selecciona al menos un tipo de proyecto.";
+    }
+    if (!form.budget) {
+      nextErrors.budget = "Selecciona un rango de presupuesto.";
+    }
+    if (!form.acceptedTerms) {
+      nextErrors.terms = "Debes aceptar los términos para enviar la solicitud.";
+    }
+
+    setErrors(nextErrors);
+
+    if (Object.values(nextErrors).some(Boolean)) {
+      return;
+    }
+
     const ticket = generateQuotationTicketId();
-    console.log("Contacto landing:", {
-      form,
+    const emailPayload = {
+      ...form,
       ticket,
+      timestamp: new Date().toISOString(),
       attachments: attachments.map((a) => ({ name: a.file.name, size: a.file.size })),
-    });
+    };
+    // TODO E1.4: conectar este payload a Resend/SendGrid o la edge function del formulario.
+    console.log("Contacto landing:", emailPayload);
     attachments.forEach(revokeAttachmentPreview);
     setAttachments([]);
     setAttachErr("");
     setThanksTicket(ticket);
     setThanksEmail(form.email.trim());
-    setForm({ name: "", email: "", phone: "", types: [], message: "" });
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      types: [],
+      budget: "",
+      location: "",
+      financing: false,
+      acceptedTerms: false,
+      message: "",
+    });
+    setErrors({});
+    setSubmitAttempted(false);
   };
 
   return (
@@ -161,10 +255,7 @@ const ContactSection = () => {
                 <p className="text-sm font-semibold text-emerald-900">Solicitud registrada</p>
                 <p className="mt-1 font-mono text-xl font-bold text-emerald-950">{thanksTicket}</p>
                 <p className="mt-3 text-sm leading-relaxed text-emerald-900/90">
-                  <strong className="text-emerald-950">Confirmación por email (F1.4.8):</strong> en producción podrás
-                  recibir en <strong>{thanksEmail}</strong> un mensaje automático con este código, el resumen enviado y
-                  enlaces útiles ({siteContact.resources.faqLabel}). Mientras conectamos el envío SMTP, usa la
-                  referencia si nos escribes.
+                  Confirmaremos tu solicitud por email en <strong>{thanksEmail}</strong> próximamente.
                 </p>
                 <p className="mt-2 text-sm">
                   <Link to={siteContact.resources.faqHref} className="font-semibold text-accent underline underline-offset-2 hover:opacity-80">
@@ -204,10 +295,12 @@ const ContactSection = () => {
                   required
                   maxLength={100}
                   value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onChange={(e) => updateFormField("name", e.target.value)}
+                  onBlur={() => handleFieldBlur("name")}
                   className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none"
                   placeholder="Tu nombre completo"
                 />
+                {renderFieldError(errors.name)}
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
@@ -218,10 +311,12 @@ const ContactSection = () => {
                     required
                     maxLength={255}
                     value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    onChange={(e) => updateFormField("email", e.target.value)}
+                    onBlur={() => handleFieldBlur("email")}
                     className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none"
                     placeholder="correo@ejemplo.com"
                   />
+                  {renderFieldError(errors.email)}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-1.5">Teléfono</label>
@@ -230,15 +325,19 @@ const ContactSection = () => {
                     required
                     maxLength={24}
                     value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    onChange={(e) => updateFormField("phone", e.target.value)}
+                    onBlur={() => handleFieldBlur("phone")}
                     className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none"
                     placeholder="+34 600 123 456"
                   />
+                  {renderFieldError(errors.phone)}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground mb-2">Tipo de Proyecto</label>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Tipo de Proyecto <span className="text-red-500">*</span>
+                </label>
                 <div className="flex flex-wrap gap-2">
                   {projectTypes.map((type) => (
                     <button
@@ -255,6 +354,67 @@ const ContactSection = () => {
                     </button>
                   ))}
                 </div>
+                {renderFieldError(errors.types)}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Presupuesto aproximado <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {budgetOptions.map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => updateFormField("budget", option.value)}
+                      className={`rounded-xl border px-3 py-2.5 text-left text-sm transition-all ${
+                        form.budget === option.value
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border hover:border-accent/50"
+                      }`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+                {submitAttempted ? renderFieldError(errors.budget) : null}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1.5">
+                  ¿Dónde quieres construir?
+                  <span className="ml-1 text-xs text-muted-foreground">(opcional)</span>
+                </label>
+                <select
+                  value={form.location}
+                  onChange={(e) => updateFormField("location", e.target.value)}
+                  className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none"
+                >
+                  <option value="">Selecciona país</option>
+                  <option value="es">España</option>
+                  <option value="pt">Portugal</option>
+                  <option value="fr">Francia</option>
+                  <option value="other">Otro</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={form.financing}
+                    onChange={(e) => updateFormField("financing", e.target.checked)}
+                    className="mt-0.5 h-4 w-4 rounded border-border accent-accent cursor-pointer"
+                  />
+                  <span className="text-sm text-foreground">
+                    Estoy interesado/a en opciones de financiamiento
+                  </span>
+                </label>
+                {form.financing && (
+                  <p className="ml-7 rounded-lg bg-muted/50 p-3 text-xs leading-relaxed text-muted-foreground">
+                    Te informaremos sobre opciones disponibles según tu proyecto y ubicación.
+                  </p>
+                )}
               </div>
 
               <div>
@@ -335,9 +495,43 @@ const ContactSection = () => {
                 </Link>
               </p>
 
+              <div className="space-y-2">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={form.acceptedTerms}
+                    onChange={(e) => updateFormField("acceptedTerms", e.target.checked)}
+                    className="mt-0.5 h-4 w-4 rounded border-border accent-accent cursor-pointer"
+                  />
+                  <span className="text-sm leading-relaxed text-muted-foreground">
+                    He leído y acepto la{" "}
+                    <Link
+                      to="/privacidad"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent underline underline-offset-2 hover:opacity-80"
+                    >
+                      política de privacidad
+                    </Link>{" "}
+                    y los{" "}
+                    <Link
+                      to="/terminos"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent underline underline-offset-2 hover:opacity-80"
+                    >
+                      términos de uso
+                    </Link>
+                    . <span className="text-red-500">*</span>
+                  </span>
+                </label>
+                {submitAttempted ? renderFieldError(errors.terms) : null}
+              </div>
+
               <button
                 type="submit"
-                className="mt-auto flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground transition-opacity hover:opacity-90"
+                disabled={!form.acceptedTerms}
+                className="mt-auto flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Send className="h-4 w-4" />
                 Solicitar presupuesto gratis
