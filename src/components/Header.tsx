@@ -7,7 +7,6 @@ import { siteContact } from "@/data/siteContact";
 
 const navLinks = [
   { label: "Galería", href: "/#gallery" },
-  { label: "Opciones de Construcción", href: "/#services" },
   { label: "Servicios", href: "/servicios" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
