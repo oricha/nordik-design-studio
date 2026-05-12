@@ -1,11 +1,417 @@
 # NordiK Features Plan - OpenSpec Framework
 
 ## Resumen Ejecutivo
-Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabricadas nórdicas). Organizado en 4 prioridades, con 32 features enumeradas y 18 épicas.
+
+Plan compacto de implementación para NordiK, portal B2B/B2C de casas prefabricadas nórdicas. El documento agrupa features similares en épicas más amplias para facilitar la creación posterior de specs OpenSpec sin perder requisitos clave.
+
+**Ejes de posicionamiento que deben mantenerse en todas las specs:**
+- Orientación comercial clara: convertir visitantes en leads para construir su casa propia, no solo explorar un catálogo.
+- Mensaje aspiracional: vivienda eficiente, bonita, de diseño nórdico y con precio más accesible que la construcción tradicional.
+- Confianza técnica: cumplimiento normativo europeo aplicable, documentación verificable, control de calidad, garantías y acompañamiento.
+- Utilidad moderna: páginas de producto completas, proceso explicado, contacto rápido, comparativas, presupuesto orientativo y CTAs contextuales.
+- Lenguaje prudente: usar "desde", "estimado", "según proyecto", "sujeto a contrato" o "documentación bajo solicitud" cuando aplique.
+
+---
+
+## 🔴 PRIORIDAD 1: CAPTACIÓN Y CONVERSIÓN (2-3 semanas)
+
+### Épica 1.0: Posicionamiento, CTAs y Contacto Comercial
+
+**Objetivo:** Reorientar la home y los puntos de entrada hacia captación de leads cualificados: personas que quieren construir una casa propia, eficiente y aspiracional a precio asequible.
+
+**Alcance agrupado:**
+- Hero aspiracional con H1 claro sobre casa propia, diseño nórdico, eficiencia y precio accesible.
+- Propuesta de valor resumida en 4 razones: precio accesible, eficiencia energética, diseño moderno y acompañamiento técnico.
+- CTAs consistentes en home, header, catálogo, tarjetas y finales de sección.
+- Contacto rápido en header, mobile y barras de confianza: teléfono, email, WhatsApp si aplica y formulario.
+- Micro-copy de confianza: normativa europea aplicable, garantías, asesoría técnica y zonas de servicio.
+
+**Criterios de aceptación:**
+- [ ] H1 comunica casa propia + diseño nórdico + eficiencia + precio accesible sin promesas absolutas.
+- [ ] Subtítulo explica construcción prefabricada/SIP, acompañamiento y presupuesto personalizado.
+- [ ] CTA primario: "Solicitar Presupuesto", "Cotizar mi Casa" o "Quiero mi casa NordiK".
+- [ ] CTA secundario: "Ver Modelos", "Cómo Funciona" o "Hablar con un asesor".
+- [ ] Header muestra contacto clicable (`tel:`, `mailto:` o WhatsApp) y botón de presupuesto visible.
+- [ ] En mobile, contacto y CTA quedan accesibles desde menú, botón sticky o CTA flotante.
+- [ ] La propuesta de valor incluye 4 cards con iconos, textos de 1-2 líneas y enlaces a catálogo, proceso, garantías o contacto.
+- [ ] Los CTAs usan micro-copy persuasivo, no genérico: evitar "Enviar" si puede ser "Solicitar Presupuesto Gratis".
+
+---
+
+### Épica 1.1: Catálogo, Búsqueda, Filtros y Comparación
+
+**Objetivo:** Ayudar al usuario a encontrar modelos relevantes por necesidades reales: precio, tamaño, habitaciones, eficiencia, entrega y tipo de servicio.
+
+**Alcance agrupado:**
+- Buscador por texto: nombre, ciudad, ubicación, tipo de proyecto o características.
+- Filtros por rango de precios, habitaciones/baños, eficiencia energética, tiempo de entrega y tipo de proyecto.
+- Sidebar/drawer de filtros con estado visible, limpiar filtros, contador de resultados y query params.
+- Vista grid/lista, ordenamiento extendido y estados de "sin resultados".
+- Comparador de 2-3 proyectos con tabla de características y CTA de cotización comparativa.
+- Reparación de enlaces rotos del catálogo hacia `/proyecto/{slug}`.
+
+**Criterios de aceptación:**
+- [ ] Input de búsqueda visible y filtrado en tiempo real.
+- [ ] Rango de precios recalculado según resultados disponibles.
+- [ ] Filtros combinables con estado persistente en URL (`type`, `price`, `bedrooms`, etc.).
+- [ ] Mobile usa drawer/modal con "Aplicar Filtros" y "Limpiar".
+- [ ] Sidebar desktop muestra filtros activos, contador "Mostrando X de Y" y opción de remover individualmente.
+- [ ] Ordenamiento por precio, tamaño, eficiencia y tiempo de entrega.
+- [ ] Vista grid/lista responsive con preferencia persistente en sesión.
+- [ ] Todas las tarjetas de proyecto enlazan a una ruta funcional `/proyecto/{slug}`.
+- [ ] Comparador permite seleccionar máximo 3 proyectos y muestra área, habitaciones, baños, precio, R-value, tiempo de entrega y personalización.
+- [ ] CTA "Solicitar Presupuesto para Comparación" rellena el formulario con los proyectos seleccionados.
+
+---
+
+### Épica 1.2: Detalle de Producto, Modelos y Contenido Visual
+
+**Objetivo:** Convertir cada modelo/proyecto en una página vendible, visualmente convincente y suficientemente técnica para generar confianza.
+
+**Alcance agrupado:**
+- Ruta individual `/proyecto/{slug}` para cada modelo, con 404 y breadcrumbs.
+- Galería completa con fotos reales, thumbnails, lightbox, zoom, fullscreen y navegación por teclado.
+- Contenido visual por categorías: exterior, interiores, detalles, acabados, proceso, antes/después en reformas y videos/tours si existen.
+- Especificaciones técnicas completas del modelo y descarga/solicitud de ficha técnica.
+- Proyectos relacionados y alternativas similares por tipo o rango de precio.
+
+**Criterios de aceptación:**
+- [ ] Cada proyecto tiene URL amigable y breadcrumbs: Home > Proyectos > [Nombre].
+- [ ] Proyectos faltantes tienen página de detalle con contenido mínimo antes de enlazarse desde catálogo.
+- [ ] Galería incluye idealmente 8-10 imágenes por proyecto; mínimo 3 fotos reales cuando no exista material completo.
+- [ ] Lightbox permite navegación anterior/siguiente, zoom, fullscreen, teclado y contador "3 de 24 fotos".
+- [ ] Imágenes optimizadas para carga rápida y con permisos/atribución cuando aplique.
+- [ ] Specs incluyen panel SIP, espesor, R-value/aislamiento, dormitorios, baños, área útil, acabados incluidos y personalización.
+- [ ] Normativas, certificaciones o estándares se muestran solo si están documentados.
+- [ ] Hay CTA contextual en header y final de página con proyecto preseleccionado.
+- [ ] Se muestran 3-4 proyectos similares con enlace directo a detalle.
+
+---
+
+### Épica 1.3: Formulario, Contacto y Seguimiento del Lead
+
+**Objetivo:** Reducir fricción de contacto y capturar datos útiles para priorizar y acompañar al cliente desde la primera consulta.
+
+**Alcance agrupado:**
+- Formulario de presupuesto con selección múltiple de tipo de proyecto.
+- Campos de cualificación: presupuesto aproximado, ubicación, financiación, proyecto de interés y mensaje.
+- Cumplimiento legal: aceptación de privacidad/términos y validación frontend/backend.
+- Mensajes de error visibles, confirmación post-envío y autorespuesta por email.
+- Contacto regional: teléfonos por país, horarios, ubicaciones, mapa y chat/chatbot si aplica.
+- Integración futura con CRM para seguimiento comercial.
+
+**Criterios de aceptación:**
+- [ ] Tipo de proyecto usa checkboxes, con mínimo 1 selección.
+- [ ] Presupuesto aproximado es obligatorio con rangos útiles: `<€50k`, `€50-100k`, `€100-200k`, `€200k+` o equivalentes validados.
+- [ ] Ubicación del proyecto permite España, Portugal, Francia y "otros"; puede ser opcional para exploración temprana.
+- [ ] Checkbox de financiación identifica interés y puede mostrar opciones de entidades si están disponibles.
+- [ ] Aceptación de privacidad/términos es obligatoria y enlaza a `/privacidad` y `/terminos`.
+- [ ] Validación visible en tiempo real para email, teléfono y campos obligatorios.
+- [ ] Confirmación indica que la solicitud fue enviada, ID/ticket si existe y SLA de contacto 24-48h.
+- [ ] Autorespuesta incluye resumen de solicitud, ID/ticket, SLA y enlace a FAQ o recursos útiles.
+- [ ] Contacto regional muestra números con código país, WhatsApp si aplica, horarios por zona e indicador "Abierto ahora" si es viable.
+- [ ] Mapa de oficinas es responsive e incluye dirección, teléfono, horario y "Cómo llegar".
+
+---
+
+## 🟠 PRIORIDAD 2: CONFIANZA, PRECIO Y ACOMPAÑAMIENTO (3-4 semanas)
+
+### Épica 2.0: Precio, Presupuesto, Pagos y Asequibilidad
+
+**Objetivo:** Resolver la incertidumbre económica y reforzar el posicionamiento de "casa propia aspiracional a precio asequible" sin prometer importes cerrados no verificables.
+
+**Alcance agrupado:**
+- Bloque de precio en producto: precio base, incluidos/excluidos, opcionales y pagos.
+- Guía de presupuesto y asequibilidad con variables que cambian el coste.
+- Esquemas de pagos orientativos sujetos a contrato/proyecto.
+- Rango o coste orientativo de opcionales solo con datos validados.
+- Preparación para PDF de cotización y cálculo dinámico en fases futuras.
+
+**Criterios de aceptación:**
+- [ ] Precio base visible con nota "desde" o "estimado" si depende de configuración, transporte, terreno o permisos.
+- [ ] Desglose claro de incluidos/excluidos: transporte, montaje, estudio de terreno, permisos, acabados y documentación.
+- [ ] Guía explica variables: tamaño, acabados, transporte, terreno, permisos, montaje, personalización y opcionales.
+- [ ] Se incluyen ejemplos o rangos solo con datos validados.
+- [ ] Copy aspiracional: vivienda propia eficiente y bonita con inversión controlada.
+- [ ] CTA principal: "Recibir presupuesto detallado" o "Pedir orientación de presupuesto".
+- [ ] Esquema de pagos se explica como orientativo y sujeto a contrato/proyecto.
+
+---
+
+### Épica 2.1: Proceso, Timeline y Acompañamiento
+
+**Objetivo:** Explicar cómo se pasa de una consulta inicial a una vivienda entregada, qué depende de NordiK, del cliente y de terceros.
+
+**Alcance agrupado:**
+- Página `/como-funciona` con proceso completo.
+- Timeline por proyecto: diseño, presupuesto, documentación, fabricación, transporte, montaje, entrega y postventa.
+- Opciones de servicio: solo paneles SIP, llave en mano, reforma u otros paquetes.
+- Explicación del sistema SIP, ventajas frente a construcción tradicional y puntos de control de calidad.
+- Acompañamiento técnico y comercial durante permisos, decisiones, presupuesto y postventa.
+
+**Criterios de aceptación:**
+- [ ] Página `/como-funciona` incluye 6-9 pasos con texto breve, iconos y CTA por etapa.
+- [ ] Se indica qué depende del cliente, de NordiK y de terceros: terreno, permisos, financiación, transporte y montaje.
+- [ ] Timeline visual en detalle de producto muestra 4-6 hitos con rangos estimados.
+- [ ] Cada opción de servicio explica incluidos/excluidos y diferencias de precio o alcance.
+- [ ] Proceso constructivo incluye 4-6 pasos con imágenes/iconos.
+- [ ] Comparativa con construcción tradicional cubre tiempo, coste, eficiencia, desperdicio, durabilidad y garantía con números reales o estimados marcados.
+- [ ] CTA final: "Empezar mi proyecto" o "Hablar con un asesor".
+
+---
+
+### Épica 2.2: Calidad, Normativa, Garantías y Documentación Técnica
+
+**Objetivo:** Centralizar la confianza técnica de NordiK y convertir dudas sobre calidad, normativa o garantías en razones para solicitar presupuesto.
+
+**Alcance agrupado:**
+- Página o sección de calidad, normativa y garantías.
+- Certificaciones, estándares energéticos, sellos ambientales y documentación técnica verificable.
+- Detalle de garantías por estructura, materiales, técnica y servicio postventa.
+- Proceso de reclamación y condiciones de garantía.
+- Reutilización de contenido técnico en producto, FAQ, formulario y "Por qué NordiK".
+
+**Criterios de aceptación:**
+- [ ] Sección de materiales y sistema constructivo con datos verificables.
+- [ ] Eficiencia energética y aislamiento se explican con R-value, estándares o datos documentados.
+- [ ] Certificaciones/logos solo se muestran si existen y están verificadas.
+- [ ] Cada certificado incluye año, versión o enlace a PDF cuando aplique.
+- [ ] Si no hay PDF público, usar "documentación disponible bajo solicitud".
+- [ ] Garantías muestran plazos validados por contrato/proveedor y condiciones de mantenimiento.
+- [ ] PDF o página de términos de garantía disponible.
+- [ ] Proceso de reclamación explicado en lenguaje claro.
+- [ ] Copy prudente: "cumplimiento aplicable", "según proyecto", "sujeto a condiciones" y "documentación bajo solicitud".
+
+---
+
+### Épica 2.3: Marca, Prueba Social y Casos Reales
+
+**Objetivo:** Humanizar NordiK y añadir evidencia real de capacidad, satisfacción y experiencia.
+
+**Alcance agrupado:**
+- Página `/sobre-nosotros` con historia, misión, visión, valores y equipo.
+- Testimonios, ratings, reseñas verificadas y referencias de clientes.
+- Estadísticas actualizadas: proyectos completados, clientes, años operando, satisfacción.
+- Case studies con antes/después, métricas, presupuesto orientativo y aprendizajes.
+- Sección "Por qué elegirnos" con micro-testimonios asociados a claims clave.
+
+**Criterios de aceptación:**
+- [ ] Sobre nosotros incluye historia de 300-500 palabras, hitos principales y equipo/founder si existe.
+- [ ] Valores y visión se presentan con iconografía coherente y lenguaje alineado a sostenibilidad, diseño y confianza.
+- [ ] Testimonios incluyen nombre, foto si hay permiso, proyecto/ubicación y texto de 100-150 palabras.
+- [ ] Reviews muestran fuente, última actualización y badge "Cliente verificado" cuando aplique.
+- [ ] Estadísticas se actualizan al menos trimestralmente y evitan números inflados sin soporte.
+- [ ] Case studies incluyen contexto, solución, resultados, fotos antes/después y enlace a detalle o PDF.
+- [ ] Logos o nombres de clientes se muestran solo con permiso.
+
+---
+
+## 🟡 PRIORIDAD 3: UX, SOPORTE Y CONTENIDO (2 semanas)
+
+### Épica 3.0: UX Visual, Accesibilidad y Navegación
+
+**Objetivo:** Hacer la experiencia más clara, moderna y escaneable en home, catálogo, producto y contacto.
+
+**Alcance agrupado:**
+- Jerarquía visual en H1/H2, contraste, tipografía y espaciado.
+- Iconografía coherente para servicios, características y proceso.
+- Hover effects en tarjetas y feedback visual.
+- Breadcrumbs en detalle y navegación consistente.
+- Mejoras específicas de filtros: badge de filtros activos, scroll al top, drawer mobile y query params.
+
+**Criterios de aceptación:**
+- [ ] H1 usa 48-56px en desktop cuando el diseño lo permita; H2 usa 32-40px.
+- [ ] Body text mínimo 16px, line-height 1.6-1.8 y contraste WCAG AA.
+- [ ] Espaciado entre secciones 60-80px y padding de tarjetas 24-32px.
+- [ ] Set de 6-8 iconos consistente para servicios, proceso y tarjetas.
+- [ ] Tarjetas clicables tienen hover sutil, shadow, transición 200-300ms y cursor correcto.
+- [ ] Breadcrumbs funcionales en `/proyecto/{slug}`.
+- [ ] Cambiar filtros hace scroll suave hacia resultados cuando mejore la comprensión.
+- [ ] Badge muestra número de filtros activos y desaparece si no hay filtros.
+
+---
+
+### Épica 3.1: FAQ, Recursos de Soporte y Educación Comercial
+
+**Objetivo:** Resolver preguntas frecuentes antes del contacto y preparar contenido reusable para ventas, soporte y SEO.
+
+**Alcance agrupado:**
+- Página `/faq` con búsqueda, acordeones y categorías.
+- Preguntas clave sobre proceso, entrega, garantía, personalización, costes, financiación, cobertura, aislamiento SIP y normativa.
+- Enlaces a FAQ desde formulario, producto, contacto y páginas técnicas.
+- Recursos educativos que puedan evolucionar hacia blog/guías.
+
+**Criterios de aceptación:**
+- [ ] FAQ incluye 12-15 preguntas iniciales con categorías: Proceso, Garantía, Financiamiento, Técnica, Costes y Entrega.
+- [ ] Incluye respuestas sobre qué incluye/no incluye el precio base, normativas europeas aplicables y documentación técnica.
+- [ ] Accordion accesible con búsqueda interna.
+- [ ] Link "Ver FAQ primero" aparece en formulario sin bloquear el envío.
+- [ ] Respuestas usan lenguaje claro y prudente, con enlaces a specs/documentación cuando exista.
+
+---
+
+## 🟢 PRIORIDAD 4: FUNCIONALIDADES AVANZADAS (4+ semanas)
+
+### Épica 4.0: Configuración, Cotización Avanzada y Portal de Cliente
+
+**Objetivo:** Evolucionar de captación manual a una experiencia más interactiva, con personalización, cotización y seguimiento.
+
+**Alcance agrupado:**
+- Visualizador 3D o planos interactivos.
+- Cambio de acabados en tiempo real y cálculo de precio dinámico.
+- Carrito/lista de proyectos, favoritos e historial de cotizaciones.
+- Generación automática de PDF de presupuesto.
+- Sistema de cuentas y portal postventa con documentos, tracking y soporte.
+
+**Criterios de aceptación:**
+- [ ] Visualizador permite rotar, zoom y vistas predefinidas si hay modelos 3D disponibles.
+- [ ] Selector de acabados actualiza visualización y precio cuando existan datos validados.
+- [ ] Planos interactivos muestran dimensiones, zoom y descarga PDF.
+- [ ] Carrito permite añadir proyectos/materiales, cantidades, totales y edición de items.
+- [ ] PDF de cotización incluye proyectos, cantidades, precios, términos, fecha, logo y número único.
+- [ ] Favoritos requieren login y permiten comparar o retomar cotizaciones.
+- [ ] Portal cliente permite descargar contrato, planos, especificaciones, garantía y documentos técnicos.
+- [ ] Tracking muestra estado de fabricación/entrega y canal de soporte.
+
+---
+
+### Épica 4.1: Contenido SEO, Automatización Comercial e Integraciones
+
+**Objetivo:** Escalar adquisición orgánica y seguimiento comercial cuando el core de conversión ya esté validado.
+
+**Alcance agrupado:**
+- Blog/recursos con artículos educativos y case studies.
+- Optimización SEO: keyword research, meta descriptions, estructura H2/H3, alt text e internal linking.
+- Newsletter para lead nurturing.
+- Integración CRM para leads, dashboard de cotizaciones y seguimiento comercial.
+- Integración de pago/ecommerce solo si el modelo comercial lo justifica.
+
+**Criterios de aceptación:**
+- [ ] Blog incluye listado, búsqueda, filtros por categoría y paginación o "Cargar más".
+- [ ] Artículos iniciales cubren paneles SIP, construcción sostenible, diseño escandinavo, proceso de compra y casos reales.
+- [ ] Cada artículo tiene autor, fecha, última actualización, tiempo de lectura y 3-5 enlaces internos.
+- [ ] Newsletter usa doble opt-in y mensaje de valor claro.
+- [ ] CRM sincroniza nombre, email, teléfono, proyecto, presupuesto, ubicación y fuente de lead.
+- [ ] Dashboard comercial muestra cotizaciones pendientes, aceptadas, cerradas, vendedor, fecha, monto y próximas acciones.
+- [ ] Pagos online contemplan Stripe/Redsys/transferencia solo si hay checkout real y cumplimiento PCI.
+
+---
+
+## 📊 RESUMEN POR ÉPICA
+
+| Épica | Grupo Principal | Prioridad | Duración |
+|-------|-----------------|-----------|----------|
+| 1.0 | Posicionamiento, CTAs y Contacto Comercial | P1 | 3-5 días |
+| 1.1 | Catálogo, Búsqueda, Filtros y Comparación | P1 | 1-2 sem |
+| 1.2 | Detalle de Producto, Modelos y Contenido Visual | P1 | 2-3 sem |
+| 1.3 | Formulario, Contacto y Seguimiento del Lead | P1 | 1-2 sem |
+| 2.0 | Precio, Presupuesto, Pagos y Asequibilidad | P2 | 1 sem |
+| 2.1 | Proceso, Timeline y Acompañamiento | P2 | 1 sem |
+| 2.2 | Calidad, Normativa, Garantías y Documentación Técnica | P2 | 1 sem |
+| 2.3 | Marca, Prueba Social y Casos Reales | P2 | 1-2 sem |
+| 3.0 | UX Visual, Accesibilidad y Navegación | P3 | 3-5 días |
+| 3.1 | FAQ, Recursos de Soporte y Educación Comercial | P3 | 5 días |
+| 4.0 | Configuración, Cotización Avanzada y Portal de Cliente | P4 | 3-4 sem |
+| 4.1 | Contenido SEO, Automatización Comercial e Integraciones | P4 | 2-4 sem |
+
+**Total compacto: 12 grupos principales | Duración estimada: 10-14 semanas**
+
+---
+
+## 🚀 ROADMAP RECOMENDADO
+
+**Semanas 1-2:**
+- [ ] P1.0: Posicionamiento, hero, propuesta de valor, CTAs y contacto rápido.
+- [ ] P1.1: Búsqueda, filtros principales, estado en URL y reparación de enlaces a proyectos.
+- [ ] P1.3: Formulario mínimo de presupuesto con campos de cualificación y privacidad.
+
+**Semanas 3-4:**
+- [ ] P1.2: Páginas de detalle para modelos prioritarios con galería, specs, precio orientativo y CTA.
+- [ ] P2.0: Bloques de precio, incluidos/excluidos, pagos y guía de presupuesto.
+- [ ] P2.1: Página `/como-funciona`, timeline y opciones de servicio.
+
+**Semanas 5-6:**
+- [ ] P2.2: Calidad, normativa, garantías y documentación técnica reusable.
+- [ ] P2.3: Sobre nosotros, testimonios, estadísticas y primeros case studies.
+- [ ] P3.0: Ajustes UX críticos de legibilidad, filtros mobile, breadcrumbs y tarjetas.
+
+**Semanas 7-8:**
+- [ ] P3.1: FAQ y recursos educativos enlazados desde contacto/producto.
+- [ ] P1.1: Comparador de proyectos y cotización comparativa.
+- [ ] P1.2: Galería avanzada, videos/tours o antes/después si hay material.
+
+**Semanas 9-14:**
+- [ ] P4.0: Configurador, PDF de cotización, favoritos, portal o tracking según prioridad comercial.
+- [ ] P4.1: Blog, SEO, newsletter, CRM, dashboard comercial e integraciones de pago si aplica.
+
+---
+
+## ✅ MÉTRICAS DE ÉXITO
+
+**Post-lanzamiento (2-4 semanas):**
+- [ ] CTR de "Solicitar Presupuesto": 3-5%.
+- [ ] Conversión de contacto: 1-2%.
+- [ ] Bounce rate: <50%.
+- [ ] Tiempo en sitio: 2-3 minutos.
+- [ ] Clicks en teléfono/WhatsApp/email desde header y contacto rápido.
+- [ ] Visitas a `/como-funciona`, páginas de producto y contenido de calidad/garantías.
+- [ ] Porcentaje de leads con proyecto, ubicación y presupuesto informado.
+
+**3+ meses:**
+- [ ] Leads mensuales: +50% vs. baseline.
+- [ ] Conversión de leads a cliente: 10-15%.
+- [ ] Satisfacción cliente (NPS): 50+.
+- [ ] Retorno de inversión de features: 2-3x.
+- [ ] Reducción de preguntas repetidas gracias a FAQ y páginas de proceso/calidad.
+
+---
+
+**Documento creado: 30 Abril 2026**
+**Última compactación: 12 Mayo 2026**
+# NordiK Features Plan - OpenSpec Framework
+
+## Resumen Ejecutivo
+Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabricadas nórdicas). Organizado en 4 prioridades, con features enumeradas y épicas accionables para convertir después a specs OpenSpec.
+
+**Ejes de posicionamiento incorporados desde el nuevo análisis:**
+- Orientación comercial clara: convertir visitantes en leads para construir su casa propia, no solo explorar un catálogo.
+- Mensaje aspiracional: casa eficiente, bonita, de diseño nórdico y con precio más accesible que la construcción tradicional.
+- Confianza técnica: cumplimiento normativo europeo aplicable, documentación técnica verificable, control de calidad, garantías y acompañamiento.
+- Utilidad moderna: páginas de producto completas, proceso explicado, contacto rápido, comparativas, financiación/orientación de presupuesto y CTAs contextuales.
 
 ---
 
 ## 🔴 PRIORIDAD 1: CRÍTICAS (2-3 semanas)
+
+### Épica 1.0: Posicionamiento Comercial y Mensaje Principal
+
+**F1.0.1 - Hero Aspiracional Orientado a Construir**
+- Descripción: Reescribir el hero de la home para comunicar "tu casa propia, eficiente y de diseño nórdico, a un precio más accesible" con foco en solicitud de presupuesto.
+- Beneficio: El usuario entiende en segundos qué vende NordiK, por qué es relevante y cuál es el siguiente paso.
+- Criterios de aceptación:
+  - [ ] H1 comunica casa propia + diseño nórdico + eficiencia + precio accesible sin promesas absolutas.
+  - [ ] Subtítulo explica construcción prefabricada/SIP, acompañamiento y presupuesto personalizado.
+  - [ ] CTA primario: "Solicitar Presupuesto" o "Cotizar mi Casa".
+  - [ ] CTA secundario: "Ver Modelos" o "Cómo Funciona".
+  - [ ] Incluir micro-copy de confianza: normativa europea aplicable, garantías y asesoría técnica.
+
+**F1.0.2 - Bloque de Propuesta de Valor**
+- Descripción: Crear una sección breve con 4 razones para elegir NordiK: precio accesible, eficiencia energética, diseño moderno y acompañamiento técnico.
+- Beneficio: Refuerza diferenciadores frente a competidores y construcción tradicional.
+- Criterios de aceptación:
+  - [ ] 4 cards con iconos y texto de 1-2 líneas.
+  - [ ] Evitar claims no verificables; usar "desde", "estimado", "según proyecto" cuando aplique.
+  - [ ] Enlazar cada razón a contenido ampliado: catálogo, proceso, garantías o contacto.
+  - [ ] Incluir CTA final: "Hablar con un asesor".
+
+**F1.0.3 - Contacto Rápido en Header**
+- Descripción: Mostrar teléfono/email o WhatsApp en header para reducir fricción en leads calientes.
+- Beneficio: Mejora confianza y permite contacto inmediato sin buscar la página de contacto.
+- Criterios de aceptación:
+  - [ ] Teléfono clicable con `tel:` en desktop y mobile.
+  - [ ] Email clicable con `mailto:` o enlace a formulario.
+  - [ ] Botón destacado "Solicitar Presupuesto" siempre visible.
+  - [ ] En mobile, contacto accesible desde menú o botón sticky.
 
 ### Épica 1.1: Funcionalidad de Filtros y Búsqueda
 
@@ -81,7 +487,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 
 **F1.2.1 - Crear Ruta /proyecto/{slug}**
 - Descripción: Crear página individual para cada proyecto con URL amigable
-- Beneficio: Cada proyecto tiene página única, mejorable y linkeabel
+- Beneficio: Cada proyecto tiene página única, mejorable y enlazable
 - Criterios de aceptación:
   - [ ] URLs: /proyecto/kuusamo, /proyecto/tampere, etc.
   - [ ] 404 si proyecto no existe
@@ -93,18 +499,19 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 - Criterios de aceptación:
   - [ ] Lightbox con navegación (prev/next)
   - [ ] Zoom en imagen
-  - [ ] Thumbnails abajo (1-2 lineas)
+  - [ ] Thumbnails abajo (1-2 líneas)
   - [ ] Optimizadas para carga rápida
 
 **F1.2.3 - Especificaciones Técnicas Completas**
-- Descripción: Sección con specs: paneles SIP (espesor, R-value), acabados, personalización
-- Beneficio: Clientes entienden exactamente qué están comprando
+- Descripción: Sección con specs: paneles SIP (espesor, R-value), acabados, personalización, documentación técnica y normativa aplicable
+- Beneficio: Clientes entienden exactamente qué están comprando y ganan confianza técnica antes de pedir presupuesto
 - Criterios de aceptación:
   - [ ] Especificación de panel SIP: espesor (cm), R-value (insulación)
   - [ ] Cantidad: dormitorios, baños, área útil
   - [ ] Acabados incluidos (techo, piso, pintura, puertas)
   - [ ] Opciones de personalización disponibles
-  - [ ] Certificaciones/estándares (ISO, energía, etc.)
+  - [ ] Normativas, certificaciones o estándares aplicables mostrados solo si están documentados
+  - [ ] Descarga de ficha técnica o solicitud de documentación técnica
 
 **F1.2.4 - Timeline de Construcción y Entrega**
 - Descripción: Mostrar fases constructivas (diseño → fabricación → entrega) con duraciones
@@ -122,8 +529,8 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] 3 cards o tabs: Opciones de Servicio
   - [ ] Descripción clara de cada una
   - [ ] Diferencia de precio explícita
-  - [ ] Incluidos/excluidos en cada opción, nevio, estudio de terreno
-  - [ ] Garantia y normatica europea
+  - [ ] Incluidos/excluidos en cada opción: transporte, montaje, estudio de terreno, permisos y acabados
+  - [ ] Garantía, documentación técnica y cumplimiento normativo europeo aplicable
 
 **F1.2.6 - Proceso Constructivo Explicado**
 - Descripción: Sección con descripción de cómo se construye, ventajas de SIP
@@ -132,7 +539,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] 4-6 pasos del proceso con imágenes/íconos
   - [ ] Explicación de por qué SIP es mejor (velocidad, eficiencia, calidad)
   - [ ] Comparativa con construcción tradicional (tiempo/costo)
-  - [ ] Garantia Europea, normativa europea de eficiencia
+  - [ ] Explicar eficiencia y normativa europea aplicable con lenguaje verificable
 
 **F1.2.7 - CTA Contextual: "Solicitar Cotización"**
 - Descripción: Botón prominente en detalle de proyecto que abre formulario pre-filled
@@ -150,6 +557,16 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] 4 cards de proyectos similares
   - [ ] Enlace directo a detalle de cada uno
   - [ ] "Más como este" o "También te puede interesar"
+
+**F1.2.9 - Bloque de Precio, Opcionales y Pagos**
+- Descripción: Mostrar precio base, qué incluye, opcionales principales y esquema de pagos orientativo por proyecto.
+- Beneficio: Reduce incertidumbre económica y refuerza el posicionamiento de precio accesible.
+- Criterios de aceptación:
+  - [ ] Precio base visible con nota "desde" o "estimado" si depende de configuración, transporte o permisos.
+  - [ ] Desglose de incluidos/excluidos para evitar expectativas falsas.
+  - [ ] Opcionales frecuentes con rango o coste orientativo cuando exista dato validado.
+  - [ ] Esquema de pagos orientativo explicado como sujeto a contrato/proyecto.
+  - [ ] CTA: "Recibir presupuesto detallado".
 
 ---
 
@@ -299,6 +716,15 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] Link "Cómo llegar" directo a Google Maps
   - [ ] Información: dirección, teléfono, horario en popup
 
+**F1.5.6 - Barra de Confianza y Contacto**
+- Descripción: Añadir una franja visible en home/contacto con teléfono, email, zonas de servicio y mensaje de asesoría para construir.
+- Beneficio: Hace la web más útil para clientes listos para consultar y refuerza la cercanía comercial.
+- Criterios de aceptación:
+  - [ ] Mostrar canales de contacto principales en una sola fila o card compacta.
+  - [ ] Indicar zonas de servicio de forma prudente: "consultar disponibilidad por región".
+  - [ ] CTA de llamada y CTA de formulario claramente diferenciados.
+  - [ ] Texto orientado a lead: "Cuéntanos dónde quieres construir y te orientamos".
+
 ---
 
 ## 🟠 PRIORIDAD 2: IMPORTANTES (3-4 semanas)
@@ -307,7 +733,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 
 **F2.1.1 - Historia de la Empresa**
 - Descripción: Página /sobre-nosotros con historia, fundación, misión
-- Beneficio: Humaniza marca, genera confianza a través de narrative
+- Beneficio: Humaniza marca, genera confianza a través de narrativa
 - Criterios de aceptación:
   - [ ] Timeline: fundación → hitos principales → presente
   - [ ] 300-500 palabras de storytelling
@@ -315,19 +741,20 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 
 **F2.1.2 - Equipo y Expertos**
 - Descripción: Cards de miembros clave: foto, nombre, rol, experiencia
-- Beneficio: Social proof, faces behind the brand
+- Beneficio: Prueba social, personas reales detrás de la marca
 - Criterios de aceptación:
   - [ ] 5-8 miembros del equipo
   - [ ] Foto profesional + nombre + rol + bio corta
   - [ ] Link a LinkedIn (opcional)
 
 **F2.1.3 - Certificaciones y Estándares**
-- Descripción: Mostrar ISO, estándares energéticos, acreditaciones
+- Descripción: Mostrar certificaciones, estándares energéticos, documentación técnica y normativa europea aplicable cuando estén verificados
 - Beneficio: Credibilidad técnica, cumplimiento regulatorio
 - Criterios de aceptación:
-  - [ ] Logos de certificaciones
-  - [ ] Año de obtención
-  - [ ] Link a certificado (PDF)
+  - [ ] Logos o menciones solo de certificaciones realmente disponibles
+  - [ ] Año de obtención o versión del documento cuando aplique
+  - [ ] Link a certificado/ficha técnica (PDF) o mensaje "documentación disponible bajo solicitud"
+  - [ ] Evitar afirmaciones absolutas de cumplimiento si no hay soporte documental
 
 **F2.1.4 - Proceso Constructivo Detallado**
 - Descripción: Explicar paso a paso cómo se construye (fases, control calidad)
@@ -487,22 +914,23 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 ### Épica 2.5: Expandir Sección "Por Qué NordiK"
 
 **F2.5.1 - Detalles de Garantía Completa**
-- Descripción: Especificar: estructura (10 años), materiales, técnica, servicio post-venta
+- Descripción: Especificar garantías disponibles por categoría: estructura, materiales, técnica y servicio post-venta
 - Beneficio: Seguridad al cliente, diferenciador clave
 - Criterios de aceptación:
   - [ ] Sección "Nuestra Garantía" con breakdown:
-    - Estructura: 10 años
-    - Materiales: 5 años
-    - Técnica: 2 años
+    - Estructura: plazo validado por NordiK/contrato
+    - Materiales: plazo validado por proveedor/contrato
+    - Técnica: plazo validado por NordiK/contrato
   - [ ] PDF descargable: términos completos
   - [ ] Proceso de reclamación explicado
+  - [ ] Lenguaje claro: garantías sujetas a condiciones, mantenimiento y contrato
 
 **F2.5.2 - Certificaciones Ambientales**
-- Descripción: Mostrar: PEFC, FSC, O sellos de eficiencia energética
+- Descripción: Mostrar PEFC, FSC u otros sellos de eficiencia/ambientales solo si existen y están documentados
 - Beneficio: Atrae clientes eco-conscientes
 - Criterios de aceptación:
-  - [ ] Logos de certificaciones con descripciones
-  - [ ] Impacto ambiental: CO2 reducido vs. construcción tradicional
+  - [ ] Logos de certificaciones con descripciones verificables
+  - [ ] Impacto ambiental explicado con datos reales o marcado como estimación
   - [ ] Links a certificados verificables
 
 **F2.5.3 - Comparativa vs. Construcción Tradicional**
@@ -512,6 +940,38 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] Tabla 2 columnas: SIP Panels | Construcción Tradicional
   - [ ] Filas: Tiempo construcción, Costo total, Eficiencia energética, Desperdicio, Garantía
   - [ ] Números reales/estimados claramente marcados
+
+---
+
+### Épica 2.6: Página "Cómo Funciona" y Compra Guiada
+
+**F2.6.1 - Crear Página /como-funciona**
+- Descripción: Explicar el proceso completo desde la consulta inicial hasta la entrega de la vivienda.
+- Beneficio: Da claridad a clientes que quieren construir pero no conocen pasos, permisos, tiempos o decisiones.
+- Criterios de aceptación:
+  - [ ] 6-9 pasos con texto breve, iconos y CTA por etapa.
+  - [ ] Incluir consulta inicial, diseño, presupuesto, documentación, fabricación, montaje, entrega y postventa.
+  - [ ] Indicar qué depende del cliente, de NordiK y de terceros (terreno, permisos, financiación).
+  - [ ] CTA final: "Empezar mi proyecto".
+
+**F2.6.2 - Guía de Presupuesto y Asequibilidad**
+- Descripción: Crear contenido que explique precio base, factores que cambian el coste y alternativas para ajustar presupuesto.
+- Beneficio: Refuerza el mensaje de mejores precios/precio accesible sin prometer importes cerrados no verificables.
+- Criterios de aceptación:
+  - [ ] Explicar variables: tamaño, acabados, transporte, terreno, permisos, montaje y opcionales.
+  - [ ] Mostrar ejemplos "desde" o rangos solo con datos validados.
+  - [ ] Incluir mensaje aspiracional: vivienda propia eficiente y bonita con inversión controlada.
+  - [ ] CTA: "Pedir orientación de presupuesto".
+
+**F2.6.3 - Página de Calidad, Normativa y Garantías**
+- Descripción: Centralizar la información de calidad constructiva, documentación técnica, cumplimiento normativo europeo aplicable y garantías.
+- Beneficio: Convierte dudas técnicas en confianza comercial y prepara contenido reusable para producto, FAQ y contacto.
+- Criterios de aceptación:
+  - [ ] Sección de materiales y sistema constructivo.
+  - [ ] Sección de eficiencia energética y aislamiento con datos verificables.
+  - [ ] Sección de garantías con condiciones y enlaces a documentos.
+  - [ ] Sección de documentación técnica disponible.
+  - [ ] Copy prudente: "cumplimiento aplicable", "según proyecto", "documentación bajo solicitud".
 
 ---
 
@@ -563,7 +1023,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 
 **F3.1.6 - Tipografía: Body Text Legible**
 - Descripción: Aumentar tamaño body (14px → 16px), mejorar contraste
-- Beneficio: Mejor readabilidad, menos esfuerzo visual
+- Beneficio: Mejor legibilidad, menos esfuerzo visual
 - Criterios de aceptación:
   - [ ] Body text: 16px mínimo
   - [ ] Line height: 1.6-1.8
@@ -583,7 +1043,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 
 **F3.2.2 - Cambio de Filtro = Scroll al Top Automático**
 - Descripción: Al aplicar filtro, page scrollea a top para ver resultados
-- Beneficio: Evita confusion de "¿por qué no cambia?"
+- Beneficio: Evita confusión de "¿por qué no cambia?"
 - Criterios de aceptación:
   - [ ] Smooth scroll al cambiar filtro
   - [ ] Opcional: deshabilitar si desplazamiento > 500px
@@ -632,6 +1092,8 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] ¿Financiamiento disponible? (200 palabras)
   - [ ] ¿Dónde entregan? (200 palabras)
   - [ ] ¿Cómo es el aislamiento SIP? (250 palabras)
+  - [ ] ¿Qué normativas europeas o documentación técnica aplican? (250 palabras)
+  - [ ] ¿Qué incluye y qué no incluye el precio base? (250 palabras)
   - [ ] Otros 5-6 según soporte actual
 
 **F3.3.3 - Link a FAQ desde Formulario**
@@ -657,11 +1119,11 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] Cierre: X button o click fuera
 
 **F3.4.2 - CTA Contextual en Hero**
-- Descripción: 2 botones claros: "Ver Proyectos" (primary) y "Cotizar Ahora" (secondary)
+- Descripción: 2 botones claros: "Solicitar Presupuesto" (primary) y "Ver Modelos" o "Cómo Funciona" (secondary)
 - Beneficio: Dirección clara desde inicio
 - Criterios de aceptación:
-  - [ ] Botón primario: "Explorar Proyectos" → /catalogo
-  - [ ] Botón secundario: "Solicitar Presupuesto" → /contacto
+  - [ ] Botón primario: "Solicitar Presupuesto" → /contacto
+  - [ ] Botón secundario: "Ver Modelos" → /catalogo o "Cómo Funciona" → /como-funciona
   - [ ] Tamaños grandes, contraste alto
 
 **F3.4.3 - CTA en Tarjetas de Producto**
@@ -673,7 +1135,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 
 **F3.4.4 - CTA al Final de Secciones**
 - Descripción: Al fin de cada sección grande (servicios, por qué, etc.), CTA relevante
-- Beneficio: Múltiples conversión points
+- Beneficio: Múltiples puntos de conversión
 - Criterios de aceptación:
   - [ ] "Por Qué": "Conoce más sobre NordiK" → /sobre-nosotros
   - [ ] "Servicios": "Ver proyectos de [servicio]" → /catalogo?type=casas
@@ -684,8 +1146,9 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 - Beneficio: Mayor conversión a través de copy
 - Criterios de aceptación:
   - [ ] En lugar de "Enviar": "Solicitar Presupuesto Gratis"
-  - [ ] En lugar de "Contacto": "Agendar Consulta"
+  - [ ] En lugar de "Contacto": "Hablar con un Asesor"
   - [ ] En lugar de "Más": "Ver Todos los Proyectos"
+  - [ ] Alternativas aspiracionales: "Quiero mi casa NordiK", "Calcular mi proyecto", "Diseñar mi casa"
 
 **F3.4.6 - Botón WhatsApp Flotante (Opcional)**
 - Descripción: Icono de WhatsApp flotante bottom-left para contacto directo
@@ -829,7 +1292,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
   - [ ] Tiempo de lectura estimado
 
 **F4.3.5 - Newsletter Signup en Blog**
-- Descripción: Formulario para subscribirse a newsletter de artículos nuevos
+- Descripción: Formulario para suscribirse a newsletter de artículos nuevos
 - Beneficio: Email list building, lead nurturing
 - Criterios de aceptación:
   - [ ] Popup o form en sidebar
@@ -856,7 +1319,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 - Criterios de aceptación:
   - [ ] Lead data sync automático
   - [ ] Campos mapeados: nombre, email, teléfono, proyecto, presupuesto
-  - [ ] Dupliplicación detection
+  - [ ] Detección de duplicados
   - [ ] Log de actividades: formulario, cotización, llamada
 
 **F4.4.3 - Seguimiento de Cotizaciones**
@@ -884,16 +1347,18 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 
 | Épica | Features | Prioridad | Duración |
 |-------|----------|-----------|----------|
+| 1.0: Posicionamiento Comercial | 3 | P1 | 3-5 días |
 | 1.1: Filtros y Búsqueda | 8 | P1 | 1-2 sem |
-| 1.2: Detalle de Producto | 8 | P1 | 2-3 sem |
+| 1.2: Detalle de Producto | 9 | P1 | 2-3 sem |
 | 1.3: Enlaces Rotos | 2 | P1 | 3-5 días |
 | 1.4: Formulario | 9 | P1 | 1-2 sem |
-| 1.5: Contacto | 5 | P1 | 1 sem |
+| 1.5: Contacto | 6 | P1 | 1 sem |
 | 2.1: Sobre Nosotros | 6 | P2 | 1-2 sem |
 | 2.2: Social Proof | 6 | P2 | 2 sem |
 | 2.3: Galería | 5 | P2 | 1-2 sem |
 | 2.4: Comparador | 3 | P2 | 1 sem |
 | 2.5: Expandir Por Qué | 3 | P2 | 1 sem |
+| 2.6: Cómo Funciona y Compra Guiada | 3 | P2 | 1-2 sem |
 | 3.1: Visual | 6 | P3 | 3-5 días |
 | 3.2: Filtros UX | 4 | P3 | 5-7 días |
 | 3.3: FAQ | 3 | P3 | 5 días |
@@ -903,13 +1368,14 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 | 4.3: Blog | 5 | P4 | 2-3 sem |
 | 4.4: Ecommerce | 4 | P4 | 3-4 sem |
 
-**Total: 32 Features en 18 Épicas | Duración estimada: 12-16 semanas**
+**Total: features accionables en 20 épicas | Duración estimada: 12-16 semanas**
 
 ---
 
 ## 🚀 ROADMAP RECOMENDADO
 
 **Semanas 1-2:**
+- [ ] P1.0: Posicionamiento, hero, contacto rápido (F1.0.1 - F1.0.3)
 - [ ] P1.1: Búsqueda + filtros dinámicos (F1.1.1 - F1.1.3)
 - [ ] P1.3: Reparar enlaces (F1.3.1 - F1.3.2)
 
@@ -924,6 +1390,7 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 **Semanas 7-8:**
 - [ ] P2.2: Testimonios y social proof (F2.2.1 - F2.2.6)
 - [ ] P2.1: Sobre nosotros (F2.1.1 - F2.1.6)
+- [ ] P2.6: Cómo funciona, presupuesto y garantías (F2.6.1 - F2.6.3)
 
 **Semanas 9-10:**
 - [ ] P2.3: Galería mejorada (F2.3.1 - F2.3.5)
@@ -945,12 +1412,15 @@ Plan de implementación de features para NordiK (portal B2B/B2C de casas prefabr
 - [ ] Conversión de contacto: 1-2%
 - [ ] Bounce rate: <50%
 - [ ] Tiempo en sitio: 2-3 minutos
+- [ ] Clicks en teléfono/WhatsApp/email desde header y contacto rápido
+- [ ] Visitas a /como-funciona y páginas de garantía/calidad
 
 **3+ Meses:**
 - [ ] Leads mensuales: +50% vs. baseline
 - [ ] Conversión de leads a cliente: 10-15%
 - [ ] Satisfacción cliente (NPS): 50+
 - [ ] Retorno en inversión de features: 2-3x
+- [ ] Porcentaje de leads con proyecto/ubicación/presupuesto informado
 
 ---
 

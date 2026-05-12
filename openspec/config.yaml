@@ -1,27 +1,20 @@
 schema: spec-driven
 
-context: |
-  Project: NordiK - Portal B2B/B2C de Casas Prefabricadas Nórdicas
-  Tech stack: TypeScript, React, Node.js, Next.js
-  Conventions: Feature-based approach, spec-driven development
-  Domain: Sustainable construction, modular housing, SIP panels
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
 
-  Key goals:
-  - Improve user experience and conversion funnel
-  - Complete broken functionality (filters, links, forms)
-  - Add social proof and credibility indicators
-  - Implement advanced features (3D, ecommerce, CRM)
-
-  Current state:
-  - 32 features enumerated across 4 priorities
-  - P1 (Critical): 32 features, 2-3 weeks
-  - P2 (High): 23 features, 3-4 weeks
-  - P3 (Medium): 19 features, 2 weeks
-  - P4 (Low): 18 features, 4+ weeks
-
-rules:
-  features:
-    - Each feature must have clear acceptance criteria (5+ checkboxes)
-    - Effort estimates: small (1-3h), medium (4-8h), large (9h+)
-    - Status: proposed, in-progress, completed
-    - Include metrics for success
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours

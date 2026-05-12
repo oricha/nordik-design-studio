@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import ValueProposition from "@/components/ValueProposition";
 import { SocialProofRibbon } from "@/components/SocialProofRibbon";
 import ProjectCatalog from "@/components/ProjectCatalog";
 import WhySection from "@/components/WhySection";
@@ -10,9 +11,10 @@ import { LocationsSection } from "@/components/LocationsSection";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-            <main>
+      <main>
         <Hero />
         <SocialProofRibbon />
+        <ValueProposition />
         <ProjectCatalog />
         <WhySection />
         <Services />
@@ -20,7 +22,7 @@ const Index = () => {
         <ContactSection />
         <LocationsSection />
       </main>
-          </div>
+    </div>
   );
 };
 

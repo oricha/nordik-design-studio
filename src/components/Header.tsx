@@ -136,7 +136,7 @@ const Header = () => {
           ))}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-6">
+        <div className="ml-auto flex shrink-0 items-center gap-4">
           <button
             type="button"
             className="flex items-center gap-1.5 text-[15px] font-semibold tracking-tight text-foreground/60 transition-colors hover:text-foreground"
@@ -144,6 +144,14 @@ const Header = () => {
             <Globe className="h-[15px] w-[15px]" />
             ES / €
           </button>
+          <a
+            href={`tel:${siteContact.phoneHref}`}
+            title={siteContact.hoursShort}
+            className="hidden xl:inline-flex items-center gap-2 text-[15px] font-semibold tracking-tight text-foreground/60 transition-colors hover:text-foreground"
+          >
+            <Phone className="h-4 w-4 shrink-0 text-accent" aria-hidden />
+            {siteContact.phoneDisplay}
+          </a>
           <a
             href="/contactos"
             className="inline-flex items-center gap-2 whitespace-nowrap rounded-[10px] bg-accent px-4 py-[0.72rem] text-[0.84rem] font-semibold uppercase tracking-[0.01em] text-white transition-opacity hover:opacity-90"

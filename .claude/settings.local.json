@@ -37,7 +37,10 @@
       "mcp__Claude_in_Chrome__navigate",
       "mcp__Claude_in_Chrome__computer",
       "mcp__Claude_in_Chrome__resize_window",
-      "mcp__Claude_in_Chrome__read_console_messages"
+      "mcp__Claude_in_Chrome__read_console_messages",
+      "WebFetch(domain:github.com)",
+      "Bash(awk -F/ '{print $NF, \"→\", $\\(NF-1\\)}')",
+      "Bash(sort -k3)"
     ]
   }
 }

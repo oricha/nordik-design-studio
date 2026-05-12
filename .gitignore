@@ -27,3 +27,6 @@ dist-ssr
 .vercel
 openspec/*
 NordiK_SECON_Analisis.md
+
+.openspec/*
+openspec/*
