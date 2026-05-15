@@ -17,6 +17,7 @@ import FaqPage from "@/pages/FaqPage";
 import ContactPage from "@/pages/ContactPage";
 import ServicesPage from "@/pages/ServicesPage";
 import ProjectDetailPage from "@/pages/ProjectDetailPage";
+import HowItWorksPage from "@/pages/HowItWorksPage";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/contactos" element={<ContactPage />} />
           <Route path="/servicios" element={<ServicesPage />} />
 
+          <Route path="/how-it-works" element={<HowItWorksPage />} />
           <Route path="/project/:slug" element={<LegacyProjectRedirect />} />
           <Route path="/proyecto/:slug" element={<ProjectDetailPage />} />
 

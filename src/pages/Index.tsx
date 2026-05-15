@@ -5,8 +5,7 @@ import { SocialProofRibbon } from "@/components/SocialProofRibbon";
 import ProjectCatalog from "@/components/ProjectCatalog";
 import WhySection from "@/components/WhySection";
 import Services from "@/components/Services";
-import Gallery from "@/components/Gallery";
-import ContactSection from "@/components/ContactSection";
+import HowItWorksTimeline from "@/components/HowItWorksTimeline";
 import { LocationsSection } from "@/components/LocationsSection";
 
 const Index = () => {
@@ -15,13 +14,12 @@ const Index = () => {
       <main>
         <Hero />
         <ProjectCatalog />
+        <HowItWorksTimeline />
         <TrustBar />
         <SocialProofRibbon />
         <ValueProposition />
         <WhySection />
         <Services />
-        <Gallery />
-        <ContactSection />
         <LocationsSection />
       </main>
     </div>

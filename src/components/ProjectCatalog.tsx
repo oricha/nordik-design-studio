@@ -222,73 +222,18 @@ const ProjectCatalog = () => {
 
         <div className="flex flex-col gap-8">
           <div className="min-w-0">
-            <div className="mb-4 rounded-[26px] border border-border bg-background px-6 py-6 shadow-[0_20px_60px_rgba(15,15,15,0.06)]">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-3">
-                  <span className="text-base font-semibold text-foreground">Precio</span>
-                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
-                    <div className="flex items-center gap-3">
-                      <input
-                        type="number"
-                        min={availableRange[0]}
-                        max={availableRange[1]}
-                        value={priceRange[0]}
-                        onChange={(e) => {
-                          const parsed = Number(e.target.value.replace(",", "."));
-                          if (Number.isNaN(parsed)) return;
-                          const [lo, hi] = availableRange;
-                          const capped = Math.min(hi, Math.max(lo, parsed));
-                          const nextMin = Math.min(capped, priceRange[1]);
-                          setPriceRange([nextMin, priceRange[1]]);
-                        }}
-                        className="h-14 w-full min-w-[150px] rounded-2xl border border-border bg-white px-5 text-lg text-foreground outline-none transition-colors focus:border-accent md:w-[170px]"
-                      />
-                      <span className="text-xl text-muted-foreground">-</span>
-                      <input
-                        type="number"
-                        min={availableRange[0]}
-                        max={availableRange[1]}
-                        value={priceRange[1]}
-                        onChange={(e) => {
-                          const parsed = Number(e.target.value.replace(",", "."));
-                          if (Number.isNaN(parsed)) return;
-                          const [lo, hi] = availableRange;
-                          const capped = Math.min(hi, Math.max(lo, parsed));
-                          const nextMax = Math.max(capped, priceRange[0]);
-                          setPriceRange([priceRange[0], nextMax]);
-                        }}
-                        className="h-14 w-full min-w-[150px] rounded-2xl border border-border bg-white px-5 text-lg text-foreground outline-none transition-colors focus:border-accent md:w-[170px]"
-                      />
-                    </div>
+            <div className="mb-8 rounded-[20px] border border-border bg-background shadow-[0_20px_60px_rgba(15,15,15,0.06)]">
 
-                    <div className="min-w-0 flex-1 px-1">
-                      <Slider
-                        min={availableRange[0]}
-                        max={availableRange[1]}
-                        step={1000}
-                        value={priceRange}
-                        onValueChange={(value) => setPriceRange([value[0], value[1]])}
-                        className="[&_[data-radix-slider-range]]:bg-accent [&_[data-radix-slider-thumb]]:h-5 [&_[data-radix-slider-thumb]]:w-5 [&_[data-radix-slider-thumb]]:border-accent [&_[data-radix-slider-thumb]]:bg-accent [&_[data-radix-slider-track]]:h-1.5 [&_[data-radix-slider-track]]:bg-accent/20"
-                      />
-                      <div className="mt-3 flex items-center justify-between text-sm text-muted-foreground">
-                        <span>{formatPrice(priceRange[0])}</span>
-                        <span>{formatPrice(priceRange[1])}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-8 rounded-[26px] border border-border bg-background px-6 py-5 shadow-[0_20px_60px_rgba(15,15,15,0.05)]">
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap items-center gap-3">
+              {/* Row 1: sort · view · [mobile filters] · categories (right) */}
+              <div className="flex flex-wrap items-center justify-between gap-2 px-5 py-3">
+                {/* Left: sort + view toggle + mobile drawer btn */}
+                <div className="flex flex-wrap items-center gap-2">
                   <div className="relative">
-                    <ArrowUpDown className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <ArrowUpDown className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="h-12 min-w-[270px] appearance-none rounded-2xl border border-border bg-white pl-12 pr-12 text-base text-foreground outline-none transition-colors focus:border-accent"
+                      className="h-9 min-w-[190px] appearance-none rounded-xl border border-border bg-white pl-9 pr-8 text-sm text-foreground outline-none transition-colors focus:border-accent"
                     >
                       {sortOptions.map((opt) => (
                         <option key={opt.value} value={opt.value}>
@@ -296,106 +241,163 @@ const ProjectCatalog = () => {
                         </option>
                       ))}
                     </select>
-                    <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                   </div>
 
-                  <div className="flex items-center gap-2" role="group" aria-label="Vista de resultados">
+                  <div className="flex items-center gap-1" role="group" aria-label="Vista de resultados">
                     <button
                       type="button"
                       onClick={() => handleViewModeChange("grid")}
                       aria-pressed={viewMode === "grid"}
                       className={cn(
-                        "rounded-2xl p-3 transition-all",
+                        "rounded-xl p-2 transition-all",
                         viewMode === "grid"
                           ? "bg-primary text-primary-foreground"
                           : "bg-background text-muted-foreground hover:bg-border",
                       )}
                       title="Vista Grid"
                     >
-                      <Grid2X2 className="h-5 w-5" />
+                      <Grid2X2 className="h-4 w-4" />
                     </button>
                     <button
                       type="button"
                       onClick={() => handleViewModeChange("list")}
                       aria-pressed={viewMode === "list"}
                       className={cn(
-                        "rounded-2xl p-3 transition-all",
+                        "rounded-xl p-2 transition-all",
                         viewMode === "list"
                           ? "bg-primary text-primary-foreground"
                           : "bg-background text-muted-foreground hover:bg-border",
                       )}
                       title="Vista Lista"
                     >
-                      <List className="h-5 w-5" />
+                      <List className="h-4 w-4" />
                     </button>
                   </div>
 
                   <button
                     type="button"
                     onClick={() => setDrawerOpen(true)}
-                    className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent/50 lg:hidden"
+                    className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-white px-3 py-2 text-xs font-semibold text-foreground transition-colors hover:border-accent/50 lg:hidden"
                   >
-                    <SlidersHorizontal className="h-4 w-4" aria-hidden />
+                    <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden />
                     Filtros
                     {activeFilterCount > 0 && (
-                      <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-accent px-1.5 py-0.5 text-xs font-bold text-accent-foreground">
+                      <span className="inline-flex min-w-4 items-center justify-center rounded-full bg-accent px-1 py-0.5 text-[10px] font-bold text-accent-foreground">
                         {activeFilterCount}
                       </span>
                     )}
                   </button>
                 </div>
 
-                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                  <div className="flex flex-wrap items-center gap-3 lg:justify-start">
-                    {categories.map((cat) => (
-                      <button
-                        key={cat.key}
-                        type="button"
-                        onClick={() => setActiveCategory(cat.key)}
-                        className={cn(
-                          "rounded-2xl border px-5 py-3 text-base font-medium transition-all",
-                          activeCategory === cat.key
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-border bg-white text-foreground hover:border-accent/50",
-                        )}
-                      >
-                        {cat.label}
-                      </button>
-                    ))}
-                  </div>
+                {/* Right: category pills */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.key}
+                      type="button"
+                      onClick={() => setActiveCategory(cat.key)}
+                      className={cn(
+                        "rounded-xl border px-3 py-1.5 text-sm font-medium transition-all",
+                        activeCategory === cat.key
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-white text-foreground hover:border-accent/50",
+                      )}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-                  <div className="hidden shrink-0 lg:flex lg:min-w-[250px] lg:flex-col lg:items-end">
-                    <span className="mb-3 text-sm font-semibold text-foreground">Habitaciones</span>
-                    <div className="flex items-center gap-2">
-                      {[1, 2, 3, 4].map((bedroom) => {
-                        const selected = advancedFilters.bedrooms.includes(bedroom);
-                        return (
-                          <button
-                            key={`desktop-bed-${bedroom}`}
-                            type="button"
-                            onClick={() =>
-                              handleFilterChange({
-                                ...advancedFilters,
-                                bedrooms: selected
-                                  ? advancedFilters.bedrooms.filter((value) => value !== bedroom)
-                                  : [...advancedFilters.bedrooms, bedroom].sort((a, b) => a - b),
-                              })
-                            }
-                            className={cn(
-                              "rounded-2xl border px-4 py-3 text-base font-medium transition-all",
-                              selected
-                                ? "border-primary bg-primary text-primary-foreground"
-                                : "border-border bg-white text-foreground hover:border-accent/50",
-                            )}
-                          >
-                            {bedroom === 4 ? "4+" : bedroom}
-                          </button>
-                        );
-                      })}
+              {/* Divider */}
+              <div className="border-t border-border" />
+
+              {/* Row 2: price range (left) · bedrooms (right) */}
+              <div className="flex flex-col gap-3 px-5 py-3 lg:flex-row lg:items-center lg:justify-between">
+                {/* Price inputs + slider */}
+                <div className="flex min-w-0 flex-1 flex-col gap-2 lg:flex-row lg:items-center">
+                  <span className="shrink-0 text-xs font-semibold text-muted-foreground">Precio</span>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min={availableRange[0]}
+                      max={availableRange[1]}
+                      value={priceRange[0]}
+                      onChange={(e) => {
+                        const parsed = Number(e.target.value.replace(",", "."));
+                        if (Number.isNaN(parsed)) return;
+                        const [lo, hi] = availableRange;
+                        const capped = Math.min(hi, Math.max(lo, parsed));
+                        setPriceRange([Math.min(capped, priceRange[1]), priceRange[1]]);
+                      }}
+                      className="h-9 w-28 rounded-xl border border-border bg-white px-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
+                    />
+                    <span className="text-sm text-muted-foreground">–</span>
+                    <input
+                      type="number"
+                      min={availableRange[0]}
+                      max={availableRange[1]}
+                      value={priceRange[1]}
+                      onChange={(e) => {
+                        const parsed = Number(e.target.value.replace(",", "."));
+                        if (Number.isNaN(parsed)) return;
+                        const [lo, hi] = availableRange;
+                        const capped = Math.min(hi, Math.max(lo, parsed));
+                        setPriceRange([priceRange[0], Math.max(capped, priceRange[0])]);
+                      }}
+                      className="h-9 w-28 rounded-xl border border-border bg-white px-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1 px-1">
+                    <Slider
+                      min={availableRange[0]}
+                      max={availableRange[1]}
+                      step={1000}
+                      value={priceRange}
+                      onValueChange={(value) => setPriceRange([value[0], value[1]])}
+                      className="[&_[data-radix-slider-range]]:bg-accent [&_[data-radix-slider-thumb]]:h-4 [&_[data-radix-slider-thumb]]:w-4 [&_[data-radix-slider-thumb]]:border-accent [&_[data-radix-slider-thumb]]:bg-accent [&_[data-radix-slider-track]]:h-1 [&_[data-radix-slider-track]]:bg-accent/20"
+                    />
+                    <div className="mt-1.5 flex items-center justify-between text-xs text-muted-foreground">
+                      <span>{formatPrice(availableRange[0])}</span>
+                      <span>{formatPrice(availableRange[1])}</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Bedrooms (desktop only) */}
+                <div className="hidden shrink-0 items-center gap-2 lg:flex">
+                  <span className="text-xs font-semibold text-muted-foreground">Habitaciones</span>
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4].map((bedroom) => {
+                      const selected = advancedFilters.bedrooms.includes(bedroom);
+                      return (
+                        <button
+                          key={`desktop-bed-${bedroom}`}
+                          type="button"
+                          onClick={() =>
+                            handleFilterChange({
+                              ...advancedFilters,
+                              bedrooms: selected
+                                ? advancedFilters.bedrooms.filter((v) => v !== bedroom)
+                                : [...advancedFilters.bedrooms, bedroom].sort((a, b) => a - b),
+                            })
+                          }
+                          className={cn(
+                            "rounded-xl border px-3 py-1.5 text-sm font-medium transition-all",
+                            selected
+                              ? "border-primary bg-primary text-primary-foreground"
+                              : "border-border bg-white text-foreground hover:border-accent/50",
+                          )}
+                        >
+                          {bedroom === 4 ? "4+" : bedroom}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
+
             </div>
 
             <div className="mb-8" id="catalog-results-anchor" />

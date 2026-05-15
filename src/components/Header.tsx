@@ -6,7 +6,7 @@ import { PROJECT_CATALOG_QUERY_KEY } from "@/constants/projectCatalog";
 import { siteContact } from "@/data/siteContact";
 
 const navLinks = [
-  { label: "Galería", href: "/#gallery" },
+  { label: "How it works", href: "/how-it-works" },
   { label: "Servicios", href: "/servicios" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
