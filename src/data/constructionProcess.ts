@@ -1,3 +1,11 @@
+import contactHouseImage from "@/assets/contact-house.jpg";
+import galleryOneImage from "@/assets/gallery-1.jpg";
+import galleryTwoImage from "@/assets/gallery-2.jpg";
+import galleryThreeImage from "@/assets/gallery-3.jpg";
+import galleryFourImage from "@/assets/gallery-4.jpg";
+import projectOneImage from "@/assets/project-1.jpg";
+import projectTwoImage from "@/assets/project-2.jpg";
+
 export interface ConstructionStep {
   id: string;
   stepNumber: number;
@@ -16,8 +24,7 @@ export const constructionSteps: ConstructionStep[] = [
     description:
       "Trabajamos con el cliente para crear un diseño personalizado que cumpla con sus especificaciones y necesidades. Se elaboran planos detallados y se valida la viabilidad del proyecto.",
     duration: "2-4 semanas",
-    image:
-      "https://images.unsplash.com/photo-1541123603104-852dbe8b7198?w=600&h=400&fit=crop",
+    image: galleryOneImage,
     qaCheckpoints: ["Aprobación de planos", "Verificación de especificaciones"],
   },
   {
@@ -27,8 +34,7 @@ export const constructionSteps: ConstructionStep[] = [
     description:
       "Los componentes prefabricados se construyen en nuestras instalaciones de fabricación bajo condiciones controladas, garantizando máxima precisión y calidad.",
     duration: "4-6 semanas",
-    image:
-      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop",
+    image: galleryTwoImage,
     qaCheckpoints: ["Inspección de componentes", "Pruebas de calidad"],
   },
   {
@@ -38,8 +44,7 @@ export const constructionSteps: ConstructionStep[] = [
     description:
       "Cada componente se somete a inspecciones rigurosas y pruebas de resistencia para garantizar que cumple con nuestros altos estándares de calidad.",
     duration: "1-2 semanas",
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+    image: projectOneImage,
     qaCheckpoints: ["Certificación de componentes", "Pruebas de durabilidad"],
   },
   {
@@ -49,8 +54,7 @@ export const constructionSteps: ConstructionStep[] = [
     description:
       "Los componentes se empacan de forma segura y se transportan a la ubicación de construcción. Coordinamos la entrega para que coincida con el cronograma del sitio.",
     duration: "1-2 semanas",
-    image:
-      "https://images.unsplash.com/photo-1534016066556-6b63e9c48cea?w=600&h=400&fit=crop",
+    image: projectTwoImage,
     qaCheckpoints: ["Verificación de entrega", "Inspección de sitio"],
   },
   {
@@ -60,8 +64,7 @@ export const constructionSteps: ConstructionStep[] = [
     description:
       "Se prepara la base y se realizan trabajos preliminares necesarios. Se establecen sistemas de drenaje, cimentación y otras preparaciones esenciales.",
     duration: "1-2 semanas",
-    image:
-      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&h=400&fit=crop",
+    image: galleryThreeImage,
     qaCheckpoints: ["Inspección de cimentación", "Validación de niveles"],
   },
   {
@@ -71,8 +74,7 @@ export const constructionSteps: ConstructionStep[] = [
     description:
       "Los componentes prefabricados se ensamblan en el sitio utilizando técnicas especializadas. Esta fase es mucho más rápida que la construcción tradicional.",
     duration: "2-3 semanas",
-    image:
-      "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop",
+    image: galleryFourImage,
     qaCheckpoints: ["Alineación estructural", "Conexiones aseguradas"],
   },
   {
@@ -82,8 +84,7 @@ export const constructionSteps: ConstructionStep[] = [
     description:
       "Se completan los sistemas eléctricos, fontanería, HVAC y trabajos de acabado. Se realizan pruebas finales para garantizar que todo funciona correctamente.",
     duration: "2-3 semanas",
-    image:
-      "https://images.unsplash.com/photo-1565450588840-4d7f3db47a12?w=600&h=400&fit=crop",
+    image: contactHouseImage,
     qaCheckpoints: [
       "Inspecciones de sistemas",
       "Pruebas funcionales finales",

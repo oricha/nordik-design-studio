@@ -18,6 +18,7 @@ import ContactPage from "@/pages/ContactPage";
 import ServicesPage from "@/pages/ServicesPage";
 import ProjectDetailPage from "@/pages/ProjectDetailPage";
 import HowItWorksPage from "@/pages/HowItWorksPage";
+import Why from "@/pages/Why";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/contactos" element={<ContactPage />} />
           <Route path="/servicios" element={<ServicesPage />} />
+          <Route path="/why" element={<Why />} />
 
           <Route path="/how-it-works" element={<HowItWorksPage />} />
           <Route path="/project/:slug" element={<LegacyProjectRedirect />} />

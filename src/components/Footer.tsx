@@ -24,7 +24,7 @@ const Footer = () => {
               <a href="/servicios#services-b2b" className="hover:text-primary-foreground transition-colors">Empresas y SIP</a>
               <a href="/testimonios" className="hover:text-primary-foreground transition-colors">Testimonios</a>
               <a href="/casos" className="hover:text-primary-foreground transition-colors">Casos de estudio</a>
-              <a href="/#why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
+              <a href="/why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
               <a href="/#gallery" className="hover:text-primary-foreground transition-colors">Galería</a>
               <a href="/faq" className="hover:text-primary-foreground transition-colors">FAQ NordiK</a>
               <a href="/contactos" className="hover:text-primary-foreground transition-colors">Agendar consulta</a>

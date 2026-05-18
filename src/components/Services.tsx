@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Home, Layers, Wrench } from "lucide-react";
+import { Building2, Hammer, Home, Layers, Trees, Wrench } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 type ServiceAudience = "b2c" | "b2b" | "both";
@@ -70,6 +70,42 @@ const services: ServiceItem[] = [
     ctaLabel: "Agendar consulta ejecutiva",
     ctaHash: "/contactos",
   },
+  {
+    icon: Hammer,
+    title: "Ampliaciones de casas",
+    subtitle: "Cocinas · salones · espacios traseros",
+    audience: "b2c",
+    audienceLabel: "Particulares",
+    bullets: ["Extensiones SIP integradas en vivienda existente", "Más metros útiles con obra limpia y planificación técnica"],
+    description:
+      "Diseñamos ampliaciones para cocinas, salones, estudios y espacios traseros, buscando continuidad estética con la casa actual y un presupuesto orientativo según estructura, accesos y acabados.",
+    ctaLabel: "Consultar ampliación",
+    ctaHash: "/contactos?service=ampliaciones",
+  },
+  {
+    icon: Building2,
+    title: "Construcción en terrazas y áticos",
+    subtitle: "Cubiertas · áticos · espacios elevados",
+    audience: "both",
+    audienceLabel: "Mixto · B2C & B2B",
+    bullets: ["Soluciones SIP ligeras para cubiertas transitables", "Estudio previo de cargas, permisos y envolvente"],
+    description:
+      "Creamos nuevos espacios funcionales en terrazas, áticos y cubiertas cuando la estructura y la normativa lo permiten, con sistemas SIP de bajo peso y documentación técnica bajo solicitud.",
+    ctaLabel: "Evaluar terraza o ático",
+    ctaHash: "/contactos?service=terrazas-aticos",
+  },
+  {
+    icon: Trees,
+    title: "Campings y cabañas",
+    subtitle: "Glamping · turismo rural · módulos compactos",
+    audience: "b2b",
+    audienceLabel: "Profesional",
+    bullets: ["Cabañas modulares para alojamientos turísticos", "Diseños repetibles, rápidos de montar y personalizables"],
+    description:
+      "Proyectamos cabañas y unidades compactas para campings, glamping y turismo rural, optimizando transporte, montaje por fases y una imagen nórdica consistente para el conjunto.",
+    ctaLabel: "Planificar proyecto turístico",
+    ctaHash: "/contactos?service=campings-cabanas",
+  },
 ];
 
 const AudiencePanel = ({
@@ -122,7 +158,7 @@ const Services = () => {
           <AudiencePanel {...audienceIntro.b2b} />
         </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, i) => (
             <motion.article
               key={service.title}
