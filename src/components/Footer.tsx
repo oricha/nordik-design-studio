@@ -26,7 +26,7 @@ const Footer = () => {
               <a href="/casos" className="hover:text-primary-foreground transition-colors">Casos de estudio</a>
               <a href="/why" className="hover:text-primary-foreground transition-colors">Por qué NordiK</a>
               <a href="/#gallery" className="hover:text-primary-foreground transition-colors">Galería</a>
-              <a href="/faq" className="hover:text-primary-foreground transition-colors">FAQ NordiK</a>
+              <a href="/faq" className="hover:text-primary-foreground transition-colors">Preguntas frecuentes NordiK</a>
               <a href="/contactos" className="hover:text-primary-foreground transition-colors">Agendar consulta</a>
             </nav>
           </div>
@@ -41,7 +41,7 @@ const Footer = () => {
               <a href={`tel:${siteContact.phoneHref}`} className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
                 <Phone className="w-4 h-4 shrink-0" aria-hidden />
                 {siteContact.phoneDisplay}{" "}
-                <span className="text-primary-foreground/50">· Barcelona HQ</span>
+                <span className="text-primary-foreground/50">· sede Barcelona</span>
               </a>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-primary-foreground/75">
                 {siteContact.offices

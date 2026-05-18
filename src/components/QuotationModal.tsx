@@ -91,9 +91,9 @@ const QuotationModal = ({
     const newErrors: Record<string, string> = {};
 
     if (!formData.name.trim()) newErrors.name = "El nombre es requerido";
-    if (!formData.email.trim()) newErrors.email = "El email es requerido";
+    if (!formData.email.trim()) newErrors.email = "El correo electrónico es obligatorio";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = "Email no válido";
+      newErrors.email = "Introduce un correo electrónico válido";
     if (!formData.phone.trim()) newErrors.phone = "El teléfono es requerido";
     if (formData.projectTypes.length === 0) newErrors.projectTypes = "Selecciona al menos un tipo de proyecto";
     if (!formData.budget) newErrors.budget = "Selecciona un rango de presupuesto";
@@ -277,10 +277,10 @@ const QuotationModal = ({
                 {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name}</p>}
               </div>
 
-              {/* Email */}
+              {/* Correo electrónico */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1">
-                  Email *
+                  Correo electrónico *
                 </label>
                 <input
                   type="email"
@@ -378,7 +378,7 @@ const QuotationModal = ({
               {/* Financing */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-3">
-                  ¿Busca Financiamiento?
+                  ¿Necesita financiación?
                 </label>
                 <div className="space-y-2">
                   <label className="flex items-center p-3 rounded-lg border border-border hover:bg-accent/5 cursor-pointer transition-colors">
@@ -390,7 +390,7 @@ const QuotationModal = ({
                       onChange={handleChange}
                       className="w-4 h-4 cursor-pointer accent-primary"
                     />
-                    <span className="ml-3 text-sm font-medium text-foreground">Sí, estoy interesado en opciones de financiamiento</span>
+                    <span className="ml-3 text-sm font-medium text-foreground">Sí, me interesan opciones de financiación</span>
                   </label>
                   <label className="flex items-center p-3 rounded-lg border border-border hover:bg-accent/5 cursor-pointer transition-colors">
                     <input
@@ -401,7 +401,7 @@ const QuotationModal = ({
                       onChange={handleChange}
                       className="w-4 h-4 cursor-pointer accent-primary"
                     />
-                    <span className="ml-3 text-sm font-medium text-foreground">No, no necesito financiamiento</span>
+                    <span className="ml-3 text-sm font-medium text-foreground">No, no necesito financiación</span>
                   </label>
                 </div>
               </div>
@@ -604,7 +604,7 @@ const QuotationModal = ({
                           <span className="text-muted-foreground">Nombre:</span> {submittedData.name}
                         </p>
                         <p className="text-sm font-medium text-foreground">
-                          <span className="text-muted-foreground">Email:</span> {submittedData.email}
+                          <span className="text-muted-foreground">Correo:</span> {submittedData.email}
                         </p>
                       </div>
                     </div>

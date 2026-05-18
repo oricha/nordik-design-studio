@@ -13,7 +13,7 @@ const ProjectDetailPage = () => {
     }
 
     return () => {
-      document.title = "NordiK — Modern Wood Frame Houses | Scandinavian Architecture";
+      document.title = "NordiK — Casas de madera modernas | Arquitectura escandinavia";
     };
   }, [project]);
 

@@ -74,7 +74,7 @@ export const siteContact = {
   /** Recursos tras envío de formulario / chat (F1.4.8, F3.3.x) */
   resources: {
     faqHref: "/faq",
-    faqLabel: "Ver preguntas frecuentes (FAQ)",
+    faqLabel: "Ver preguntas frecuentes",
   } as const,
 
   whatsapp: {

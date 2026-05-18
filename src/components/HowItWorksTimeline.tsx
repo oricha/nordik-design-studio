@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const steps = [
-  { number: "01", title: "Project selection" },
-  { number: "02", title: "Consultation & production visit" },
-  { number: "03", title: "Contract & first payment" },
-  { number: "04", title: "Submission of documents to building authorities" },
-  { number: "05", title: "Beginning of house construction" },
-  { number: "06", title: "Selecting finishing materials" },
-  { number: "07", title: "Installation of foundation" },
-  { number: "08", title: "Delivery and installation" },
-  { number: "09", title: "Connection to utilities" },
+  { number: "01", title: "Elección del proyecto" },
+  { number: "02", title: "Consulta y visita de producción" },
+  { number: "03", title: "Contrato y primer pago" },
+  { number: "04", title: "Tramitación ante la administración" },
+  { number: "05", title: "Inicio de obra de la vivienda" },
+  { number: "06", title: "Elección de materiales de acabado" },
+  { number: "07", title: "Cimentación en parcela" },
+  { number: "08", title: "Transporte y montaje" },
+  { number: "09", title: "Conexión de suministros" },
 ];
 
 const previewSteps = steps.slice(0, 8);
@@ -29,20 +29,20 @@ const HowItWorksTimeline = () => {
         >
           <div>
             <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-accent">
-              The process
+              El proceso
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-              How it works
+              Cómo funciona
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-              From choosing your model to installation — preview the key milestones before the final utility connection.
+              Desde elegir modelo hasta instalación — un adelanto de los hitos clave antes de conectar los servicios en tu parcela.
             </p>
           </div>
           <Link
             to="/how-it-works"
             className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent underline-offset-4 hover:underline"
           >
-            See full process <ArrowRight className="h-4 w-4" />
+            Ver proceso completo <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
 
@@ -129,7 +129,7 @@ const HowItWorksTimeline = () => {
                   className="text-sm font-medium leading-snug text-foreground/70
                              transition-colors group-hover:text-accent"
                 >
-                  See final step
+                  Ver último paso
                 </p>
               </Link>
             </motion.li>
@@ -138,7 +138,7 @@ const HowItWorksTimeline = () => {
 
         {/* Mobile hint */}
         <p className="mt-4 text-center text-xs text-muted-foreground md:hidden">
-          Scroll for the preview, then open the full process.
+          Desliza para ver el resumen y abre después el proceso completo.
         </p>
       </div>
     </section>

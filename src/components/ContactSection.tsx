@@ -116,7 +116,7 @@ const ContactSection = () => {
       return value.trim().length >= 2 ? "" : "Introduce al menos 2 caracteres.";
     }
     if (name === "email") {
-      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value.trim()) ? "" : "Introduce un email válido.";
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value.trim()) ? "" : "Introduce un correo electrónico válido.";
     }
     return value.replace(/\D/g, "").length >= 8 ? "" : "Introduce al menos 8 dígitos.";
   };
@@ -255,7 +255,7 @@ const ContactSection = () => {
                 <p className="text-sm font-semibold text-emerald-900">Solicitud registrada</p>
                 <p className="mt-1 font-mono text-xl font-bold text-emerald-950">{thanksTicket}</p>
                 <p className="mt-3 text-sm leading-relaxed text-emerald-900/90">
-                  Confirmaremos tu solicitud por email en <strong>{thanksEmail}</strong> próximamente.
+                  Confirmaremos tu solicitud por correo electrónico en <strong>{thanksEmail}</strong> próximamente.
                 </p>
                 <p className="mt-2 text-sm">
                   <Link to={siteContact.resources.faqHref} className="font-semibold text-accent underline underline-offset-2 hover:opacity-80">
@@ -407,7 +407,7 @@ const ContactSection = () => {
                     className="mt-0.5 h-4 w-4 rounded border-border accent-accent cursor-pointer"
                   />
                   <span className="text-sm text-foreground">
-                    Estoy interesado/a en opciones de financiamiento
+                    Estoy interesado/a en opciones de financiación
                   </span>
                 </label>
                 {form.financing && (
@@ -482,7 +482,7 @@ const ContactSection = () => {
                   onClick={() => setFaqOpen(true)}
                   className="font-semibold text-accent underline underline-offset-2 hover:opacity-90"
                 >
-                  Ver FAQ primero (modal)
+                  Ver preguntas frecuentes primero (modal)
                 </button>
                 <span aria-hidden>/</span>
                 <Link
@@ -491,7 +491,7 @@ const ContactSection = () => {
                   to="/faq"
                   className="font-semibold text-accent underline underline-offset-2 hover:opacity-90"
                 >
-                  FAQ en nueva pestaña
+                  Preguntas frecuentes en nueva pestaña
                 </Link>
               </p>
 

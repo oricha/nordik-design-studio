@@ -20,7 +20,7 @@ const audienceIntro = {
   b2c: {
     id: "services-b2c" as const,
     eyebrow: "Particulares y hogares",
-    title: "Vive nordic SIP",
+    title: "Vive el SIP nórdico",
     description:
       "Casas y cabañas llave en mano, así como reformas y ampliaciones. Ideal si buscas moverte con tu familia, teletrabajar o invertir en una segunda residencia con consumo muy reducido.",
   },
@@ -54,7 +54,7 @@ const services: ServiceItem[] = [
     audienceLabel: "Profesional",
     bullets: ["Listas de corte CNC y cargas agrupadas", "Documentación para obra UE"],
     description:
-      "Paneles Estructurales Aislados, encargos por m² o por kit de planta repetitiva: ideal si ya tienes equipo de obra o eres desarrollador promoviendo comunidades nordic-lite.",
+      "Paneles Estructurales Aislados, encargos por m² o por kit de planta repetitiva: ideal si ya tienes equipo de obra o eres desarrollador promoviendo comunidades estilo nórdico ligero.",
     ctaLabel: "Ver precios SIP y dossier técnico",
     ctaHash: "/contactos",
   },
@@ -212,7 +212,7 @@ const Services = () => {
         >
           <p className="text-lg font-semibold text-foreground">¿Sigues entre llave completa y kit SIP?</p>
           <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Explore el catálogo con filtros de precio y categoría antes de elegir modelo.
+            Explora el catálogo con filtros de precio y categoría antes de elegir modelo.
           </p>
           <a
             href="/#projects"

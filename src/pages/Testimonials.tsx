@@ -130,7 +130,7 @@ const Testimonials = () => {
           </h2>
           <p className="text-xl font-semibold text-foreground md:text-2xl">¿Te encaja el ritmo SIP que describen?</p>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-            Agenda una consulta comercial: responderemos con referencia de ticket y guía FAQ.
+            Agenda una consulta comercial: responderemos con referencia de ticket y enlaces útiles del centro de preguntas frecuentes.
           </p>
           <Link
             to="/contactos"
@@ -142,7 +142,7 @@ const Testimonials = () => {
             to="/faq"
             className="mt-5 block text-sm font-semibold text-accent underline-offset-4 hover:underline"
           >
-            Resolver dudas en el centro FAQ antes de llamar →
+            Resolver dudas en preguntas frecuentes antes de llamar →
           </Link>
         </motion.section>
       </div>

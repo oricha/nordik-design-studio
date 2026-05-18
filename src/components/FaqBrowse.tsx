@@ -54,13 +54,13 @@ export function FaqBrowse({ className = "", intro }: FaqBrowseProps) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Buscar en preguntas y respuestas…"
           className="pl-10"
-          aria-label="Buscar en el FAQ"
+          aria-label="Buscar en las preguntas frecuentes"
         />
       </div>
 
       <div
         role="tablist"
-        aria-label="Categorías FAQ"
+        aria-label="Categorías de preguntas frecuentes"
         className="mb-6 flex flex-wrap gap-2 rounded-xl border border-border bg-muted/50 p-1.5"
       >
         {pills.map((p) => (

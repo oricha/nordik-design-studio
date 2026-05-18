@@ -26,7 +26,7 @@ function ConstructionVideosSection() {
           </div>
           <figcaption className="flex items-start gap-2 p-4 text-sm text-muted-foreground">
             <Play className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
-            Embed referencia obra industrializada (~3 min.). Sustituir por canal NordiK u ocultar hasta vídeo revisado marca.
+            Contenido de referencia incrustado: obra industrializada (~3 min). Sustituir por el canal NordiK u ocultar hasta tener vídeo aprobado por marca.
           </figcaption>
         </figure>
 

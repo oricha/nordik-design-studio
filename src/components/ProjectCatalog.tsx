@@ -255,7 +255,7 @@ const ProjectCatalog = () => {
                           ? "bg-primary text-primary-foreground"
                           : "bg-background text-muted-foreground hover:bg-border",
                       )}
-                      title="Vista Grid"
+                      title="Vista en cuadrícula"
                     >
                       <Grid2X2 className="h-4 w-4" />
                     </button>
@@ -419,7 +419,7 @@ const ProjectCatalog = () => {
             {filtered.length === 0 && (
               <p className="py-12 text-center text-muted-foreground" role="status">
                 <span className="font-medium text-foreground">No hay resultados.</span>{" "}
-                Pruebe otros términos o ajuste el rango de precio y categoría.
+                Prueba otros términos o ajusta el rango de precio y la categoría.
               </p>
             )}
           </div>
@@ -511,7 +511,7 @@ const ProjectCard = ({ project, listView }: { project: Project; listView?: boole
           <span
             className={cn(
               "absolute left-2 top-2 rounded px-2 py-1 text-xs font-semibold",
-              project.badge === "New"
+              project.badge === "Novedad"
                 ? "bg-accent text-accent-foreground"
                 : "bg-primary text-primary-foreground",
             )}
@@ -556,7 +556,7 @@ const ProjectCard = ({ project, listView }: { project: Project; listView?: boole
           <span
             className={cn(
               "absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-semibold",
-              project.badge === "New"
+              project.badge === "Novedad"
                 ? "bg-accent text-accent-foreground"
                 : "bg-primary text-primary-foreground",
             )}

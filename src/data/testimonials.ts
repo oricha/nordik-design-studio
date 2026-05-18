@@ -60,7 +60,7 @@ export const pageTestimonials: PageTestimonial[] = [
     id: "t4",
     clientName: "Helena R.",
     role: "Compradora residencial",
-    city: "Oulu metropolitan",
+    city: "Área metropolitana de Oulu",
     projectLabel: "Vivienda unifamiliar nieve moderada",
     projectSlug: "oulu",
     body: "Buscamos una vivienda pequeña pero robusta junto al mar donde nuestra hija cursa estudios y teletrabaja. Las casas de bloque cercanas sufren salitre capilar cuando golpean los temporales largos del invierno. Optamos por planta nueva con posibilidad de ampliar en fases posteriores. NordiK detallaron el coste-logística de llevar cerramiento taller Finlandia hasta el emplazamiento y cuántos días efectivos se recuperaban cerrando ocupación antes. El ritmo montaje con equipo autorizado marca y un canal de trabajo bilingüe español-finés funcionó mejor de lo esperado. Un elemento acristalado llegó con marcas de transporte: taller lo cambió sobre seguro materiales.",

@@ -49,7 +49,7 @@ const RelatedProjects = ({ projects }: RelatedProjectsProps) => {
                       {project.badge && (
                         <span
                           className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold ${
-                            project.badge === "New"
+                            project.badge === "Novedad"
                               ? "bg-accent text-accent-foreground"
                               : "bg-primary text-primary-foreground"
                           }`}

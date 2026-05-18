@@ -6,48 +6,48 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const steps = [
   {
     number: "01",
-    title: "Project selection",
-    body: `Explore our website to discover the house model that resonates with your vision, preferred size, design, and layout. Enhance your chosen home with additional features to create your ideal living space. Submit your customization requests to us!`,
+    title: "Elección del proyecto",
+    body: `Explora nuestra web para encontrar el modelo que encaje con tu visión: tamaño, distribución y acabados. Completa tu vivienda con opciones adicionales y crea tu espacio ideal. ¡Cuéntanos qué personalizaciones te interesan!`,
   },
   {
     number: "02",
-    title: "Consultation & production visit",
-    body: `Visit our office in Riga or arrange an online consultation with our team of experts and gather any necessary information. You are also invited to explore our production facilities and view our completed houses in Latvia for an in-person experience of our product.`,
+    title: "Consulta y visita de producción",
+    body: `Visita nuestras oficinas en Barcelona o Madrid o programa una videoconsulta con el equipo técnico. También puedes solicitar conocer talleres de fabricación acordados y viviendas de referencia para evaluar materiales y acabados.`,
   },
   {
     number: "03",
-    title: "Contract & first payment",
-    body: `Once you have selected your ideal house and decided on any preferred additions, we proceed to sign the contract. At this stage, the client is required to make an initial payment of 50% of the total amount.`,
+    title: "Contrato y primer pago",
+    body: `Cuando el modelo y las ampliaciones estén definidos, firmamos el contrato. En esta fase se abona normalmente una provisión inicial del 50 % del importe total acordado, según condiciones del contrato.`,
   },
   {
     number: "04",
-    title: "Submission of documents to building authorities",
-    body: `Upon signing the agreement, we will provide you with all the requisite documents and plans necessary for submission to your local building authorities. We offer to adjust each house to your specific local requirements. This ensures a smooth and compliant process for obtaining the necessary approvals and permits for your project.`,
+    title: "Tramitación ante la administración",
+    body: `Tras la firma te entregamos la documentación y planos necesarios para presentarlos ante el ayuntamiento u organismo competente. Ajustamos la vivienda a la normativa local para facilitar licencias y permisos.`,
   },
   {
     number: "05",
-    title: "Beginning of house construction",
-    body: `Construction of your house commences at our production facility. The timeframe for completion is contingent upon the size and design of your chosen home. Throughout the process, we maintain regular communication, providing updates on progress and the work accomplished at each stage.`,
+    title: "Inicio de obra de la vivienda",
+    body: `La fabricación de tu vivienda arranca en instalaciones controladas en taller. Los plazos dependen del tamaño y diseño elegidos. Te mantenemos informado con hitos claros sobre el avance en la planta de producción.`,
   },
   {
     number: "06",
-    title: "Selecting finishing materials",
-    body: `We understand the importance of creating a perfect house that aligns with your vision. To achieve this, we provide you with a wide range of options for finishing materials. You can choose from a variety of colors and styles for exterior and interior walls, flooring, roof, and windows to ensure that every detail matches your preferences and brings your dream home to life.`,
+    title: "Elección de materiales de acabado",
+    body: `Ofrecemos un amplio catálogo de acabados para fachada, interior, suelos, cubierta y carpinterías, con tonalidades y texturas para que cada detalle refleje lo acordado en proyecto.`,
   },
   {
     number: "07",
-    title: "Installation of foundation",
-    body: `While we are in the process of constructing your house, it is essential that you prepare the foundation at your site. You can use pillars, screw piles, concrete foundations, or other alternatives based on your preferences. We will provide all the necessary information, including a foundation plan and communication plan, to ensure that you can prepare the site effectively and choose the best option for your project.`,
+    title: "Cimentación en parcela",
+    body: `Mientras avanza la prefabricación, en tu parcela debe ejecutarse la cimentación: pilares, micropilotaje, zapatas u otra solución de ingeniería. Recibirás planos y criterios para preparar obra y accesos según el modelo contratado.`,
   },
   {
     number: "08",
-    title: "Delivery and installation",
-    body: `Once your house is complete, we are ready to ship it to your location. Advance organization of transportation is essential to ensure a smooth and successful delivery process. The method of shipment may vary based on the chosen house model and construction method. Whether it's delivered fully finished, in multiple modules, or panelized, it's important to note that crane services will be required both at our production facility and on your site.`,
+    title: "Transporte y montaje",
+    body: `Con la vivienda lista, coordinamos el transporte hasta tu ubicación. El embalaje (acabada, en módulos o panelizada) varía según modelo; suele requerirse grúa en origen y en destino para descarga y montaje seguro.`,
   },
   {
     number: "09",
-    title: "Connection to utilities",
-    body: `After the house is securely placed on its foundation and all necessary construction work is completed, which may include site-specific requirements, your final step is to connect your existing utilities to the prepared outputs within the house. These connections involve water, sewage, and electricity. After this, your new house will be ready for you to move in and enjoy!`,
+    title: "Conexión de suministros",
+    body: `Una vez apoyada la vivienda y cerrados los trabajos en obra, se enlazan agua, saneamiento y electricidad a las tomas preparadas en interior. Con eso, tu nueva casa queda lista para ocupación y puesta en marcha final.`,
   },
 ];
 
@@ -76,17 +76,17 @@ const HowItWorksPage = () => {
             className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to home
+            Volver al inicio
           </Link>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-            The process
+            El proceso
           </p>
           <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-            How it works
+            Cómo funciona
           </h1>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            From choosing your model to moving in — 9 clear steps to your new
-            NordiK home. Each step explained so you always know what comes next.
+            Desde elegir modelo hasta ocupar tu vivienda: 9 pasos claros hasta tu nueva
+            casa NordiK. Cada fase explicada para que sepas siempre qué viene después.
           </p>
         </div>
       </div>
@@ -165,7 +165,7 @@ const HowItWorksPage = () => {
                           className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3
                                      text-sm font-bold text-accent-foreground transition-opacity hover:opacity-90"
                         >
-                          Start your project <ArrowRight className="h-4 w-4" />
+                          Empezar tu proyecto <ArrowRight className="h-4 w-4" />
                         </Link>
                       )}
                       <div className="flex gap-3 text-sm">
@@ -183,7 +183,7 @@ const HowItWorksPage = () => {
                             href={`#step-${next.number}`}
                             className="inline-flex items-center gap-1.5 font-medium text-accent hover:opacity-80"
                           >
-                            Next: {next.number}. {next.title}
+                            Siguiente: {next.number}. {next.title}
                             <ArrowRight className="h-3.5 w-3.5" />
                           </a>
                         )}
@@ -209,17 +209,17 @@ const HowItWorksPage = () => {
           className="mt-12 rounded-2xl border border-border bg-card px-8 py-10 text-center shadow-sm"
         >
           <h3 className="text-xl font-semibold text-foreground">
-            Ready to start your project?
+            ¿Empezamos tu proyecto?
           </h3>
           <p className="mt-2 text-base text-muted-foreground">
-            Request a free quote and our team will guide you through every step.
+            Solicita un presupuesto sin compromiso y el equipo te acompaña en cada paso.
           </p>
           <Link
             to="/contactos"
             className="mt-6 inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-3.5
                        text-base font-bold text-accent-foreground transition-opacity hover:opacity-90"
           >
-            Request a free quote <ArrowRight className="h-4 w-4" />
+            Solicitar presupuesto gratis <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
       </div>

@@ -91,12 +91,12 @@ const ProjectDetail = ({ project }: ProjectDetailProps) => {
 
       <div className="border-b border-border bg-warm-gray pt-24" aria-label="Migas de pan">
         <div className="mx-auto max-w-7xl px-6 py-4">
-          <nav aria-label="Breadcrumb" className="mb-2">
+          <nav aria-label="Ruta de navegación" className="mb-2">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
               <li>
                 <Link to="/" className="inline-flex items-center gap-1 transition-colors hover:text-foreground">
                   <Home className="size-4 shrink-0" aria-hidden />
-                  Home
+                  Inicio
                 </Link>
               </li>
               <li aria-hidden>

@@ -112,9 +112,9 @@ const ConstructionProcess = () => {
                 transition={{ duration: 0.3, delay: 0.1 }}
               >
                 <p className="text-4xl font-bold text-accent mb-2">40%</p>
-                <p className="font-semibold text-foreground mb-2">Menor Costo</p>
+                <p className="font-semibold text-foreground mb-2">Menor coste</p>
                 <p className="text-sm text-muted-foreground">
-                  Menos mano de obra, menor desperdicio y eficiencia operativa reducen costos significativamente.
+                  Menos mano de obra, menos desperdicio y eficiencia operativa reducen el coste total de forma importante.
                 </p>
               </motion.div>
 
@@ -157,7 +157,7 @@ const ConstructionProcess = () => {
                     <td className="p-4 text-center text-muted-foreground">8-12 meses</td>
                   </tr>
                   <tr className="border-b border-border hover:bg-warm-gray transition-colors">
-                    <td className="p-4 font-medium text-foreground">Costo Total Aproximado</td>
+                    <td className="p-4 font-medium text-foreground">Coste total aprox.</td>
                     <td className="p-4 text-center text-accent font-semibold">€1.200-1.400/m²</td>
                     <td className="p-4 text-center text-muted-foreground">€1.600-2.000/m²</td>
                   </tr>
@@ -203,7 +203,7 @@ const ConstructionProcess = () => {
               <h4 className="font-semibold text-foreground mb-3">✓ Ventajas de SIP</h4>
               <ul className="space-y-2 text-sm text-foreground">
                 <li>• Construcción 60-70% más rápida</li>
-                <li>• Menor costo total de proyecto</li>
+                <li>• Menor coste total del proyecto</li>
                 <li>• Máxima eficiencia energética (ahorro 70%)</li>
                 <li>• Menos residuos y más sostenible</li>
                 <li>• Mejor aislamiento acústico</li>

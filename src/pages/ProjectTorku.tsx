@@ -64,7 +64,7 @@ const ProjectTorku = () => {
         <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
           <img
             src={images[activeImage]}
-            alt="Torku cabin"
+            alt="Cabaña modelo Torku"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/60 to-transparent" />
@@ -101,7 +101,7 @@ const ProjectTorku = () => {
               </span>
             </div>
             <p className="text-background/70 text-sm">
-              Tiempo de construcción: <strong className="text-background">3 months</strong>
+              Tiempo de construcción: <strong className="text-background">3 meses</strong>
             </p>
             <a
               href="/contactos"
@@ -133,7 +133,7 @@ const ProjectTorku = () => {
             <div>
               <img
                 src={torkuSide}
-                alt="Torku side view"
+                alt="Torku — vista lateral"
                 className="w-full rounded-xl"
                 loading="lazy"
               />
@@ -188,7 +188,7 @@ const ProjectTorku = () => {
                 >
                   <img
                     src={img}
-                    alt={`Torku photo ${i + 1}`}
+                    alt={`Torku · imagen ${i + 1}`}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />

@@ -12,7 +12,7 @@ const FaqPage = () => {
             Preguntas frecuentes
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Proceso, garantía SIP, financiamiento y aspectos técnicos. Si no encuentras respuesta,{" "}
+            Proceso, garantía SIP, financiación y aspectos técnicos. Si no encuentras respuesta,{" "}
             <Link className="font-semibold text-accent underline underline-offset-4 hover:opacity-90" to="/contactos">
               solicita presupuesto gratis
             </Link>{" "}

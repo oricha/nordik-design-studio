@@ -38,7 +38,7 @@ export function TraditionalVsSipSection() {
                     Aspecto
                   </th>
                   <th scope="col" className="border-b border-primary-foreground/20 px-4 py-4 text-left font-semibold">
-                    Env. SIP Nordic / industriada
+                    Envolvente SIP nórdica / industrializada
                   </th>
                   <th scope="col" className="border-b border-primary-foreground/20 px-4 py-4 text-left font-semibold">
                     Albañilería / bloque habitual

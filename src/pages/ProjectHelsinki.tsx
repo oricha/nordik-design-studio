@@ -61,7 +61,7 @@ const ProjectHelsinki = () => {
     <div className="min-h-screen bg-background">
             <main className="pt-16">
         <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
-          <img src={images[activeImage]} alt="Barcelona renovation" className="w-full h-full object-cover" />
+          <img src={images[activeImage]} alt="Reforma residencial en Barcelona" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/60 to-transparent" />
           <div className="absolute bottom-0 left-0 p-8 md:p-16 max-w-lg">
             <Link to="/" className="inline-flex items-center gap-2 text-sm text-background/80 hover:text-background mb-6 transition-colors">
@@ -79,7 +79,7 @@ const ProjectHelsinki = () => {
               <span className="flex items-center gap-1"><Bath className="w-4 h-4" /> 2 baños</span>
             </div>
             <p className="text-background/70 text-sm">
-              Tiempo de construcción: <strong className="text-background">5 months</strong>
+              Tiempo de construcción: <strong className="text-background">5 meses</strong>
             </p>
             <a href="/contactos" className="mt-6 inline-block bg-accent text-accent-foreground px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
               Solicitar presupuesto
@@ -97,7 +97,7 @@ const ProjectHelsinki = () => {
         <section className="section-padding bg-background">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
             <div>
-              <img src={project1} alt="Barcelona side view" className="w-full rounded-xl" loading="lazy" />
+              <img src={project1} alt="Barcelona — vista lateral" className="w-full rounded-xl" loading="lazy" />
             </div>
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">Especificaciones de la casa</h2>
@@ -132,7 +132,7 @@ const ProjectHelsinki = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[gallery1, gallery2, gallery3, gallery4].map((img, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="aspect-[4/3] rounded-xl overflow-hidden">
-                  <img src={img} alt={`Barcelona photo ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img src={img} alt={`Barcelona · imagen ${i + 1}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
                 </motion.div>
               ))}
             </div>

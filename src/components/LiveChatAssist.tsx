@@ -46,7 +46,7 @@ const LiveChatAssist = () => {
                     to="/faq"
                     className="font-medium text-accent underline-offset-4 hover:underline"
                   >
-                    Preguntas frecuentes (FAQ NordiK)
+                    Preguntas frecuentes NordiK
                   </Link>
                 </li>
                 <li>

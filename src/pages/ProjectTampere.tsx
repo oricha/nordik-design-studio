@@ -64,7 +64,7 @@ const ProjectTampere = () => {
         <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
           <img
             src={images[activeImage]}
-            alt="Tampere materials package"
+            alt="Paquete de materiales Tampere"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/60 to-transparent" />
@@ -89,7 +89,7 @@ const ProjectTampere = () => {
               Paquete de materiales premium para construcción de casas de madera
             </p>
             <p className="text-background/70 text-sm">
-              Tiempo de construcción: <strong className="text-background">3–4 months</strong>
+              Tiempo de construcción: <strong className="text-background">3–4 meses</strong>
             </p>
             <a
               href="/contactos"
@@ -121,7 +121,7 @@ const ProjectTampere = () => {
             <div>
               <img
                 src={project5}
-                alt="Tampere materials package"
+                alt="Paquete de materiales Tampere"
                 className="w-full rounded-xl"
                 loading="lazy"
               />
@@ -176,7 +176,7 @@ const ProjectTampere = () => {
                 >
                   <img
                     src={img}
-                    alt={`Tampere photo ${i + 1}`}
+                    alt={`Tampere · imagen ${i + 1}`}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
