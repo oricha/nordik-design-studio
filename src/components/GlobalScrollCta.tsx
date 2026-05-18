@@ -31,7 +31,7 @@ const GlobalScrollCta = () => {
   return (
     <div
       className={cn(
-        "fixed bottom-6 right-6 z-[44] flex max-w-[min(100vw-3rem,20rem)] items-stretch rounded-full shadow-xl",
+        "fixed bottom-6 right-24 z-[44] flex max-w-[min(100vw-7.5rem,20rem)] items-stretch rounded-full shadow-xl",
         "ring-2 ring-black/10",
       )}
       role="complementary"

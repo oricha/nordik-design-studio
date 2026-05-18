@@ -14,6 +14,8 @@ const steps = [
   { number: "09", title: "Connection to utilities" },
 ];
 
+const previewSteps = steps.slice(0, 8);
+
 const HowItWorksTimeline = () => {
   return (
     <section className="section-padding bg-warm-gray overflow-hidden">
@@ -33,7 +35,7 @@ const HowItWorksTimeline = () => {
               How it works
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground">
-              From choosing your model to moving in — 9 clear steps to your new home.
+              From choosing your model to installation — preview the key milestones before the final utility connection.
             </p>
           </div>
           <Link
@@ -61,7 +63,7 @@ const HowItWorksTimeline = () => {
                        scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none]
                        [&::-webkit-scrollbar]:hidden"
           >
-            {steps.map((step, i) => (
+            {previewSteps.map((step, i) => (
               <motion.li
                 key={step.number}
                 initial={{ opacity: 0, y: 16 }}
@@ -69,7 +71,7 @@ const HowItWorksTimeline = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
                 className="flex-shrink-0"
-                style={{ width: `${100 / steps.length}%`, minWidth: "9rem" }}
+                style={{ width: `${100 / previewSteps.length}%`, minWidth: "9rem" }}
               >
                 <Link
                   to={`/how-it-works#step-${step.number}`}
@@ -100,12 +102,43 @@ const HowItWorksTimeline = () => {
                 </Link>
               </motion.li>
             ))}
+            <motion.li
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: previewSteps.length * 0.06 }}
+              className="flex-shrink-0"
+              style={{ width: `${100 / previewSteps.length}%`, minWidth: "9rem" }}
+            >
+              <Link
+                to="/how-it-works#step-09"
+                className="group flex flex-col items-center px-3 text-center"
+              >
+                <div
+                  className="relative z-10 mb-4 flex h-[4.25rem] w-[4.25rem] shrink-0 items-center
+                             justify-center rounded-full border-2 border-dashed border-accent bg-background
+                             transition-all duration-200 group-hover:bg-accent group-hover:shadow-lg"
+                >
+                  <ArrowRight
+                    className="h-6 w-6 text-accent transition-colors group-hover:text-white"
+                    aria-hidden
+                  />
+                </div>
+
+                <p
+                  className="text-sm font-medium leading-snug text-foreground/70
+                             transition-colors group-hover:text-accent"
+                >
+                  See final step
+                </p>
+              </Link>
+            </motion.li>
           </motion.ol>
         </div>
 
         {/* Mobile hint */}
         <p className="mt-4 text-center text-xs text-muted-foreground md:hidden">
-          Scroll to see all steps →
+          Scroll for the preview, then open the full process.
         </p>
       </div>
     </section>
