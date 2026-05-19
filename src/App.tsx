@@ -19,6 +19,9 @@ import ServicesPage from "@/pages/ServicesPage";
 import ProjectDetailPage from "@/pages/ProjectDetailPage";
 import HowItWorksPage from "@/pages/HowItWorksPage";
 import Why from "@/pages/Why";
+import { ProtectedAdminRoute } from "@/components/Admin/ProtectedAdminRoute";
+import AdminDashboard from "@/pages/AdminDashboard";
+import AdminLogin from "@/pages/AdminLogin";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +46,10 @@ const App = () => (
           <Route path="/contactos" element={<ContactPage />} />
           <Route path="/servicios" element={<ServicesPage />} />
           <Route path="/why" element={<Why />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route element={<ProtectedAdminRoute />}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          </Route>
 
           <Route path="/how-it-works" element={<HowItWorksPage />} />
           <Route path="/project/:slug" element={<LegacyProjectRedirect />} />

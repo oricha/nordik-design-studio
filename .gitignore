@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Secrets (mantener actualizado según equipo)
+.env
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -30,3 +34,4 @@ NordiK_SECON_Analisis.md
 
 .openspec/*
 openspec/*
+docs/admin-supabase-auth.md
