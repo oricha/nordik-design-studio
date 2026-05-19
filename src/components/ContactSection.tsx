@@ -60,6 +60,8 @@ const ContactSection = () => {
   const [attachErr, setAttachErr] = useState("");
   const [thanksTicket, setThanksTicket] = useState<string | null>(null);
   const [thanksEmail, setThanksEmail] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const prefillSlug = searchParams.get(CONTACT_PROJECT_PREFILL_QUERY);
 
@@ -143,9 +145,10 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitAttempted(true);
+    setSubmitError("");
 
     const nextErrors: Record<string, string> = {
       name: validateField("name", form.name),
@@ -162,6 +165,9 @@ const ContactSection = () => {
     if (!form.acceptedTerms) {
       nextErrors.terms = "Debes aceptar los términos para enviar la solicitud.";
     }
+    if (form.message.trim().length < 10) {
+      nextErrors.message = "Cuéntanos un poco más sobre tu proyecto.";
+    }
 
     setErrors(nextErrors);
 
@@ -169,33 +175,74 @@ const ContactSection = () => {
       return;
     }
 
-    const ticket = generateQuotationTicketId();
-    const emailPayload = {
-      ...form,
-      ticket,
-      timestamp: new Date().toISOString(),
-      attachments: attachments.map((a) => ({ name: a.file.name, size: a.file.size })),
-    };
-    // TODO E1.4: conectar este payload a Resend/SendGrid o la edge function del formulario.
-    console.log("Contacto landing:", emailPayload);
-    attachments.forEach(revokeAttachmentPreview);
-    setAttachments([]);
-    setAttachErr("");
-    setThanksTicket(ticket);
-    setThanksEmail(form.email.trim());
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      types: [],
-      budget: "",
-      location: "",
-      financing: false,
-      acceptedTerms: false,
-      message: "",
-    });
-    setErrors({});
-    setSubmitAttempted(false);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          projectTypes: form.types,
+          budget: form.budget,
+          location: form.location,
+          financing: form.financing,
+          message: form.message,
+          acceptedTerms: form.acceptedTerms,
+          attachments: attachments.map((attachment) => ({
+            name: attachment.file.name,
+            size: attachment.file.size,
+            type: attachment.file.type,
+          })),
+        }),
+      });
+
+      const result = (await response.json()) as {
+        ok?: boolean;
+        ticket?: string;
+        id?: string;
+        error?: string;
+        fieldErrors?: Record<string, string>;
+      };
+
+      if (!response.ok || !result.ok) {
+        const fieldErrors = result.fieldErrors ?? {};
+        setErrors((prev) => ({
+          ...prev,
+          ...fieldErrors,
+          types: fieldErrors.projectTypes ?? prev.types,
+          terms: fieldErrors.acceptedTerms ?? prev.terms,
+        }));
+        setSubmitError(result.error ?? "No se pudo enviar la solicitud. Inténtalo de nuevo.");
+        return;
+      }
+
+      attachments.forEach(revokeAttachmentPreview);
+      setAttachments([]);
+      setAttachErr("");
+      setThanksTicket(result.ticket ?? result.id?.slice(0, 8).toUpperCase() ?? generateQuotationTicketId());
+      setThanksEmail(form.email.trim());
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        types: [],
+        budget: "",
+        location: "",
+        financing: false,
+        acceptedTerms: false,
+        message: "",
+      });
+      setErrors({});
+      setSubmitAttempted(false);
+    } catch {
+      setSubmitError("No se pudo conectar con el servidor. Revisa la conexión e inténtalo de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -288,6 +335,12 @@ const ContactSection = () => {
             </Dialog>
 
             <motion.form onSubmit={handleSubmit} className="bg-background rounded-2xl p-8 flex flex-col gap-5 shadow-sm">
+              {submitError ? (
+                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+                  {submitError}
+                </div>
+              ) : null}
+
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5">Nombre</label>
                 <input
@@ -424,10 +477,16 @@ const ContactSection = () => {
                   maxLength={1000}
                   rows={4}
                   value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  onChange={(e) => {
+                    setForm({ ...form, message: e.target.value });
+                    if (e.target.value.trim().length >= 10) {
+                      setErrors((prev) => ({ ...prev, message: "" }));
+                    }
+                  }}
                   className="w-full border border-border rounded-lg px-4 py-2.5 text-sm bg-background text-foreground focus:ring-2 focus:ring-accent focus:outline-none resize-none"
                   placeholder="Háblanos sobre tu proyecto..."
                 />
+                {submitAttempted ? renderFieldError(errors.message) : null}
               </div>
 
               <div>
@@ -530,11 +589,11 @@ const ContactSection = () => {
 
               <button
                 type="submit"
-                disabled={!form.acceptedTerms}
+                disabled={!form.acceptedTerms || isSubmitting}
                 className="mt-auto flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Send className="h-4 w-4" />
-                Solicitar presupuesto gratis
+                {isSubmitting ? "Enviando solicitud..." : "Solicitar presupuesto gratis"}
               </button>
             </motion.form>
           </motion.div>
