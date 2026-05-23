@@ -5,7 +5,11 @@ import { AlertCircle, Clock, FileText, Mail, MessageCircle, Phone, Send, Trash2 
 import contactImage from "@/assets/contact-house.jpg";
 import { siteContact, whatsappConversationHref } from "@/data/siteContact";
 import { projects } from "@/data/projects";
-import { CONTACT_PROJECT_PREFILL_QUERY } from "@/constants/contactForm";
+import {
+  CONTACT_PROJECT_PREFILL_QUERY,
+  CONTACT_SERVICE_PREFILL_QUERY,
+  CONTACT_SERVICE_INTENT_META,
+} from "@/constants/contactForm";
 import SupportPresencePanel from "@/components/SupportPresencePanel";
 import { FaqBrowse } from "@/components/FaqBrowse";
 import {
@@ -62,29 +66,72 @@ const ContactSection = () => {
   const [thanksEmail, setThanksEmail] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-
-  const prefillSlug = searchParams.get(CONTACT_PROJECT_PREFILL_QUERY);
+  const [appliedServiceIntent, setAppliedServiceIntent] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!prefillSlug) return;
-    const proj = projects.find((p) => p.slug === prefillSlug);
-    const label = proj?.name ?? prefillSlug;
-    setForm((prev) => ({
-      ...prev,
-      message:
-        prev.message.trim().length > 0
-          ? prev.message
-          : `Hola, solicito información y presupuesto orientativo sobre el proyecto «${label}».\n\n`,
-    }));
+    const cotizarSlug = searchParams.get(CONTACT_PROJECT_PREFILL_QUERY);
+    const serviceSlug = searchParams.get(CONTACT_SERVICE_PREFILL_QUERY);
+    const serviceMeta = serviceSlug ? CONTACT_SERVICE_INTENT_META[serviceSlug] : undefined;
+
+    if (!cotizarSlug && !serviceSlug) return;
+
+    const proj = cotizarSlug ? projects.find((p) => p.slug === cotizarSlug) : undefined;
+    const cotizarLabel = cotizarSlug ? proj?.name ?? cotizarSlug : undefined;
+
+    if (!cotizarSlug && serviceSlug && !serviceMeta) {
+      setSearchParams(
+        (prev) => {
+          const next = new URLSearchParams(prev);
+          next.delete(CONTACT_SERVICE_PREFILL_QUERY);
+          return next;
+        },
+        { replace: true },
+      );
+      return;
+    }
+
+    if (serviceMeta) {
+      setAppliedServiceIntent(serviceMeta.label);
+    }
+
+    setForm((prev) => {
+      if (prev.message.trim().length > 0) return prev;
+
+      let nextMsg = "";
+      const addTypes = [...prev.types];
+
+      const pushTypes = (types: readonly string[]) => {
+        types.forEach((t) => {
+          if (!addTypes.includes(t)) addTypes.push(t);
+        });
+      };
+      pushTypes(serviceMeta?.addProjectTypes ?? []);
+
+      if (cotizarLabel && serviceMeta) {
+        nextMsg = `Hola,\n\nSolicitud orientativa sobre: ${serviceMeta.label}.\n\nSolicito información y presupuesto orientativo sobre el proyecto «${cotizarLabel}».\n\nUbicación, fotos del estado actual y ampliación deseada (aproximada):\n\n`;
+      } else if (cotizarLabel) {
+        nextMsg = `Hola, solicito información y presupuesto orientativo sobre el proyecto «${cotizarLabel}».\n\n`;
+      } else if (serviceMeta) {
+        nextMsg = `Hola,\n\nSolicitud orientativa sobre: ${serviceMeta.label}.\n\nUbicación, fotos del estado actual y ampliación deseada (aproximada):\n\n`;
+      }
+
+      return {
+        ...prev,
+        types: addTypes,
+        message: nextMsg,
+      };
+    });
+
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
-        next.delete(CONTACT_PROJECT_PREFILL_QUERY);
+        if (cotizarSlug) next.delete(CONTACT_PROJECT_PREFILL_QUERY);
+        if (serviceSlug) next.delete(CONTACT_SERVICE_PREFILL_QUERY);
         return next;
       },
       { replace: true },
     );
-  }, [prefillSlug, setSearchParams]);
+  }, [searchParams, setSearchParams]);
 
   const toggleType = (type: string) => {
     setForm((prev) => ({
@@ -225,6 +272,7 @@ const ContactSection = () => {
       setAttachErr("");
       setThanksTicket(result.ticket ?? result.id?.slice(0, 8).toUpperCase() ?? generateQuotationTicketId());
       setThanksEmail(form.email.trim());
+      setAppliedServiceIntent(null);
       setForm({
         name: "",
         email: "",
@@ -297,6 +345,17 @@ const ContactSection = () => {
             viewport={{ once: true }}
             className="flex flex-col gap-5"
           >
+            {appliedServiceIntent && !thanksTicket ? (
+              <div className="rounded-xl border border-accent/30 bg-accent/10 px-5 py-4 text-sm text-foreground md:rounded-2xl">
+                <p>
+                  <span className="font-semibold text-accent">Consulta vinculada:</span> {appliedServiceIntent}
+                </p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Viabilidad, cargas administrativas o plazos orientativos se concretan solo tras revisar tu caso.
+                </p>
+              </div>
+            ) : null}
+
             {thanksTicket ? (
               <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-5 text-left text-emerald-950">
                 <p className="text-sm font-semibold text-emerald-900">Solicitud registrada</p>
