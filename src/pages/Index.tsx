@@ -3,9 +3,7 @@ import TrustBar from "@/components/TrustBar";
 import ValueProposition from "@/components/ValueProposition";
 import { SocialProofRibbon } from "@/components/SocialProofRibbon";
 import ProjectCatalog from "@/components/ProjectCatalog";
-import Services from "@/components/Services";
 import HowItWorksTimeline from "@/components/HowItWorksTimeline";
-import { LocationsSection } from "@/components/LocationsSection";
 
 const Index = () => {
   return (
@@ -17,8 +15,6 @@ const Index = () => {
         <TrustBar />
         <SocialProofRibbon />
         <ValueProposition />
-        <Services />
-        <LocationsSection />
       </main>
     </div>
   );

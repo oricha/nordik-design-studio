@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { BadgeCheck, PlaySquare } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 import { pageTestimonials } from "@/data/testimonials";
 import { ReviewsAggregate } from "@/components/ReviewsAggregate";
 import { StarRating } from "@/components/StarRating";
@@ -8,22 +9,18 @@ import { StarRating } from "@/components/StarRating";
 /** F2.2.1 + agregados F2.2.2/F2.2.3 en tarjetas */
 const Testimonials = () => {
   return (
-    <div className="min-h-screen bg-background pb-24 pt-28 md:pb-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.header
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-14 max-w-3xl"
-        >
-          <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">Testimonios</h1>
-          <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-            Experiencias de clientes y socios ejecutores (casos ejemplo para comunicación; sustituir por permisos reales
-            antes de usar en campañas públicas grandes).
-          </p>
-          <Link to="/casos" className="mt-4 inline-block text-sm font-semibold text-accent underline-offset-4 hover:underline">
-            Ver estudios de caso con métricas →
-          </Link>
-        </motion.header>
+    <div className="min-h-screen bg-background pb-24 md:pb-28">
+      <PageHero
+        eyebrow="Clientes y socios"
+        title="Testimonios"
+        description="Experiencias de clientes y socios ejecutores (casos ejemplo para comunicación; sustituir por permisos reales antes de usar en campañas públicas grandes)."
+        actions={[
+          { label: "Ver estudios de caso", href: "/casos" },
+          { label: "Resolver dudas", href: "/faq", variant: "secondary" },
+        ]}
+      />
+
+      <div className="mx-auto max-w-7xl px-6 pt-14">
 
         <motion.section
           initial={{ opacity: 0, y: 12 }}

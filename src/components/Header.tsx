@@ -99,6 +99,11 @@ const Header = () => {
     </form>
   );
 
+  const isActivePath = (href: string) => {
+    const path = href.split("#")[0];
+    return path === "/" ? location.pathname === "/" : location.pathname === path;
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-300/90 bg-[#f7f7fb]/95 shadow-[0_8px_32px_-28px_rgb(15_23_42/0.35)] backdrop-blur-md">
       <div className="mx-auto flex min-h-[58px] items-center px-6 lg:hidden">
@@ -124,13 +129,18 @@ const Header = () => {
 
         <nav className="flex min-w-0 items-center justify-center gap-7 xl:gap-10" aria-label="Principal">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
-              className="whitespace-nowrap text-[15px] font-semibold tracking-tight text-foreground/60 underline-offset-8 transition-colors hover:text-foreground hover:underline decoration-foreground/25"
+              to={link.href}
+              aria-current={isActivePath(link.href) ? "page" : undefined}
+              className={`whitespace-nowrap border-b-2 py-5 text-[15px] font-semibold tracking-tight transition-colors ${
+                isActivePath(link.href)
+                  ? "border-accent text-foreground"
+                  : "border-transparent text-foreground/60 hover:border-foreground/20 hover:text-foreground"
+              }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -178,23 +188,28 @@ const Header = () => {
               </button>
               {catalogSearchForm}
               <nav className="flex flex-col gap-3">
-                {navLinks.map((link) => (
-                  <a
+              {navLinks.map((link) => (
+                  <Link
                     key={link.label}
-                    href={link.href}
+                    to={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                    aria-current={isActivePath(link.href) ? "page" : undefined}
+                    className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                      isActivePath(link.href)
+                        ? "bg-muted text-foreground"
+                        : "text-muted-foreground hover:bg-muted/70 hover:text-foreground"
+                    }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
-                <a
-                  href="/contactos"
+                <Link
+                  to="/contactos"
                   onClick={() => setMobileOpen(false)}
                   className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-center text-sm font-semibold text-accent-foreground"
                 >
                   Presupuesto gratis
-                </a>
+                </Link>
               </nav>
             </div>
           </motion.div>

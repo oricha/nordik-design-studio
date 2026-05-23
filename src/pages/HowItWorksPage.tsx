@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 
 const steps = [
   {
@@ -17,7 +18,7 @@ const steps = [
   {
     number: "03",
     title: "Contrato y primer pago",
-    body: `Cuando el modelo y las ampliaciones estén definidos, firmamos el contrato. En esta fase se abona normalmente una provisión inicial del 50 % del importe total acordado, según condiciones del contrato.`,
+    body: `Cuando el modelo y las ampliaciones estén definidos, firmamos el contrato. En esta fase se abona normalmente una provisión inicial del 50 % del importe total acordado, según condiciones del contrato.`,
   },
   {
     number: "04",
@@ -68,28 +69,17 @@ const HowItWorksPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Page hero */}
-      <div className="bg-warm-gray pt-28 pb-16">
-        <div className="mx-auto max-w-4xl px-6">
-          <Link
-            to="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Volver al inicio
-          </Link>
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-accent">
-            El proceso
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-            Cómo funciona
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Desde elegir modelo hasta ocupar tu vivienda: 9 pasos claros hasta tu nueva
-            casa NordiK. Cada fase explicada para que sepas siempre qué viene después.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        eyebrow="El proceso"
+        title="Cómo funciona"
+        description="Desde elegir modelo hasta ocupar tu vivienda: 9 pasos claros hasta tu nueva casa NordiK. Cada fase explicada para que sepas siempre qué viene después."
+        backHref="/"
+        stats={[
+          { label: "Fases", value: "9 pasos" },
+          { label: "Método", value: "Obra seca" },
+          { label: "Control", value: "Hitos claros" },
+        ]}
+      />
 
       {/* Sticky mini-nav on desktop */}
       <div className="sticky top-[62px] z-30 hidden border-b border-border bg-background/95 backdrop-blur-md lg:block">

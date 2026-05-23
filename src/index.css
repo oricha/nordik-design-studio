@@ -60,6 +60,18 @@
   body {
     @apply bg-background font-sans text-base leading-[1.65] text-foreground antialiased;
     font-family: 'Montserrat', system-ui, sans-serif;
+    background-image:
+      linear-gradient(90deg, hsl(var(--foreground) / 0.025) 1px, transparent 1px),
+      linear-gradient(180deg, hsl(var(--foreground) / 0.018) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  ::selection {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
   }
 
   h1 {
@@ -88,6 +100,10 @@
 
   .section-padding {
     @apply px-6 py-24 md:px-12 md:py-[5.75rem] lg:px-20 lg:py-28 xl:px-32;
+  }
+
+  .surface-panel {
+    @apply border border-border bg-background/80 shadow-[0_24px_70px_-52px_hsl(var(--foreground)/0.55)];
   }
 
   .hover-lift {

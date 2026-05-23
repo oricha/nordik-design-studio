@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Building2, Download, Timer } from "lucide-react";
+import { PageHero } from "@/components/PageHero";
 import g1 from "@/assets/gallery-1.jpg";
 import g4 from "@/assets/gallery-4.jpg";
 import gp2 from "@/assets/project-2.jpg";
@@ -78,31 +79,31 @@ const cases = [
 ];
 
 const CaseStudies = () => (
-  <div className="min-h-screen bg-background pb-24 pt-28 md:pb-28">
-    <div className="mx-auto max-w-7xl px-6">
-      <header className="mb-14 max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">Casos destacados</h1>
-        <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          Tres historias ejemplo con antes/después ilustrativo, métricas resumidas y enlace al modelo del catálogo. Las cifras
-          económicas quedan bajo NDA hasta publicar el dossier comercial oficial.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-4">
-          <Link
-            to="/testimonios"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
-          >
-            Leer testimonios <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
-          <a
-            href={pdfOutline}
-            download
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-muted/50 px-4 py-2 text-sm font-semibold hover:bg-muted"
-          >
-            <Download className="h-4 w-4" aria-hidden />
-            Descargar esquema informe caso (.txt)
-          </a>
-        </div>
-      </header>
+  <div className="min-h-screen bg-background pb-24 md:pb-28">
+    <PageHero
+      eyebrow="Prueba de proceso"
+      title="Casos destacados"
+      description="Tres historias ejemplo con antes/después ilustrativo, métricas resumidas y enlace al modelo del catálogo. Las cifras económicas quedan bajo NDA hasta publicar el dossier comercial oficial."
+      actions={[
+        { label: "Leer testimonios", href: "/testimonios" },
+        { label: "Ver modelos", href: "/#projects", variant: "secondary" },
+      ]}
+      stats={[
+        { label: "Casos", value: `${cases.length}` },
+        { label: "Formato", value: "Antes / después" },
+        { label: "Métricas", value: "Resumen QA" },
+      ]}
+    />
+
+    <div className="mx-auto max-w-7xl px-6 pt-14">
+      <a
+        href={pdfOutline}
+        download
+        className="mb-10 inline-flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-4 py-2 text-sm font-semibold hover:bg-muted"
+      >
+        <Download className="h-4 w-4" aria-hidden />
+        Descargar esquema informe caso (.txt)
+      </a>
 
       <ol className="space-y-24">
         {cases.map((c, idx) => (

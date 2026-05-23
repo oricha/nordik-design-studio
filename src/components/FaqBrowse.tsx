@@ -13,17 +13,46 @@ import { faqCategories, faqItems, type FaqCategorySlug } from "@/data/faq";
 export type FaqBrowseProps = {
   className?: string;
   intro?: string;
+  query?: string;
+  onQueryChange?: (query: string) => void;
+  activeCategory?: FaqCategorySlug | "todas";
+  onCategoryChange?: (category: FaqCategorySlug | "todas") => void;
+  showSearch?: boolean;
+  showTabs?: boolean;
+  includeAllTab?: boolean;
 };
 
-export function FaqBrowse({ className = "", intro }: FaqBrowseProps) {
-  const [query, setQuery] = useState("");
-  const [tab, setTab] = useState<FaqCategorySlug | "todas">("todas");
+export function FaqBrowse({
+  className = "",
+  intro,
+  query,
+  onQueryChange,
+  activeCategory,
+  onCategoryChange,
+  showSearch = true,
+  showTabs = true,
+  includeAllTab = true,
+}: FaqBrowseProps) {
+  const [internalQuery, setInternalQuery] = useState("");
+  const [internalTab, setInternalTab] = useState<FaqCategorySlug | "todas">("todas");
 
-  const normalized = query.trim().toLowerCase();
+  const currentQuery = query ?? internalQuery;
+  const currentTab = activeCategory ?? internalTab;
+  const normalized = currentQuery.trim().toLowerCase();
+
+  const updateQuery = (nextQuery: string) => {
+    onQueryChange?.(nextQuery);
+    if (query === undefined) setInternalQuery(nextQuery);
+  };
+
+  const updateTab = (nextTab: FaqCategorySlug | "todas") => {
+    onCategoryChange?.(nextTab);
+    if (activeCategory === undefined) setInternalTab(nextTab);
+  };
 
   const filteredItems = useMemo(() => {
     let list =
-      tab === "todas" ? faqItems : faqItems.filter((item) => item.category === tab);
+      currentTab === "todas" ? faqItems : faqItems.filter((item) => item.category === currentTab);
 
     if (normalized) {
       list = list.filter((item) => {
@@ -32,10 +61,10 @@ export function FaqBrowse({ className = "", intro }: FaqBrowseProps) {
       });
     }
     return list;
-  }, [tab, normalized]);
+  }, [currentTab, normalized]);
 
   const pills: Array<{ value: FaqCategorySlug | "todas"; label: string }> = [
-    { value: "todas", label: "Todas" },
+    ...(includeAllTab ? [{ value: "todas" as const, label: "Todas" }] : []),
     ...faqCategories.map((c) => ({ value: c.slug, label: c.label })),
   ];
 
@@ -43,47 +72,53 @@ export function FaqBrowse({ className = "", intro }: FaqBrowseProps) {
     <div className={className}>
       {intro ? <p className="mb-4 text-muted-foreground leading-relaxed">{intro}</p> : null}
 
-      <div className="relative mb-6">
-        <Search
-          className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-          aria-hidden
-        />
-        <Input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Buscar en preguntas y respuestas…"
-          className="pl-10"
-          aria-label="Buscar en las preguntas frecuentes"
-        />
-      </div>
+      {showSearch ? (
+        <div className="relative mb-6">
+          <Search
+            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+            aria-hidden
+          />
+          <Input
+            type="search"
+            value={currentQuery}
+            onChange={(e) => updateQuery(e.target.value)}
+            placeholder="Buscar en preguntas y respuestas..."
+            className="pl-10"
+            aria-label="Buscar en las preguntas frecuentes"
+          />
+        </div>
+      ) : null}
 
-      <div
-        role="tablist"
-        aria-label="Categorías de preguntas frecuentes"
-        className="mb-6 flex flex-wrap gap-2 rounded-xl border border-border bg-muted/50 p-1.5"
-      >
-        {pills.map((p) => (
-          <button
-            key={p.value}
-            type="button"
-            role="tab"
-            aria-selected={tab === p.value}
-            className={cn(
-              "rounded-lg px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring",
-              tab === p.value ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
-            )}
-            onClick={() => setTab(p.value)}
-          >
-            {p.label}
-          </button>
-        ))}
-      </div>
+      {showTabs ? (
+        <div
+          role="tablist"
+          aria-label="Categorías de preguntas frecuentes"
+          className="mb-6 flex flex-wrap gap-2 rounded-xl border border-border bg-muted/50 p-1.5"
+        >
+          {pills.map((p) => (
+            <button
+              key={p.value}
+              type="button"
+              role="tab"
+              aria-selected={currentTab === p.value}
+              className={cn(
+                "rounded-lg px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring",
+                currentTab === p.value
+                  ? "bg-background text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+              onClick={() => updateTab(p.value)}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       <div role="tabpanel">
         {filteredItems.length === 0 ? (
           <p className="py-10 text-center text-muted-foreground" role="status">
-            Sin resultados{query.trim() ? ` para “${query.trim()}”.` : "."}
+            Sin resultados{currentQuery.trim() ? ` para "${currentQuery.trim()}".` : "."}
           </p>
         ) : (
           <Accordion type="multiple" className="w-full divide-y rounded-xl border border-border bg-card px-1 sm:px-4">
