@@ -23,7 +23,7 @@
     /* F3.1.6: contraste mejorado (~AA) sobre texto de apoyo sobre fondos claros */
     --muted-foreground: 0 0% 36%;
 
-    --accent: 27 55% 64%;
+    --accent: 18 50% 30%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -31,13 +31,13 @@
 
     --border: 30 15% 90%;
     --input: 30 15% 90%;
-    --ring: 27 55% 64%;
+    --ring: 18 50% 30%;
 
     --radius: 0.5rem;
 
-    --wood: 27 55% 64%;
+    --wood: 18 50% 30%;
     --wood-light: 30 30% 92%;
-    --wood-dark: 27 40% 45%;
+    --wood-dark: 18 45% 20%;
     --warm-gray: 30 10% 97%;
     --charcoal: 0 0% 10%;
 
@@ -126,7 +126,7 @@
 
   .text-gradient-wood {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(27 55% 64%), hsl(27 40% 45%));
+    background-image: linear-gradient(135deg, hsl(18 50% 30%), hsl(18 45% 20%));
   }
 }
 
