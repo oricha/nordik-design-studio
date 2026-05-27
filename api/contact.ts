@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getSupabaseServerClient } from "../src/lib/supabaseServer";
-import { contactSubmissionSchema, toContactSubmissionRow } from "../src/lib/contactSubmissionSchema";
-import { sendContactEmailNotifications } from "../src/lib/contactEmailNotifications.server";
+import { getSupabaseServerClient } from "../src/lib/supabaseServer.js";
+import { contactSubmissionSchema, toContactSubmissionRow } from "../src/lib/contactSubmissionSchema.js";
+import { sendContactEmailNotifications } from "../src/lib/contactEmailNotifications.server.js";
 
 const contactTable = "contact_submissions";
 

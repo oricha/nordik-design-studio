@@ -3,7 +3,7 @@ import {
   buildAdminLeadEmail,
   buildRequesterConfirmationEmail,
   type ContactEmailPayload,
-} from "./contactEmailTemplates";
+} from "./contactEmailTemplates.js";
 
 export type ContactEmailResult = {
   requesterEmailId?: string;
