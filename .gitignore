@@ -34,6 +34,7 @@ NordiK_SECON_Analisis.md
 
 .openspec/*
 openspec/*
-docs/admin-supabase-auth.md
+docs/*
+doc/*
 
 .agents/*

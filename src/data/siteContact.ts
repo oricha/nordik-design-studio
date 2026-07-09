@@ -22,12 +22,12 @@ export type RegionalDialIn = {
   phoneDisplay: string;
 };
 
-const helsinkiOffice: OfficeLocation = {
-  id: "helsinki",
+const barcelonaOffice: OfficeLocation = {
+  id: "barcelona",
   title: "Sede · Barcelona",
-  addressLines: ["Passeig de Gràcia 1", "08007 Barcelona", "España"],
-  lat: 41.3874,
-  lon: 2.1686,
+  addressLines: ["Carrer de Balmes, 150", "08008 Barcelona", "España"],
+  lat: 41.3941,
+  lon: 2.1529,
   timeZone: "Europe/Madrid",
   weekdayOpen: "09:00",
   weekdayClose: "18:00",
@@ -39,9 +39,9 @@ const helsinkiOffice: OfficeLocation = {
 const madridOffice: OfficeLocation = {
   id: "madrid",
   title: "Oficina · Madrid (Iberia)",
-  addressLines: ["P.º de la Castellana 95", "28046 Madrid", "España"],
-  lat: 40.4686,
-  lon: -3.6892,
+  addressLines: ["Calle de Serrano, 41", "28001 Madrid", "España"],
+  lat: 40.4267,
+  lon: -3.6878,
   timeZone: "Europe/Madrid",
   weekdayOpen: "09:00",
   weekdayClose: "18:00",
@@ -58,8 +58,8 @@ const regionalDialInLines: RegionalDialIn[] = [
 
 export const siteContact = {
   /** Teléfono principal mostrado en UI compacta (HQ Barcelona) */
-  phoneHref: helsinkiOffice.phoneHref,
-  phoneDisplay: helsinkiOffice.phoneDisplay,
+  phoneHref: barcelonaOffice.phoneHref,
+  phoneDisplay: barcelonaOffice.phoneDisplay,
   emailHref: "info@nordik.fi",
   emailDisplay: "info@nordik.fi",
   hoursShort:
@@ -68,7 +68,7 @@ export const siteContact = {
     "Atención comercial lun–viernes. Barcelona 9:00–18:00 (CET), Madrid 9:00–18:00 (CET). Festivos locales cerrado.",
   locationLine: "Barcelona · Madrid",
 
-  offices: [helsinkiOffice, madridOffice] as const,
+  offices: [barcelonaOffice, madridOffice] as const,
   regionalDialIn: regionalDialInLines,
 
   /** Recursos tras envío de formulario / chat (F1.4.8, F3.3.x) */

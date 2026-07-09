@@ -1,4 +1,4 @@
-import { LucideIcon, TreePine, Award, Zap, Shield, Clock, Home, Users, Star } from "lucide-react";
+import { LucideIcon, TreePine, Award, Shield, Clock, Home, Users, Star } from "lucide-react";
 
 export interface Value {
   id: string;
@@ -44,12 +44,6 @@ export const values: Value[] = [
     icon: Award,
     title: "Calidad",
     description: "Garantía de 10 años estructural y acabados impecables en cada proyecto que entregamos.",
-  },
-  {
-    id: "innovation",
-    icon: Zap,
-    title: "Innovación",
-    description: "Integramos tecnología moderna en diseño eficiente y sistemas de construcción avanzados.",
   },
   {
     id: "trust",

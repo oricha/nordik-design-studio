@@ -3,47 +3,71 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
+import projectSelectionImage from "@/assets/how-it-works-step-01-project-selection.jpg";
+import productionVisitImage from "@/assets/how-it-works-step-02-production-visit.jpg";
+import contractPaymentImage from "@/assets/how-it-works-step-03-contract-payment.jpg";
+import administrationPermitsImage from "@/assets/how-it-works-step-04-administration-permits.jpg";
+import constructionStartImage from "@/assets/how-it-works-step-05-construction-start.jpg";
+import finishMaterialsImage from "@/assets/how-it-works-step-06-finish-materials.jpg";
+import foundationSurveyImage from "@/assets/how-it-works-step-07-foundation-survey.jpg";
+import transportAssemblyImage from "@/assets/how-it-works-step-08-transport-assembly.jpg";
 
 const steps = [
   {
     number: "01",
     title: "Elección del proyecto",
     body: `Explora nuestra web para encontrar el modelo que encaje con tu visión: tamaño, distribución y acabados. Completa tu vivienda con opciones adicionales y crea tu espacio ideal. ¡Cuéntanos qué personalizaciones te interesan!`,
+    image: projectSelectionImage,
+    imageAlt: "Planos de construcción de una casa NordiK sobre una mesa de estudio",
   },
   {
     number: "02",
     title: "Consulta y visita de producción",
     body: `Visita nuestras oficinas en Barcelona o Madrid o programa una videoconsulta con el equipo técnico. También puedes solicitar conocer talleres de fabricación acordados y viviendas de referencia para evaluar materiales y acabados.`,
+    image: productionVisitImage,
+    imageAlt: "Personas con casco visitando una obra de casa prefabricada con paneles SIP",
   },
   {
     number: "03",
     title: "Contrato y primer pago",
     body: `Cuando el modelo y las ampliaciones estén definidos, firmamos el contrato. En esta fase se abona normalmente una provisión inicial del 50 % del importe total acordado, según condiciones del contrato.`,
+    image: contractPaymentImage,
+    imageAlt: "Apretón de manos sobre contrato, planos de vivienda y casco de obra",
   },
   {
     number: "04",
     title: "Tramitación ante la administración",
     body: `Tras la firma te entregamos la documentación y planos necesarios para presentarlos ante el ayuntamiento u organismo competente. Ajustamos la vivienda a la normativa local para facilitar licencias y permisos.`,
+    image: administrationPermitsImage,
+    imageAlt: "Documentación administrativa, solicitud de licencia de obra y planos para permisos de construcción",
   },
   {
     number: "05",
     title: "Inicio de obra de la vivienda",
     body: `La fabricación de tu vivienda arranca en instalaciones controladas en taller. Los plazos dependen del tamaño y diseño elegidos. Te mantenemos informado con hitos claros sobre el avance en la planta de producción.`,
+    image: constructionStartImage,
+    imageAlt: "Cimentación de una vivienda con paneles SIP y materiales preparados para iniciar el montaje",
   },
   {
     number: "06",
     title: "Elección de materiales de acabado",
     body: `Ofrecemos un amplio catálogo de acabados para fachada, interior, suelos, cubierta y carpinterías, con tonalidades y texturas para que cada detalle refleje lo acordado en proyecto.`,
+    image: finishMaterialsImage,
+    imageAlt: "Interior salón-cocina con texturas de madera, suelos y muestras de materiales de acabado",
   },
   {
     number: "07",
     title: "Cimentación en parcela",
     body: `Mientras avanza la prefabricación, en tu parcela debe ejecutarse la cimentación: pilares, micropilotaje, zapatas u otra solución de ingeniería. Recibirás planos y criterios para preparar obra y accesos según el modelo contratado.`,
+    image: foundationSurveyImage,
+    imageAlt: "Técnicos de espaldas midiendo y nivelando la cimentación de una vivienda en parcela",
   },
   {
     number: "08",
     title: "Transporte y montaje",
     body: `Con la vivienda lista, coordinamos el transporte hasta tu ubicación. El embalaje (acabada, en módulos o panelizada) varía según modelo; suele requerirse grúa en origen y en destino para descarga y montaje seguro.`,
+    image: transportAssemblyImage,
+    imageAlt: "Camión transportando paneles SIP y remolque con contenedor protegido hacia una obra residencial",
   },
   {
     number: "09",
@@ -102,11 +126,12 @@ const HowItWorksPage = () => {
       </div>
 
       {/* Steps */}
-      <div className="mx-auto max-w-4xl px-6 py-16">
+      <div className="mx-auto max-w-6xl px-6 py-16">
         <ol className="space-y-0">
           {steps.map((step, i) => {
             const prev = steps[i - 1];
             const next = steps[i + 1];
+            const imageOnLeft = i % 2 === 0;
 
             return (
               <li
@@ -119,10 +144,10 @@ const HowItWorksPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
                   transition={{ duration: 0.5 }}
-                  className="flex gap-8 py-14"
+                  className="grid gap-8 py-14 md:grid-cols-[4.5rem_minmax(0,1fr)]"
                 >
                   {/* Left: number + connector */}
-                  <div className="flex flex-col items-center">
+                  <div className="hidden flex-col items-center md:flex">
                     {/* Circle */}
                     <div
                       className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full
@@ -139,44 +164,75 @@ const HowItWorksPage = () => {
                   </div>
 
                   {/* Right: content */}
-                  <div className="min-w-0 flex-1 pb-4">
-                    <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-                      {step.title}
-                    </h2>
-                    <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
-                      {step.body}
-                    </p>
+                  <div className="min-w-0 pb-4">
+                    <div
+                      className={`grid items-center gap-8 ${
+                        step.image ? "lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)]" : ""
+                      }`}
+                    >
+                      {step.image ? (
+                        <figure className={imageOnLeft ? "lg:order-1" : "lg:order-2"}>
+                          <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-muted shadow-[0_24px_70px_-48px_hsl(var(--foreground)/0.55)]">
+                            <img
+                              src={step.image}
+                              alt={step.imageAlt}
+                              className="h-full w-full object-cover"
+                              loading={i === 0 ? "eager" : "lazy"}
+                            />
+                          </div>
+                        </figure>
+                      ) : null}
 
-                    {/* Step navigation */}
-                    <div className="mt-8 flex flex-wrap items-center gap-4">
-                      {i === steps.length - 1 && (
-                        <Link
-                          to="/contactos"
-                          className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3
-                                     text-sm font-bold text-accent-foreground transition-opacity hover:opacity-90"
-                        >
-                          Empezar tu proyecto <ArrowRight className="h-4 w-4" />
-                        </Link>
-                      )}
-                      <div className="flex gap-3 text-sm">
-                        {prev && (
-                          <a
-                            href={`#step-${prev.number}`}
-                            className="inline-flex items-center gap-1.5 font-medium text-muted-foreground hover:text-foreground"
-                          >
-                            <ArrowLeft className="h-3.5 w-3.5" />
-                            {prev.number}. {prev.title}
-                          </a>
-                        )}
-                        {next && (
-                          <a
-                            href={`#step-${next.number}`}
-                            className="inline-flex items-center gap-1.5 font-medium text-accent hover:opacity-80"
-                          >
-                            Siguiente: {next.number}. {next.title}
-                            <ArrowRight className="h-3.5 w-3.5" />
-                          </a>
-                        )}
+                      <div className={step.image && imageOnLeft ? "lg:order-2" : "lg:order-1"}>
+                        <div className="mb-4 flex items-center gap-3 md:hidden">
+                          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-accent bg-accent/10 text-sm font-bold tabular-nums text-accent">
+                            {step.number}
+                          </span>
+                          <span className="h-px flex-1 bg-border" aria-hidden />
+                        </div>
+
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-accent">
+                          Paso {step.number}
+                        </p>
+                        <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                          {step.title}
+                        </h2>
+                        <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
+                          {step.body}
+                        </p>
+
+                        {/* Step navigation */}
+                        <div className="mt-8 flex flex-wrap items-center gap-4">
+                          {i === steps.length - 1 && (
+                            <Link
+                              to="/contactos"
+                              className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3
+                                         text-sm font-bold text-accent-foreground transition-opacity hover:opacity-90"
+                            >
+                              Empezar tu proyecto <ArrowRight className="h-4 w-4" />
+                            </Link>
+                          )}
+                          <div className="flex flex-wrap gap-3 text-sm">
+                            {prev && (
+                              <a
+                                href={`#step-${prev.number}`}
+                                className="inline-flex items-center gap-1.5 font-medium text-muted-foreground hover:text-foreground"
+                              >
+                                <ArrowLeft className="h-3.5 w-3.5" />
+                                {prev.number}. {prev.title}
+                              </a>
+                            )}
+                            {next && (
+                              <a
+                                href={`#step-${next.number}`}
+                                className="inline-flex items-center gap-1.5 font-medium text-accent hover:opacity-80"
+                              >
+                                Siguiente: {next.number}. {next.title}
+                                <ArrowRight className="h-3.5 w-3.5" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -184,7 +240,7 @@ const HowItWorksPage = () => {
 
                 {/* Divider between steps (except last) */}
                 {i < steps.length - 1 && (
-                  <div className="ml-[3.5rem] border-t border-border/50" />
+                  <div className="border-t border-border/50 md:ml-[4.5rem]" />
                 )}
               </li>
             );

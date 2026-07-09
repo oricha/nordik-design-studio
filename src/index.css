@@ -102,6 +102,10 @@
     @apply px-6 py-24 md:px-12 md:py-[5.75rem] lg:px-20 lg:py-28 xl:px-32;
   }
 
+  .section-padding-home {
+    @apply px-6 py-12 md:px-12 md:py-[2.875rem] lg:px-20 lg:py-14 xl:px-32;
+  }
+
   .surface-panel {
     @apply border border-border bg-background/80 shadow-[0_24px_70px_-52px_hsl(var(--foreground)/0.55)];
   }

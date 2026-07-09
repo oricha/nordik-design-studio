@@ -1,17 +1,42 @@
 import { FormEvent, useEffect, useState } from "react";
-import { Menu, X, Globe, Search, Phone, Mail, Clock } from "lucide-react";
+import { Menu, X, Globe, Search, Phone, Mail, Clock, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PROJECT_CATALOG_QUERY_KEY } from "@/constants/projectCatalog";
 import { siteContact } from "@/data/siteContact";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navLinks = [
-  { label: "Cómo funciona", href: "/how-it-works" },
+  { label: "Proyectos", href: "/#projects" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Sobre nosotros", href: "/about" },
-  { label: "Preguntas frecuentes", href: "/faq" },
-  { label: "Contactos", href: "/contactos" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contacto", href: "/contactos" },
 ];
+
+const LanguageSelector = ({ className = "" }: { className?: string }) => (
+  <DropdownMenu>
+    <DropdownMenuTrigger
+      className={`inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm font-semibold tracking-tight text-foreground/70 transition-colors hover:text-foreground data-[state=open]:text-foreground ${className}`}
+    >
+      <Globe className="h-4 w-4" aria-hidden />
+      ES
+      <ChevronDown className="h-3.5 w-3.5" aria-hidden />
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end" className="min-w-24">
+      <DropdownMenuItem className="font-semibold text-accent">
+        ES
+      </DropdownMenuItem>
+      <DropdownMenuItem className="text-muted-foreground">
+        EN
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+);
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -145,13 +170,7 @@ const Header = () => {
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-4">
-          <button
-            type="button"
-            className="flex items-center gap-1.5 text-[15px] font-semibold tracking-tight text-foreground/60 transition-colors hover:text-foreground"
-          >
-            <Globe className="h-[15px] w-[15px]" />
-            ES / €
-          </button>
+          <LanguageSelector />
           <a
             href={`tel:${siteContact.phoneHref}`}
             title={siteContact.hoursShort}
@@ -179,13 +198,7 @@ const Header = () => {
           >
             <div className="flex flex-col gap-4 px-6 py-4">
               {mobileContactLinks}
-              <button
-                type="button"
-                className="flex w-fit items-center gap-1.5 text-sm font-medium text-muted-foreground"
-              >
-                <Globe className="h-4 w-4" />
-                ES / €
-              </button>
+              <LanguageSelector className="w-fit" />
               {catalogSearchForm}
               <nav className="flex flex-col gap-3">
               {navLinks.map((link) => (

@@ -202,7 +202,7 @@ const ProjectCatalog = () => {
     advancedFilters.bedrooms.length;
 
   return (
-    <section id="projects" className="section-padding bg-warm-gray">
+    <section id="projects" className="section-padding-home bg-warm-gray">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,8 +1,11 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Building2,
   ChefHat,
+  ChevronLeft,
+  ChevronRight,
   ClipboardCheck,
   Home,
   HousePlus,
@@ -27,7 +30,6 @@ type ServiceItem = {
   description: string;
   ctaLabel: string;
   ctaHash: string;
-  /** Opcional: imagen en `/public` para refuerzo visual en la tarjeta. */
   imageSrc?: string;
   imageAlt?: string;
 };
@@ -95,10 +97,9 @@ const services: ServiceItem[] = [
     bullets: [
       "Reordenamos la cocina o la abrimos al salón/comedor cuando la envolvente lo permite",
       "Propuesta de panel SIP ligero tras valorar cargas existentes",
-      "Plano de trabajo y rutas antes de cerrar alcance económico",
     ],
     description:
-      "Si buscas más metros de cocina o integrar zona comedor con buena luminosidad, partimos de tus fotos o planillo y definimos siguiente paso con documentación suficiente. Viabilidad estructural, licencias y plazos concretos se confirman en visita técnica.",
+      "Si buscas más metros de cocina o integrar zona comedor con buena luminosidad, partimos de tus fotos o planillo y definimos siguiente paso con documentación suficiente.",
     ctaLabel: "Pedir información — ampliación cocina",
     ctaHash: "/contactos?service=ampliacion-cocina",
     imageSrc: "/images/services/ampliacion1.jpg",
@@ -113,10 +114,9 @@ const services: ServiceItem[] = [
     bullets: [
       "Salón, dormitorio o zona polivalente pegada al jardín o patio",
       "Encaje de nueva pieza SIP con aislamiento y estética nórdica",
-      "Cronograma y presupuesto guía tras revisión de accesos y cimentación aplicable",
     ],
     description:
-      "Amplía hacia el fondo cuando quieres ganar sala de estar o habitación sin mover toda la vivienda. Analizamos empalmes, desagües próximos y solape con cubierta existente; los trámites municipales los abordamos con la información que aportes o levantemos en trabajo de campo.",
+      "Amplía hacia el fondo cuando quieres ganar sala de estar o habitación sin mover toda la vivienda. Analizamos empalmes, desagües próximos y solape con cubierta existente.",
     ctaLabel: "Solicitar valoración trasera",
     ctaHash: "/contactos?service=ampliacion-trasera",
     imageSrc: "/images/services/ampliacion4.jpg",
@@ -130,11 +130,10 @@ const services: ServiceItem[] = [
     audienceLabel: "Particulares",
     bullets: [
       "Ampliación o cerramiento parcial según proyecto y límites urbanísticos locales",
-      "Sistema ligero donde la estructura portante tras estudio admita esa solución",
       "Plan de obra por fases para minimizar ocupación del espacio habitual",
     ],
     description:
-      "Cubrimos proyectos donde el objetivo es ganar zona exterior habitable con detalle fino tipo nórdico. Confirmamos límites y cargas antes de recomendar formato; cada caso requiere comprobaciones propias antes de apostar por solución o calendario.",
+      "Cubrimos proyectos donde el objetivo es ganar zona exterior habitable con detalle fino tipo nórdico. Confirmamos límites y cargas antes de recomendar formato.",
     ctaLabel: "Consultar ampliación de terraza",
     ctaHash: "/contactos?service=ampliacion-terraza",
   },
@@ -147,10 +146,9 @@ const services: ServiceItem[] = [
     bullets: [
       "Espacio nuevo sobre forjado existente cuando las cargas y la normativa lo admiten",
       "Soluciones SIP ligeras para cubiertas transitables",
-      "Estudio previo antes de cerrar alcance técnico o administrativo",
     ],
     description:
-      "Complementamos la línea de ampliaciones en planta cuando el reto está en crear habitáculo sobre cubierta, ático o forjado. La viabilidad estructural y los permisos dependen de cada edificio: lo encauzamos con documentación a medida cuando avanzas desde este servicio.",
+      "Complementamos la línea de ampliaciones en planta cuando el reto está en crear habitáculo sobre cubierta, ático o forjado. La viabilidad estructural y los permisos dependen de cada edificio.",
     ctaLabel: "Evaluar terraza o ático",
     ctaHash: "/contactos?service=terrazas-aticos",
   },
@@ -166,22 +164,6 @@ const services: ServiceItem[] = [
     ctaLabel: "Planificar proyecto turístico",
     ctaHash: "/contactos?service=campings-cabanas",
   },
-];
-
-const extensionServiceTitles = new Set([
-  "Ampliación de cocinas",
-  "Ampliación trasera de vivienda",
-  "Ampliación de terrazas",
-]);
-
-const extensionServices = services.filter((service) => extensionServiceTitles.has(service.title));
-const coreServices = services.filter((service) => !extensionServiceTitles.has(service.title));
-
-const serviceAnchors = [
-  { href: "#ampliaciones-vivienda", label: "Ampliaciones" },
-  { href: "#servicios-principales", label: "Servicios principales" },
-  { href: "#services-b2c", label: "Particulares" },
-  { href: "#services-b2b", label: "Profesionales" },
 ];
 
 const reviewItems = [
@@ -201,6 +183,16 @@ const reviewItems = [
     description: "Damos el siguiente paso con fotos, plano o visita, sin prometer viabilidad a ciegas.",
   },
 ];
+
+// ─── Carousel config ───────────────────────────────────────────────────────────
+const COLS = 3;
+const ROWS = 2;
+const PAGE_SIZE = COLS * ROWS; // 6 cards visible
+const ADVANCE = 2;             // slide 2 cards (1 row) per step
+const INTERVAL_MS = 30_000;
+const TOTAL_STEPS = Math.ceil(services.length / ADVANCE); // 4
+
+// ─── Sub-components ────────────────────────────────────────────────────────────
 
 const AudiencePanel = ({
   eyebrow,
@@ -224,19 +216,15 @@ const AudiencePanel = ({
   </div>
 );
 
-const ServiceCard = ({ service, index, featured = false }: { service: ServiceItem; index: number; featured?: boolean }) => (
+const ServiceCard = ({ service, index }: { service: ServiceItem; index: number }) => (
   <motion.article
-    key={service.title}
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-80px" }}
-    transition={{ duration: 0.45, delay: Math.min(index * 0.07, 0.28) }}
-    className={`group flex h-full flex-col overflow-hidden border border-border bg-background shadow-[0_18px_50px_-36px_hsl(var(--foreground)/0.32)] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_26px_60px_-34px_hsl(var(--foreground)/0.4)] ${
-      featured ? "rounded-[1.75rem]" : "rounded-2xl"
-    }`}
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.35, delay: Math.min(index * 0.06, 0.22) }}
+    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[0_18px_50px_-36px_hsl(var(--foreground)/0.32)] transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_26px_60px_-34px_hsl(var(--foreground)/0.4)]"
   >
     {service.imageSrc ? (
-      <div className={`${featured ? "aspect-[4/3] md:aspect-[16/11]" : "aspect-[16/10]"} w-full shrink-0 overflow-hidden bg-muted`}>
+      <div className="aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted">
         <img
           src={service.imageSrc}
           alt={service.imageAlt ?? ""}
@@ -245,7 +233,7 @@ const ServiceCard = ({ service, index, featured = false }: { service: ServiceIte
         />
       </div>
     ) : null}
-    <div className={`flex flex-1 flex-col ${featured ? "p-6 md:p-7" : "p-6"}`}>
+    <div className="flex flex-1 flex-col p-6">
       <div className="mb-5 flex items-start justify-between gap-4">
         <span
           className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wide ${
@@ -264,9 +252,7 @@ const ServiceCard = ({ service, index, featured = false }: { service: ServiceIte
       </div>
 
       <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-accent">{service.subtitle}</p>
-      <h3 className={`${featured ? "text-2xl" : "text-xl"} text-balance font-semibold text-foreground`}>
-        {service.title}
-      </h3>
+      <h3 className="text-xl text-balance font-semibold text-foreground">{service.title}</h3>
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
 
       <ul className="mt-5 space-y-2 text-sm leading-relaxed text-muted-foreground">
@@ -280,7 +266,7 @@ const ServiceCard = ({ service, index, featured = false }: { service: ServiceIte
 
       <a
         href={service.ctaHash}
-        className="mt-7 inline-flex items-center justify-between gap-3 rounded-xl bg-primary px-4 py-3 text-sm font-bold text-primary-foreground transition duration-300 ease-out hover:bg-primary/90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+        className="mt-auto pt-7 inline-flex items-center justify-between gap-3 rounded-xl bg-primary px-4 py-3 text-sm font-bold text-primary-foreground transition duration-300 ease-out hover:bg-primary/90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
       >
         <span>{service.ctaLabel}</span>
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
@@ -289,10 +275,52 @@ const ServiceCard = ({ service, index, featured = false }: { service: ServiceIte
   </motion.article>
 );
 
+// ─── Slide variants ────────────────────────────────────────────────────────────
+const slideVariants = {
+  enter: (dir: number) => ({ x: `${dir * 100}%`, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: number) => ({ x: `${dir * -100}%`, opacity: 0 }),
+};
+
+const slideTransition = { duration: 0.55, ease: [0.32, 0, 0.18, 1] as const };
+
+// ─── Main component ────────────────────────────────────────────────────────────
 const Services = () => {
+  const [step, setStep] = useState(0);
+  const [dir, setDir] = useState<1 | -1>(1);
+
+  const goNext = useCallback(() => {
+    setDir(1);
+    setStep((prev) => (prev + 1) % TOTAL_STEPS);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setDir(-1);
+    setStep((prev) => (prev - 1 + TOTAL_STEPS) % TOTAL_STEPS);
+  }, []);
+
+  const goTo = useCallback((index: number) => {
+    setDir(index > step ? 1 : -1);
+    setStep(index);
+  }, [step]);
+
+  // Auto-advance every 30 seconds
+  useEffect(() => {
+    const timer = setInterval(goNext, INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [goNext]);
+
+  // Visible 6 cards starting at (step * ADVANCE) with wrap-around
+  const startIndex = (step * ADVANCE) % services.length;
+  const visibleCards = Array.from({ length: PAGE_SIZE }, (_, i) =>
+    services[(startIndex + i) % services.length]
+  );
+
   return (
     <section id="services" className="section-padding bg-warm-gray">
       <div className="mx-auto max-w-7xl">
+
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -307,52 +335,110 @@ const Services = () => {
           </h2>
           <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
             NordiK combina proyectos terminados para quien quiere moverse rápido, con líneas industriales SIP
-            para quien ejecuta grandes volúmenes. El mismo catálogo público muestra proyectos ejemplo; estas
-            líneas distinguen cómo contratar cada servicio en NordiK.
+            para quien ejecuta grandes volúmenes.
           </p>
         </motion.div>
 
-        <nav aria-label="Secciones de servicios" className="mb-10 flex gap-2 overflow-x-auto pb-2">
-          {serviceAnchors.map((anchor) => (
-            <a
-              key={anchor.href}
-              href={anchor.href}
-              className="whitespace-nowrap rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent/50 hover:text-accent active:scale-[0.98]"
-            >
-              {anchor.label}
-            </a>
-          ))}
-        </nav>
-
+        {/* ── Audience panels ── */}
         <div className="mb-12 grid gap-6 md:grid-cols-2">
           <AudiencePanel {...audienceIntro.b2c} />
           <AudiencePanel {...audienceIntro.b2b} />
         </div>
 
-        <div id="ampliaciones-vivienda" className="scroll-mt-28">
-          <div className="mb-7 grid gap-5 md:grid-cols-[1.1fr_0.9fr] md:items-end">
+        {/* ── Carousel ── */}
+        <div id="servicios-principales" className="scroll-mt-28">
+
+          {/* Carousel header + nav buttons */}
+          <div className="mb-7 flex items-end justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Ampliaciones de vivienda</p>
-              <h3 className="mt-3 text-balance text-2xl font-semibold text-foreground md:text-4xl">
-                Más metros donde la casa realmente los necesita
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Todos los servicios</p>
+              <h3 className="mt-3 text-2xl font-semibold text-foreground md:text-3xl">
+                Del proyecto completo al suministro técnico
               </h3>
             </div>
-            <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-              Cocina-comedor, fondo de parcela o terraza: planteamos cada ampliación desde uso, estructura,
-              accesos y límites urbanísticos antes de recomendar sistema o calendario.
-            </p>
+            <div className="flex shrink-0 items-center gap-2">
+              <button
+                onClick={goPrev}
+                aria-label="Servicios anteriores"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition hover:border-accent/50 hover:text-accent active:scale-[0.96]"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={goNext}
+                aria-label="Servicios siguientes"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition hover:border-accent/50 hover:text-accent active:scale-[0.96]"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-3">
-            {extensionServices.map((service, i) => (
-              <ServiceCard key={service.title} service={service} index={i} featured />
-            ))}
+          {/* Card grid with slide animation */}
+          <div className="relative overflow-hidden rounded-3xl">
+            <AnimatePresence mode="wait" custom={dir}>
+              <motion.div
+                key={step}
+                custom={dir}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={slideTransition}
+                className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+              >
+                {visibleCards.map((service, i) => (
+                  <ServiceCard key={`${step}-${service.title}`} service={service} index={i} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Progress bar + dots */}
+          <div className="mt-8 space-y-3">
+            {/* Auto-progress bar — resets on each step */}
+            <div className="h-[2px] overflow-hidden rounded-full bg-border">
+              <motion.div
+                key={`progress-${step}`}
+                className="h-full origin-left bg-accent"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: INTERVAL_MS / 1000, ease: "linear" }}
+              />
+            </div>
+
+            {/* Dots + counter */}
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2" role="tablist" aria-label="Páginas de servicios">
+                {Array.from({ length: TOTAL_STEPS }, (_, i) => (
+                  <button
+                    key={i}
+                    role="tab"
+                    aria-selected={i === step}
+                    aria-label={`Página ${i + 1} de ${TOTAL_STEPS}`}
+                    onClick={() => goTo(i)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      i === step
+                        ? "w-6 bg-accent"
+                        : "w-2 bg-border hover:bg-muted-foreground"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs tabular-nums text-muted-foreground">
+                {step + 1} / {TOTAL_STEPS}
+              </span>
+            </div>
           </div>
         </div>
 
+        {/* ── Review strip ── */}
         <div className="my-14 grid overflow-hidden rounded-[1.75rem] border border-border bg-background shadow-[0_18px_50px_-36px_hsl(var(--foreground)/0.35)] md:grid-cols-3">
           {reviewItems.map((item, i) => (
-            <div key={item.title} className={`p-6 md:p-7 ${i > 0 ? "border-t border-border md:border-l md:border-t-0" : ""}`}>
+            <div
+              key={item.title}
+              className={`p-6 md:p-7 ${i > 0 ? "border-t border-border md:border-l md:border-t-0" : ""}`}
+            >
               <item.icon className="h-6 w-6 text-accent" strokeWidth={2} aria-hidden />
               <h4 className="mt-4 text-base font-semibold text-foreground">{item.title}</h4>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
@@ -360,31 +446,12 @@ const Services = () => {
           ))}
         </div>
 
-        <div id="servicios-principales" className="scroll-mt-28">
-          <div className="mb-7 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Servicios principales</p>
-              <h3 className="mt-3 text-2xl font-semibold text-foreground md:text-3xl">
-                Del proyecto completo al suministro técnico
-              </h3>
-            </div>
-            <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-              Elige la vía de contratación según quién ejecuta la obra, el nivel de soporte y el volumen.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {coreServices.map((service, i) => (
-              <ServiceCard key={service.title} service={service} index={i} />
-            ))}
-          </div>
-        </div>
-
+        {/* ── Bottom CTA ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-14 rounded-[1.75rem] border border-accent/35 bg-accent/10 px-6 py-9 text-left md:mt-16 md:px-8 md:py-10 lg:flex lg:items-center lg:justify-between lg:gap-8"
+          className="rounded-[1.75rem] border border-accent/35 bg-accent/10 px-6 py-9 text-left md:px-8 md:py-10 lg:flex lg:items-center lg:justify-between lg:gap-8"
         >
           <div>
             <p className="text-lg font-semibold text-foreground">¿Sigues entre llave completa, ampliación y kit SIP?</p>
@@ -399,6 +466,7 @@ const Services = () => {
             Ver catálogo — casas, cabañas y kits
           </a>
         </motion.div>
+
       </div>
     </section>
   );

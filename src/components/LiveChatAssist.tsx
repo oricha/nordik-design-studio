@@ -49,12 +49,6 @@ const LiveChatAssist = () => {
                     Preguntas frecuentes NordiK
                   </Link>
                 </li>
-                <li>
-                  ·{" "}
-                  <Link to="/contactos" className="font-medium text-accent underline-offset-4 hover:underline">
-                    Cotización por zona / envíos
-                  </Link>
-                </li>
                 <li className="text-xs leading-relaxed">
                   Próximo paso: conectar este panel a widget en vivo o a un bot; de momento sólo enlaces útiles y email.
                 </li>

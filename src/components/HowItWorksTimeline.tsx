@@ -18,7 +18,7 @@ const previewSteps = steps.slice(0, 8);
 
 const HowItWorksTimeline = () => {
   return (
-    <section className="section-padding bg-warm-gray overflow-hidden">
+    <section className="section-padding-home bg-warm-gray overflow-hidden">
       <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
         <motion.div
